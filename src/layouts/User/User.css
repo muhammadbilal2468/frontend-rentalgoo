@@ -1,0 +1,90 @@
+.user {
+  display: flex;
+  flex-direction: column;
+}
+/* ------------------------------------- HEADER ----------------------------------------- */
+.user .header {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  padding: 0px 180px;
+  position: fixed;
+  /* background-color: white; */
+  background-color: #0f1127;
+  box-shadow: 0px 5px 5px #181b3e;
+  z-index: 1;
+}
+.user .header .left {
+  display: flex;
+  align-items: center;
+}
+.user .header .left img {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+}
+.user .header .left p {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  /* border: 1px solid black; */
+}
+.user .header .menu {
+  display: flex;
+}
+.user .header .right {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.user .header .right .fa-home,
+.user .header .right .fa-magnifying-glass,
+.user .header .right .fa-shop,
+.user .header .right .fa-bookmark,
+.user .header .right .fa-clock {
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+}
+.user .header .right .fa-comment {
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+.user .header .right .profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.user .header .right .profile .box {
+  position: absolute;
+  top: 100%; /* ubah posisi dari atas menjadi bawah */
+  right: 0;
+  width: 200px;
+  z-index: 1;
+  transition: 2s;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+.user .header .right .profile img {
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+/* ------------------------------------- CONTENT ----------------------------------------- */
+.user .content {
+  box-sizing: border-box;
+  padding: 0px 180px;
+  margin-top: 80px;
+  background-color: #0f1127;
+}

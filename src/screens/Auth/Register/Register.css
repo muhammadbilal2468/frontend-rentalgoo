@@ -1,0 +1,92 @@
+.regis {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px 100px;
+}
+.regis p.title {
+  font-size: 38px;
+  font-weight: 900;
+  text-align: center;
+  color: #ff6854;
+}
+.regis p.desc {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.regis form {
+  display: flex;
+  flex-direction: column;
+}
+.regis form p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.regis form p.form-error {
+  font-size: 14px;
+  text-align: center;
+  color: rgb(241, 3, 3);
+  font-weight: bold;
+}
+.regis form .input-box {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+.regis form .input-box i.fa-user,
+.regis form .input-box i.fa-envelope,
+.regis form .input-box i.fa-lock {
+  position: absolute;
+  z-index: 1;
+  font-size: 20px;
+  color: #ff6854;
+  line-height: 40px;
+  left: 15px;
+}
+.regis form .input-box i.fa-eye-slash,
+.regis form .input-box i.fa-eye {
+  position: absolute;
+  z-index: 1;
+  font-size: 20px;
+  color: #ff6854;
+  line-height: 40px;
+  right: 15px;
+  cursor: pointer;
+}
+.regis form .input-box input {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 100%;
+  padding: 0px 40px;
+  border-radius: 15px;
+  font-size: 16px;
+  border: 1px solid black;
+}
+
+.regis form button {
+  background-color: #ff6854;
+  color: white;
+  font-size: 18px;
+  padding: 10px 0px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.regis p.link-login {
+  margin-top: 10px;
+  text-align: center;
+}
+.regis p.link-login span {
+  color: black;
+  font-weight: 600;
+}

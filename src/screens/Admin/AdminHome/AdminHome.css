@@ -1,0 +1,136 @@
+.admin-home {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.admin-home .chart {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas: "bar line";
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+  height: 50%;
+  border-radius: 20px;
+}
+.admin-home .chart .bar-chart {
+  grid-area: bar;
+}
+.admin-home .chart .line-chart {
+  grid-area: line;
+}
+.admin-home .chart .bar-chart p,
+.admin-home .chart .line-chart p {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.admin-home .data {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-areas: "product-user product-category";
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 50%;
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-home .data::-webkit-scrollbar {
+  width: 0.1em;
+}
+
+.admin-home .data::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.admin-home .data .list-card {
+  box-sizing: border-box;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.admin-home .data .list-card .card-product,
+.admin-home .data .list-card .card-save,
+.admin-home .data .list-card .card-agree,
+.admin-home .data .list-card .card-isrent,
+.admin-home .data .list-card .card-finishrent,
+.admin-home .data .list-card .card-user {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 250px;
+  height: 100%;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.admin-home .data .list-card .card-product:hover,
+.admin-home .data .list-card .card-save:hover,
+.admin-home .data .list-card .card-agree:hover,
+.admin-home .data .list-card .card-isrent:hover,
+.admin-home .data .list-card .card-finishrent:hover,
+.admin-home .data .list-card .card-user:hover {
+  transform: scale(0.95);
+}
+.admin-home .data .list-card .card-product {
+  background-color: #ff6854;
+}
+.admin-home .data .list-card .card-save {
+  background-color: #ff4b33;
+}
+.admin-home .data .list-card .card-agree {
+  background-color: #ff1e00;
+}
+.admin-home .data .list-card .card-isrent {
+  background-color: #cc1800;
+}
+.admin-home .data .list-card .card-finishrent {
+  background-color: #991200;
+}
+.admin-home .data .list-card .card-user {
+  background-color: #4d0900;
+}
+
+.admin-home .data .list-card .card p.title {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-home .data .list-card .card-product i,
+.admin-home .data .list-card .card-save i,
+.admin-home .data .list-card .card-agree i,
+.admin-home .data .list-card .card-isrent i,
+.admin-home .data .list-card .card-finishrent i,
+.admin-home .data .list-card .card-user i {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+}
+.admin-home .data .list-card .card-product p.total,
+.admin-home .data .list-card .card-save p.total,
+.admin-home .data .list-card .card-agree p.total,
+.admin-home .data .list-card .card-isrent p.total,
+.admin-home .data .list-card .card-finishrent p.total,
+.admin-home .data .list-card .card-user p.total {
+  font-size: 35px;
+  font-weight: 900;
+}
+.admin-home .data .list-card .card-product p.desc,
+.admin-home .data .list-card .card-save p.desc,
+.admin-home .data .list-card .card-agree p.desc,
+.admin-home .data .list-card .card-isrent p.desc,
+.admin-home .data .list-card .card-finishrent p.desc,
+.admin-home .data .list-card .card-user p.desc {
+  font-size: 20px;
+}

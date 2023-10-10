@@ -1,0 +1,47 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      screens: {
+        sm: "300px", // Ubah breakpoint 'sm' menjadi 640px
+        md: "600px", // Ubah breakpoint 'md' menjadi 768px
+        lg: "1024px", // Ubah breakpoint 'lg' menjadi 1024px
+        xl: "1280px", // Ubah breakpoint 'xl' menjadi 1280px
+        "2xl": "1440px", // Tambahkan breakpoint baru '2xl' dengan lebar 1440px
+      },
+      colors: {
+        // primary: "#114B5F",
+        // secondary: "#456990",
+        // tertiary: "#E4FDE1",
+        // "bright-pink": "#F45B69",
+        // wine: "#6B2737",
+
+        primary: "#1D3354",
+        secondary: "#D64045",
+        tertiary: "#467599",
+      },
+      zIndex: {
+        60: 60,
+        70: 70,
+        80: 80,
+        90: 90,
+        100: 100,
+        // Tambahkan z-index yang lebih tinggi sesuai kebutuhan Anda
+      },
+    },
+  },
+  plugins: [
+    require("flowbite/plugin")({
+      charts: true,
+    }),
+  ],
+  extend: {
+    fontFamily: {
+      poppins: ["Poppins", "sans"],
+    },
+  },
+};

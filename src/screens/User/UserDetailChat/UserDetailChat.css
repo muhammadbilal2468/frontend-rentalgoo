@@ -1,0 +1,30 @@
+.message {
+  clear: both;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.sender {
+  float: right;
+  /* background-color: #ff6854; */
+  padding: 5px 10px;
+  color: white;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.receiver {
+  float: left;
+  /* background-color: #f4f4f4; */
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.sender p.sender {
+  background-color: #467599;
+}
+
+.receiver p.receiver {
+  background-color: #cde4f5;
+}
