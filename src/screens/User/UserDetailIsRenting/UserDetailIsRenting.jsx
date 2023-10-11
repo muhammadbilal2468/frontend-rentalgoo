@@ -25,7 +25,7 @@ const UserDetailIsRenting = () => {
   const getIsRentingOutById = async (uuid) => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/isrentingproducts/${uuid}`
+        `http://localhost:5000/isrentingproducts/${uuid}`
       );
       setIsRenting(resp.data);
       setProduct(resp.data.product);

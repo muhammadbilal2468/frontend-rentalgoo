@@ -29,7 +29,7 @@ const UserAddProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/products", formData);
+      await axios.post("http://localhost:5000/products", formData);
       alert("berhasil menambah barang");
       navigate("/user/myproducts");
     } catch (error) {

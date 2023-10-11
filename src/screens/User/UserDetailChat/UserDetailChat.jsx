@@ -24,7 +24,7 @@ const UserDetailChat = () => {
 
   const getChatPersonal = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/chats/${uuid}`);
+      const resp = await axios.get(`http://localhost:5000/chats/${uuid}`);
       setMessages(resp.data);
       setReceiver(resp.data.receiver);
     } catch (error) {
@@ -34,7 +34,7 @@ const UserDetailChat = () => {
 
   const getReceiver = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/users/${uuid}`);
+      const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
       setReceiver(resp.data);
     } catch (error) {
       console.error(error);
@@ -52,7 +52,7 @@ const UserDetailChat = () => {
       message: sendMessage,
     };
     try {
-      const resp = await axios.post(`https://confused-dove-overalls.cyclic.app/chats`, requestData);
+      const resp = await axios.post(`http://localhost:5000/chats`, requestData);
       console.log(resp.data);
       scrollToBottom();
       setSendMessage("");

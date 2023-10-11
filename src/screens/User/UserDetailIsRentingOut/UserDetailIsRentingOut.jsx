@@ -21,7 +21,7 @@ const UserDetailIsRentingOut = () => {
   const getIsRentingOutById = async (uuid) => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/isrentingproducts/${uuid}`
+        `http://localhost:5000/isrentingproducts/${uuid}`
       );
       setIsRentingOut(resp.data);
       setProduct(resp.data.product);
@@ -44,7 +44,7 @@ const UserDetailIsRentingOut = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/finishrentbyowner", requestData);
+      await axios.post("http://localhost:5000/finishrentbyowner", requestData);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -62,7 +62,7 @@ const UserDetailIsRentingOut = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/finishrentbyrenter", requestData);
+      await axios.post("http://localhost:5000/finishrentbyrenter", requestData);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -74,7 +74,7 @@ const UserDetailIsRentingOut = () => {
     };
     try {
       await axios.patch(
-        `https://confused-dove-overalls.cyclic.app/isrentingproducts/${isRentingOut.uuid}`,
+        `http://localhost:5000/isrentingproducts/${isRentingOut.uuid}`,
         requestData
       );
     } catch (error) {
@@ -84,7 +84,7 @@ const UserDetailIsRentingOut = () => {
 
   const deleteIsRentingOut = async (id) => {
     try {
-      await axios.delete(`https://confused-dove-overalls.cyclic.app/isrentingproducts/${id}`);
+      await axios.delete(`http://localhost:5000/isrentingproducts/${id}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }

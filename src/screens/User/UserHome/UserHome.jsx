@@ -20,11 +20,12 @@ import CardProduct from "../../../components/CardProduct/CardProduct";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import { Link } from "react-router-dom";
+import Alert from "../../../components/Alert/Alert";
 
 const UserHome = () => {
   const [products, setProducts] = useState([]);
   const [closestProducts, setClosestProducts] = useState([]);
-  const [limit, setLimit] = useState(2);
+  const [limit, setLimit] = useState(6);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ const UserHome = () => {
   const getProducts = async () => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/products?limit=${limit}`,
+        `http://localhost:5000/products?limit=${limit}`,
         {
           withCredentials: true, // Set withCredentials ke 'true'
         }
@@ -56,12 +57,9 @@ const UserHome = () => {
 
   const getClosestProducts = async () => {
     try {
-      const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/closestproducts`,
-        {
-          withCredentials: true, // Set withCredentials ke 'true'
-        }
-      );
+      const resp = await axios.get(`http://localhost:5000/closestproducts`, {
+        withCredentials: true, // Set withCredentials ke 'true'
+      });
       setClosestProducts(resp.data);
       console.log("closestProducts", closestProducts);
     } catch (error) {
@@ -83,7 +81,7 @@ const UserHome = () => {
     formData.append("ownerId", data.user.id);
     try {
       await axios.post(
-        "https://confused-dove-overalls.cyclic.app/saveproducts",
+        "http://localhost:5000/saveproducts",
         {
           withCredentials: true, // Set withCredentials ke 'true'
         },
@@ -398,6 +396,7 @@ const UserHome = () => {
         {/* footer */}
         <ButtonNavigation />
       </div>
+      <Alert />
     </>
   );
 };

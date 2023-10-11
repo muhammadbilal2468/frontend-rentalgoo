@@ -23,7 +23,7 @@ const UserAddAgreement = () => {
   }, [totalPrice]);
 
   const getProductsById = async () => {
-    const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/products/${uuid}`);
+    const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
     setProduct(resp.data);
     setProductId(resp.data.id);
     setOwnerId(resp.data.user.id);
@@ -43,7 +43,7 @@ const UserAddAgreement = () => {
     formData.append("ownerId", ownerId);
     try {
       const resp = await axios.post(
-        "https://confused-dove-overalls.cyclic.app/agreementproducts",
+        "http://localhost:5000/agreementproducts",
         formData
       );
       alert("berhasil");

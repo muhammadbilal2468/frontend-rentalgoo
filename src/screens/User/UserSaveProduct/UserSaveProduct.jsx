@@ -15,7 +15,7 @@ const UserSaveProduct = () => {
 
   const getSaveProducts = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/saveproducts`);
+      const resp = await axios.get(`http://localhost:5000/saveproducts`);
       setSaveProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -24,7 +24,7 @@ const UserSaveProduct = () => {
 
   const deleteSaveProduct = (id) => {
     try {
-      axios.delete(`https://confused-dove-overalls.cyclic.app/saveproducts/${id}`);
+      axios.delete(`http://localhost:5000/saveproducts/${id}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }

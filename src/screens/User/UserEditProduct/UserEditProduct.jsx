@@ -26,7 +26,7 @@ const UserEditProduct = () => {
 
   const getProductById = async (uuid) => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/products/${uuid}`);
+      const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
       setName(resp.data.name);
       setUrl(resp.data.url);
       setCategory(resp.data.category);
@@ -52,7 +52,7 @@ const UserEditProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      await axios.patch(`https://confused-dove-overalls.cyclic.app/products/${uuid}`, formData);
+      await axios.patch(`http://localhost:5000/products/${uuid}`, formData);
       alert("berhasil mengubah");
       navigate("/user/myproducts");
     } catch (error) {

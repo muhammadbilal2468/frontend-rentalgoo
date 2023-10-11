@@ -1,4 +1,8 @@
+export { default as updaloadProductImg } from "./img/uploadproduct.png";
+export { default as updaloadProfileImg } from "./img/uploadprofile.png";
+
 export { default as logoImg } from "./img/logo.png";
+// ----------------- Landing Page -------------------------
 export { default as bannerImg } from "./img/banner.svg";
 export { default as aboutBoxImg1 } from "./img/clock.svg";
 export { default as aboutBoxImg2 } from "./img/maps.svg";
@@ -8,8 +12,7 @@ export { default as costumerImg2 } from "./img/costumer2.svg";
 export { default as igImg } from "./img/instagram.png";
 export { default as fbImg } from "./img/facebook.png";
 export { default as githubImg } from "./img/github.png";
-export { default as updaloadProductImg } from "./img/uploadproduct.png";
-export { default as updaloadProfileImg } from "./img/uploadprofile.png";
+// ----------------- Home ---------------------------------
 export { default as aksesorisImg } from "./img/aksesoris.svg";
 export { default as bukuImg } from "./img/buku.svg";
 export { default as elektronikImg } from "./img/elektronik.svg";
@@ -21,3 +24,6 @@ export { default as peralatanImg } from "./img/peralatan.svg";
 export { default as souvenirImg } from "./img/souvenir.svg";
 export { default as transportasiImg } from "./img/transportasi.svg";
 export { default as activityImg } from "./img/activity.svg";
+// ----------------- ACTIVITY ------------------------------
+export { default as modalsuccessImg } from "./img/modalsuccess.svg";
+export { default as modalerrorImg } from "./img/modalerror.svg";

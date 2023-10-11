@@ -17,7 +17,7 @@ const UserMyProduct = () => {
 
   const getProducts = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/myproducts`);
+      const resp = await axios.get(`http://localhost:5000/myproducts`);
       setProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -30,7 +30,7 @@ const UserMyProduct = () => {
 
   const deleteProduct = async (uuid) => {
     try {
-      await axios.delete(`https://confused-dove-overalls.cyclic.app/products/${uuid}`);
+      await axios.delete(`http://localhost:5000/products/${uuid}`);
       console.log("berhasil menghapus");
     } catch (error) {
       console.log(error.response.data.msg);

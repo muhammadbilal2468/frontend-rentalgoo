@@ -13,7 +13,7 @@ const UserChat = () => {
   }, []);
 
   const getListMyChat = async () => {
-    const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/chats`);
+    const resp = await axios.get(`http://localhost:5000/chats`);
     setChatUser(resp.data);
   };
 

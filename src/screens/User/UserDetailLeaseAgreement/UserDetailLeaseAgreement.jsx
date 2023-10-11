@@ -22,7 +22,7 @@ const UserDetailLeaseAgreement = () => {
   const getLeaseAgreementById = async (uuid) => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/agreementproducts/${uuid}`
+        `http://localhost:5000/agreementproducts/${uuid}`
       );
       setAgreementProducts(resp.data);
       setProduct(resp.data.product);
@@ -39,7 +39,7 @@ const UserDetailLeaseAgreement = () => {
     formData.append("status", status);
     try {
       await axios.patch(
-        `https://confused-dove-overalls.cyclic.app/agreementproducts/${uuid}`,
+        `http://localhost:5000/agreementproducts/${uuid}`,
         formData
       );
       navigate("/user/leaseagreements");
@@ -61,7 +61,7 @@ const UserDetailLeaseAgreement = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/isrentingproducts", requestData);
+      await axios.post("http://localhost:5000/isrentingproducts", requestData);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -69,7 +69,7 @@ const UserDetailLeaseAgreement = () => {
 
   const deleteLeaseAgreement = async (id) => {
     try {
-      await axios.delete(`https://confused-dove-overalls.cyclic.app/agreementproducts/${id}`);
+      await axios.delete(`http://localhost:5000/agreementproducts/${id}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }

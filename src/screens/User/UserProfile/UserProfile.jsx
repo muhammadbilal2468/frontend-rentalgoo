@@ -20,7 +20,7 @@ const UserProfile = () => {
 
   const getUserById = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/me`);
+      const resp = await axios.get(`http://localhost:5000/me`);
       setUser(resp.data);
       setUrl(resp.data.url);
     } catch (error) {
@@ -41,7 +41,7 @@ const UserProfile = () => {
     formData.append("file", file);
     try {
       const resp = await axios.patch(
-        `https://confused-dove-overalls.cyclic.app/photome/${uuid}`,
+        `http://localhost:5000/photome/${uuid}`,
         formData
       );
       console.log(resp.data.message);

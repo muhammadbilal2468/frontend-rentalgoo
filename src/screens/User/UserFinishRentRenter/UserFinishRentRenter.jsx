@@ -14,7 +14,7 @@ const UserFinishRentRenter = () => {
 
   const getFinishRentRenter = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/finishrentbyrenter`);
+      const resp = await axios.get(`http://localhost:5000/finishrentbyrenter`);
       setFinishRent(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -23,7 +23,7 @@ const UserFinishRentRenter = () => {
 
   const deleteFinishRent = (uuid) => {
     try {
-      axios.delete(`https://confused-dove-overalls.cyclic.app/finishrentbyrenter/${uuid}`);
+      axios.delete(`http://localhost:5000/finishrentbyrenter/${uuid}`);
       alert("Berhasil Menghapus");
     } catch (error) {
       console.log(error.response.data.msg);

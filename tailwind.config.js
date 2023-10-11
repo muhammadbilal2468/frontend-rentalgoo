@@ -7,19 +7,13 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        sm: "300px", // Ubah breakpoint 'sm' menjadi 640px
-        md: "600px", // Ubah breakpoint 'md' menjadi 768px
-        lg: "1024px", // Ubah breakpoint 'lg' menjadi 1024px
-        xl: "1280px", // Ubah breakpoint 'xl' menjadi 1280px
-        "2xl": "1440px", // Tambahkan breakpoint baru '2xl' dengan lebar 1440px
+        sm: "300px",
+        md: "600px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1440px",
       },
       colors: {
-        // primary: "#114B5F",
-        // secondary: "#456990",
-        // tertiary: "#E4FDE1",
-        // "bright-pink": "#F45B69",
-        // wine: "#6B2737",
-
         primary: "#1D3354",
         secondary: "#D64045",
         tertiary: "#467599",

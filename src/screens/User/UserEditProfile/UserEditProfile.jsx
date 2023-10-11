@@ -25,7 +25,7 @@ const UserEditProfile = () => {
 
   const getUserById = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/me`);
+      const resp = await axios.get(`http://localhost:5000/me`);
       setName(resp.data.name);
       setEmail(resp.data.email);
       setNohp(resp.data.nohp);
@@ -57,7 +57,7 @@ const UserEditProfile = () => {
     formData.append("address", address);
     formData.append("location", location);
     try {
-      await axios.patch(`https://confused-dove-overalls.cyclic.app/me/${uuid}`, formData);
+      await axios.patch(`http://localhost:5000/me/${uuid}`, formData);
       alert("berhasil di ubah");
       navigate(`/user/profile/${uuid}`);
     } catch (error) {

@@ -16,7 +16,7 @@ const UserDetailProduct = () => {
   }, []);
 
   const getProductById = async () => {
-    const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/products/${uuid}`);
+    const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
     setProduct(resp.data);
     setUser(resp.data.user);
   };

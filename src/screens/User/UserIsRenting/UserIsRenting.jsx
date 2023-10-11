@@ -14,7 +14,7 @@ const UserIsRenting = () => {
 
   const getIsRentingOuts = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/isrentingproducts`);
+      const resp = await axios.get(`http://localhost:5000/isrentingproducts`);
       setIsRenting(resp.data);
     } catch (error) {
       console.log(error.response);

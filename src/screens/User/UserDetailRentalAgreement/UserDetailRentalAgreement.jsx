@@ -23,7 +23,7 @@ const UserDetailRentalAgreement = () => {
 
   const getRentalAgreementById = async () => {
     const resp = await axios.get(
-      `https://confused-dove-overalls.cyclic.app/agreementproducts/${uuid}`
+      `http://localhost:5000/agreementproducts/${uuid}`
     );
     setAgreementProducts(resp.data);
     setProduct(resp.data.product);
@@ -37,7 +37,7 @@ const UserDetailRentalAgreement = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.delete(`https://confused-dove-overalls.cyclic.app/agreementproducts/${uuid}`);
+      await axios.delete(`http://localhost:5000/agreementproducts/${uuid}`);
       alert("Berhasil membatalkan");
       navigate("/user/rentalagreements");
     } catch (error) {

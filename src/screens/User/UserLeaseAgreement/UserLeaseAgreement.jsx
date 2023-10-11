@@ -17,7 +17,7 @@ const UserLeaseAgreement = () => {
   const getLeaseAgreements = async () => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/owneragreementproducts`
+        `http://localhost:5000/owneragreementproducts`
       );
       setLeaseAgreements(resp.data);
     } catch (error) {

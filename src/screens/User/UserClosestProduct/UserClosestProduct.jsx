@@ -17,7 +17,7 @@ const UserClosestProduct = () => {
   const getClosestProducts = async () => {
     try {
       const resp = await axios.get(
-        `https://confused-dove-overalls.cyclic.app/closestproducts?limit=${limit}`
+        `http://localhost:5000/closestproducts?limit=${limit}`
       );
       setClosestProducts(resp.data);
       setLimit(resp.data.length);
@@ -35,7 +35,7 @@ const UserClosestProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/saveproducts", formData);
+      await axios.post("http://localhost:5000/saveproducts", formData);
       console.log("berhasil Menyimpan");
     } catch (error) {
       console.log(error.response.data.msg);

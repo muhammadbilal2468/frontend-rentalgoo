@@ -19,7 +19,7 @@ const UserDetailUser = () => {
 
   const getUser = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/users/${uuid}`);
+      const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
       setUser(resp.data);
     } catch (error) {
       console.log(error.response.data.message);
@@ -28,7 +28,7 @@ const UserDetailUser = () => {
 
   const getProducts = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/hisproducts/${uuid}`);
+      const resp = await axios.get(`http://localhost:5000/hisproducts/${uuid}`);
       setProducts(resp.data);
       console.log(products);
     } catch (error) {
@@ -45,7 +45,7 @@ const UserDetailUser = () => {
     formData.append("productId", id);
 
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/saveproducts", formData);
+      await axios.post("http://localhost:5000/saveproducts", formData);
       alert("nerhasil menyimpan");
     } catch (error) {
       console.log(error.response.data.msg);
@@ -59,7 +59,7 @@ const UserDetailUser = () => {
       message: "Hallo Min",
     };
     try {
-      const resp = await axios.post(`https://confused-dove-overalls.cyclic.app/chats`, requestData);
+      const resp = await axios.post(`http://localhost:5000/chats`, requestData);
       console.log(resp.data);
       alert("pesan berhasil terkirim");
       navigate(`/user/detailchat/${uuid}`);

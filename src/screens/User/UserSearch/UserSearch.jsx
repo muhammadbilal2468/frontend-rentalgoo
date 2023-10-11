@@ -15,7 +15,7 @@ const UserSearch = () => {
 
   const getSearchs = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/searchs`);
+      const resp = await axios.get(`http://localhost:5000/searchs`);
       setSearchs(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -26,7 +26,7 @@ const UserSearch = () => {
     const formData = new FormData();
     formData.append("text", inputSearch);
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/searchs", formData);
+      await axios.post("http://localhost:5000/searchs", formData);
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -44,7 +44,7 @@ const UserSearch = () => {
 
   const deleteSearch = async (uuid) => {
     try {
-      await axios.delete(`https://confused-dove-overalls.cyclic.app/searchs/${uuid}`);
+      await axios.delete(`http://localhost:5000/searchs/${uuid}`);
       console.log("berhasil menghapus");
     } catch (error) {
       console.log(error.response.data.msg);

@@ -29,7 +29,7 @@ const UserProduct = () => {
 
   const getProducts = async () => {
     try {
-      let url = "https://confused-dove-overalls.cyclic.app/products?";
+      let url = "http://localhost:5000/products?";
 
       if (search || category || limit || citydistrict) {
         if (search) {
@@ -56,7 +56,7 @@ const UserProduct = () => {
 
   const getClosestProducts = async () => {
     try {
-      const resp = await axios.get(`https://confused-dove-overalls.cyclic.app/closestproducts`);
+      const resp = await axios.get(`http://localhost:5000/closestproducts`);
       setClosestProducts(resp.data);
       console.log(closestProducts);
     } catch (error) {
@@ -73,7 +73,7 @@ const UserProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      await axios.post("https://confused-dove-overalls.cyclic.app/saveproducts", formData);
+      await axios.post("http://localhost:5000/saveproducts", formData);
     } catch (error) {
       console.log(error.response.data.msg);
     }
