@@ -7,11 +7,11 @@ const Alert = ({ isOpen, color, desc }) => {
 
   return (
     <div
-      class={`fixed left-1/2 transform -translate-x-1/2 bottom-9 flex items-center w-11/12 md:w-[380px] p-3 mb-4 text-sm text-${color} border border-blue-300 rounded-lg bg-blue-50 z-70`}
+      className={`fixed left-1/2 transform -translate-x-1/2 bottom-9 flex items-center w-11/12 md:w-[380px] p-3 mb-4 text-sm border border-blue-300 rounded-lg bg-gray-50 z-70`}
       role="alert"
     >
       <svg
-        class="flex-shrink-0 inline w-4 h-4 mr-3"
+        className="flex-shrink-0 inline w-4 h-4 mr-3"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill={color}

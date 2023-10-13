@@ -95,8 +95,8 @@ const AdminAgreementProducts = () => {
         </svg>
 
         <div className="flex flex-col gap-1 justify-center">
-          <h3 className="text-2xl font-bold">Barang</h3>
-          <p className="">Akses menampilkan semua data barang user</p>
+          <h3 className="text-2xl font-bold">Persetujuan Barang</h3>
+          <p className="">Akses menampilkan semua persetujuan sewa</p>
         </div>
       </div>
 
@@ -177,7 +177,11 @@ const AdminAgreementProducts = () => {
                     </th>
                     <td className="px-6 py-4">{data.product.name}</td>
                     <td className="px-6 py-4">
-                      <img src={data.product.url} alt="" className="w-12" />
+                      <img
+                        src={data.product.url}
+                        alt=""
+                        className="w-12 h-12"
+                      />
                     </td>
                     <td className="px-6 py-4">{data.owner.name}</td>
                     <td className="px-6 py-4">{data.renter.name}</td>

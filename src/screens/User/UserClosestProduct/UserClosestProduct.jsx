@@ -3,10 +3,16 @@ import React, { useEffect, useState } from "react";
 import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import { useNavigate } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import Alert from "../../../components/Alert/Alert";
+import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 
 const UserClosestProduct = () => {
   const [closestProducts, setClosestProducts] = useState([]);
   const [limit, setLimit] = useState(6);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertColor, setAlertColor] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,11 +41,20 @@ const UserClosestProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      await axios.post("http://localhost:5000/saveproducts", formData);
-      console.log("berhasil Menyimpan");
+      const resp = await axios.post(
+        "http://localhost:5000/saveproducts",
+        formData
+      );
+      setMsg(resp.data.msg);
+      setAlertColor("#00ff04");
     } catch (error) {
-      console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
+      setAlertColor("#0087ff");
     }
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1500);
   };
 
   const minLimit = (e) => {
@@ -74,41 +89,46 @@ const UserClosestProduct = () => {
       </div>
 
       {/* content */}
-      <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
-        <div className="grid grid-cols-2 mb-5 gap-3">
-          {closestProducts.map((data) => {
-            return (
-              <CardClosestProduct
-                key={data.uuid}
-                data={data}
-                save={() => addSaveProduct(data)}
-                detail={getDetailProduct}
-              />
-            );
-          })}
+      {closestProducts.length === 0 ? (
+        <NotFoundPage desc={"Belum Ada Barang Sedang Disewakan"} />
+      ) : (
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
+          <div className="grid grid-cols-2 mb-5 gap-3">
+            {closestProducts.map((data) => {
+              return (
+                <CardClosestProduct
+                  key={data.uuid}
+                  data={data}
+                  save={() => addSaveProduct(data)}
+                  detail={getDetailProduct}
+                />
+              );
+            })}
+          </div>
+          <div className="px-3 mb-5 flex justify-center gap-5 w-full">
+            {limit > 6 && (
+              <button
+                onClick={minLimit}
+                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+              >
+                Lebih Sedikit
+              </button>
+            )}
+            {closestProducts.length >= limit && (
+              <button
+                onClick={plusLimit}
+                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+              >
+                Lebih Banyak
+              </button>
+            )}
+          </div>
         </div>
-        <div className="px-3 mb-5 flex justify-center gap-5 w-full">
-          {limit > 6 && (
-            <button
-              onClick={minLimit}
-              className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-            >
-              Lebih Sedikit
-            </button>
-          )}
-          {closestProducts.length >= limit && (
-            <button
-              onClick={plusLimit}
-              className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-            >
-              Lebih Banyak
-            </button>
-          )}
-        </div>
-      </div>
+      )}
 
       {/* footer */}
       <ButtonNavigation />
+      <Alert isOpen={showAlert} desc={msg} color={alertColor} />
     </div>
   );
 };

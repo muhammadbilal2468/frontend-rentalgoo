@@ -6,6 +6,7 @@ import { updaloadProfileImg } from "../../../../assets";
 const AdminEditUser = () => {
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState(null);
+  const [urlChange, setUrlChange] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [nohp, setNohp] = useState("");
@@ -44,29 +45,37 @@ const AdminEditUser = () => {
     }
   };
 
-  const updateUser = async (e) => {
+  const updatePhotoUser = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
+    try {
+      await axios.patch(`http://localhost:5000/photousers/${uuid}`, formData);
+      setUrlChange(false);
+      alert("foto berhasil di ubah");
+    } catch (error) {
+      alert(error.response.data.msg);
+    }
+  };
+
+  const updateUser = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
     formData.append("name", name);
-    formData.append("email", email);
     formData.append("nohp", nohp);
     formData.append("province", province);
     formData.append("citydistrict", citydistrict);
     formData.append("subdistrict", subdistrict);
     formData.append("address", address);
     formData.append("location", location);
-    formData.append("password", password);
     try {
       const resp = await axios.patch(
         `http://localhost:5000/users/${uuid}`,
         formData
       );
-      console.log(resp.data);
-      alert("Pengguna berhasil Diedit");
+      alert("Data Pengguna berhasil Diedit");
       navigate("/admin/users");
     } catch (error) {
-      console.log(error.response.data.msg);
       setMsg(error.response.data.msg);
     }
   };
@@ -76,6 +85,7 @@ const AdminEditUser = () => {
     const imageUrl = URL.createObjectURL(selectedImage);
     setFile(selectedImage);
     setUrl(imageUrl);
+    setUrlChange(true);
   };
 
   return (
@@ -115,13 +125,25 @@ const AdminEditUser = () => {
                 className="w-full h-64 border-2 border-tertiary border-dashed rounded-lg p-2 mb-5"
               />
             </div>
-            <input
-              class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 "
-              aria-describedby="file_input_help"
-              id="file_input"
-              type="file"
-              onChange={handleChangeFile}
-            />
+            <div className="flex gap-2">
+              <input
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 "
+                aria-describedby="file_input_help"
+                id="file_input"
+                type="file"
+                onChange={handleChangeFile}
+              />
+              {urlChange === true ? (
+                <button
+                  className="p-2 bg-tertiary rounded-lg text-white"
+                  onClick={updatePhotoUser}
+                >
+                  simpan
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
             <p class="mt-1 text-sm text-gray-500 " id="file_input_help">
               SVG, PNG, JPG maksimal 2 MB
             </p>

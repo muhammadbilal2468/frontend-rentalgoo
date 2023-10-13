@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import CardProduct from "../../../components/CardProduct/CardProduct";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { Link } from "react-router-dom";
+import Alert from "../../../components/Alert/Alert";
+import { notfoundImg } from "../../../assets";
+import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 
 const UserProduct = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +16,10 @@ const UserProduct = () => {
   const [search, setSearch] = useState("");
   const [citydistrict, setCitydistrict] = useState("");
   const [showFilterLocation, setShowFilterLocation] = useState(false);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertColor, setAlertColor] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -73,10 +80,20 @@ const UserProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      await axios.post("http://localhost:5000/saveproducts", formData);
+      const resp = await axios.post(
+        "http://localhost:5000/saveproducts",
+        formData
+      );
+      setMsg(resp.data.msg);
+      setAlertColor("#00ff04");
     } catch (error) {
-      console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
+      setAlertColor("#0087ff");
     }
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1500);
   };
 
   const handleSearch = async (e) => {
@@ -172,93 +189,97 @@ const UserProduct = () => {
         </div>
 
         {/* content */}
-        <div className="px-3">
-          <div
-            className="flex justify-between py-2 mt-2"
-            onClick={toggleShowFilterLocation}
-          >
-            <p className="flex items-center gap-2 my-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 20 20"
-                className="text-tertiary"
+        {products.length === 0 ? (
+          <NotFoundPage desc={"Barang Tidak Ditemukan"} />
+        ) : (
+          <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
+            <div className="flex justify-between py-2 mt-2">
+              <p className="flex items-center gap-2 my-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 20 20"
+                  className="text-tertiary"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"
+                  />
+                </svg>{" "}
+                <span className="text-tertiary font-bold text-lg">Barang</span>
+              </p>
+              <p
+                className="flex items-center gap-2 text-sm justify-end cursor-pointer text-tertiary font-bold"
+                onClick={toggleShowFilterLocation}
               >
-                <path
-                  fill="currentColor"
-                  d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"
-                />
-              </svg>{" "}
-              <span className="text-tertiary font-bold text-lg">Barang</span>
-            </p>
-            <p className="flex items-center gap-2 text-sm justify-end cursor-pointer text-tertiary font-bold">
-              Filter Lokasi
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 512 512"
-                onClick={showFilterLocation}
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="48"
-                  d="m112 184l144 144l144-144"
-                />
-              </svg>
-            </p>
-          </div>
-          {showFilterLocation && (
-            <div className="flex justify-end">
-              <input
-                type="search"
-                id="default-search"
-                class="bg-gray-50 h-8 py-2 text-sm  border border-gray-300 text-gray-900 rounded-md block"
-                placeholder="Kota / Kabupaten"
-                value={citydistrict}
-                onChange={handleCitydistrict}
-                required
-              />
+                Filter Lokasi
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="48"
+                    d="m112 184l144 144l144-144"
+                  />
+                </svg>
+              </p>
             </div>
-          )}
-          <div className="grid grid-cols-2 gap-5 bg-background rounded-b-lg py-5 min-h-screen">
-            {products.map((data) => {
-              return (
-                <CardProduct
-                  key={data.uuid}
-                  data={data}
-                  save={() => addSaveProduct(data)}
-                  detail={getDetailProduct}
+            {showFilterLocation && (
+              <div className="flex justify-end">
+                <input
+                  type="search"
+                  id="default-search"
+                  class="bg-gray-50 h-8 py-2 text-sm  border border-gray-300 text-gray-900 rounded-md block"
+                  placeholder="Kota / Kabupaten"
+                  value={citydistrict}
+                  onChange={handleCitydistrict}
+                  required
                 />
-              );
-            })}
-          </div>
-          <div className="px-3 mb-5 flex justify-center gap-5 w-full">
-            {limit > 6 && (
-              <button
-                onClick={minLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Sedikit
-              </button>
+              </div>
             )}
-            {products.length >= limit && (
-              <button
-                onClick={plusLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Banyak
-              </button>
-            )}
+            <div className="grid grid-cols-2 gap-5 bg-background rounded-b-lg py-5 min-h-screen">
+              {products.map((data) => {
+                return (
+                  <CardProduct
+                    key={data.uuid}
+                    data={data}
+                    save={() => addSaveProduct(data)}
+                    detail={getDetailProduct}
+                  />
+                );
+              })}
+            </div>
+            <div className="px-3 mb-5 flex justify-center gap-5 w-full">
+              {limit > 6 && (
+                <button
+                  onClick={minLimit}
+                  className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                >
+                  Lebih Sedikit
+                </button>
+              )}
+              {products.length >= limit && (
+                <button
+                  onClick={plusLimit}
+                  className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                >
+                  Lebih Banyak
+                </button>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* footer */}
         <ButtonNavigation />
+        <Alert isOpen={showAlert} desc={msg} color={alertColor} />
       </div>
     </>
   );

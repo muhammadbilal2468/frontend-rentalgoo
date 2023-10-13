@@ -9,7 +9,7 @@ const CardSaveProduct = (props) => {
     >
       <p
         className="absolute text-xs p-1 bg-white text-secondary font-bold top-0 right-0 border-2 border-white rounded-tr-md cursor-pointer"
-        onClick={() => props.delete(props.data.product.uuid)}
+        onClick={() => props.delete(props.data.uuid)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

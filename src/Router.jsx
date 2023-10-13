@@ -46,6 +46,7 @@ import UserProfile from "./screens/User/UserProfile/UserProfile";
 import UserRentalAgreement from "./screens/User/UserRentalAgreement/UserRentalAgreement";
 import UserSaveProduct from "./screens/User/UserSaveProduct/UserSaveProduct";
 import UserSearch from "./screens/User/UserSearch/UserSearch";
+import UserTest from "./screens/User/UserTest";
 
 const Router = () => {
   return (
@@ -160,6 +161,8 @@ const Router = () => {
 
         <Route path="/user/chats" element={<UserChat />} />
         <Route path="/user/detailchat/:uuid" element={<UserDetailChat />} />
+
+        <Route path="/user/test/" element={<UserTest />} />
       </Routes>
     </BrowserRouter>
   );

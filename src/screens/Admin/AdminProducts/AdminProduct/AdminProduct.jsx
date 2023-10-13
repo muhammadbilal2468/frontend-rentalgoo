@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ModalConfirm from "../../../../components/ModalConfirm/ModalConfirm";
+import AdminModalConfirm from "../../../../components/AdminModalConfirm/AdminModalConfirm";
 import ModalImage from "../../../../components/ModalImage/ModalImage";
 import formatRupiah from "../../../../utils/FormatRupiah";
 
@@ -268,7 +268,7 @@ const AdminProduct = () => {
                         className="fa-solid fa-trash text-red-100 bg-red-500 py-1 px-2 text-base rounded-md cursor-pointer"
                         onClick={handleModalDelete}
                       ></i>
-                      <ModalConfirm
+                      <AdminModalConfirm
                         data={data}
                         isOpen={modalDelete}
                         onCancel={handleModalDelete}

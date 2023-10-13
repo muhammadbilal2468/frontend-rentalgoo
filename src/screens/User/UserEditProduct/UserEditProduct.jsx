@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
-import { updaloadProductImg } from "../../../assets";
+import { modalsuccessImg, updaloadProductImg } from "../../../assets";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserEditProduct = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,9 @@ const UserEditProduct = () => {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [timeUnit, setTimeUnit] = useState("");
-  const [modalInfo, setModalInfo] = useState(false);
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
@@ -52,12 +55,19 @@ const UserEditProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      await axios.patch(`http://localhost:5000/products/${uuid}`, formData);
-      alert("berhasil mengubah");
-      navigate("/user/myproducts");
+      const resp = await axios.patch(
+        `http://localhost:5000/products/${uuid}`,
+        formData
+      );
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/myproducts");
+      }, 2000);
     } catch (error) {
-      console.log(error.response.data.msg);
-      setMsg(error.response.data.msg);
+      alert(error.response.data.msg);
     }
   };
 
@@ -148,6 +158,7 @@ const UserEditProduct = () => {
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg  block w-full p-2.5 mb-3"
               placeholder="masukkan nama barang ..."
+              required
             />
 
             <label
@@ -161,6 +172,7 @@ const UserEditProduct = () => {
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              required
             >
               <option value="" disabled hidden>
                 Pilih Ketegori Barang
@@ -190,6 +202,7 @@ const UserEditProduct = () => {
               onChange={(e) => setDescription(e.target.value)}
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 mb-3"
               placeholder="Deskripsi Barang ..."
+              required
             ></textarea>
 
             <label
@@ -203,6 +216,7 @@ const UserEditProduct = () => {
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               value={guarantee}
               onChange={(e) => setGuarantee(e.target.value)}
+              required
             >
               <option value="" disabled hidden>
                 Pilih Jaminan
@@ -225,6 +239,7 @@ const UserEditProduct = () => {
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               placeholder="jumlah stok ..."
+              required
             />
             <label
               htmlFor="price"
@@ -241,11 +256,13 @@ const UserEditProduct = () => {
                 aria-describedby="helper-text-explanation"
                 className="col-span-2 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                 placeholder=" Rp.xxx.xxx"
+                required
               />
               <select
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                vvalue={timeUnit}
+                value={timeUnit}
                 onChange={(e) => setTimeUnit(e.target.value)}
+                required
               >
                 <option value="" disabled hidden>
                   / Waktu
@@ -265,6 +282,13 @@ const UserEditProduct = () => {
 
         {/* footer */}
         <ButtonNavigation />
+
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

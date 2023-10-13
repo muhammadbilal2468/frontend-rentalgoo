@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import { modalsuccessImg } from "../../../assets";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserDetailIsRentingOut = () => {
   const [isRentingOut, setIsRentingOut] = useState("");
@@ -9,6 +11,10 @@ const UserDetailIsRentingOut = () => {
   const [product, setProduct] = useState("");
   const [owner, setOwner] = useState("");
   const [renter, setRenter] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -44,7 +50,12 @@ const UserDetailIsRentingOut = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("http://localhost:5000/finishrentbyowner", requestData);
+      const resp = await axios.post(
+        "http://localhost:5000/finishrentbyowner",
+        requestData
+      );
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -73,10 +84,20 @@ const UserDetailIsRentingOut = () => {
       status: status,
     };
     try {
-      await axios.patch(
+      const resp = await axios.patch(
         `http://localhost:5000/isrentingproducts/${isRentingOut.uuid}`,
         requestData
       );
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
+  };
+
+  const updateLeasedProduct = async () => {
+    try {
+      await axios.patch(`http://localhost:5000/leasedproduct/${product.uuid}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -84,7 +105,9 @@ const UserDetailIsRentingOut = () => {
 
   const deleteIsRentingOut = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/isrentingproducts/${id}`);
+      const resp = await axios.delete(
+        `http://localhost:5000/isrentingproducts/${id}`
+      );
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -99,18 +122,25 @@ const UserDetailIsRentingOut = () => {
     ) {
       try {
         updateIsRentingOut();
-        alert("status berhasil di update");
-        navigate("/user/isrentingouts");
+        setShowModalInfo(true);
+        setTimeout(() => {
+          setShowModalInfo(false);
+          navigate("/user/isrentingouts");
+        }, 1500);
       } catch (error) {
         console.log(error.response.data.msg);
       }
     } else {
       await createFinishRentByOwner();
       await createFinishRentByRenter();
+      await updateLeasedProduct();
       await deleteIsRentingOut(isRentingOut.uuid);
 
-      alert("berhasil selesai sewa");
-      navigate("/user/finishrentowners");
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/finishrentowner");
+      }, 1500);
     }
   };
 
@@ -241,6 +271,12 @@ const UserDetailIsRentingOut = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import formatRupiah from "../../../utils/FormatRupiah";
 import LocationMap from "../../../components/LocationMap/LocationMap";
+import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
+import { modalconfirmImg } from "../../../assets";
 
 const UserDetailRentalAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -12,6 +14,10 @@ const UserDetailRentalAgreement = () => {
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
   const [showMaps, setShowMaps] = useState(false);
+
+  const [showModalConfirm, setShowModalConfirm] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [titleModal, setTitleModal] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,10 +41,9 @@ const UserDetailRentalAgreement = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const cancelAgreement = async () => {
     try {
       await axios.delete(`http://localhost:5000/agreementproducts/${uuid}`);
-      alert("Berhasil membatalkan");
       navigate("/user/rentalagreements");
     } catch (error) {
       console.log(error.response.data.message);
@@ -51,6 +56,12 @@ const UserDetailRentalAgreement = () => {
 
   const toggleShowMaps = () => {
     setShowMaps(!showMaps);
+  };
+
+  const handleModalCancel = async () => {
+    setTitleModal("Batalkan Sewa");
+    setMsg("apakah anda yakin membatalkan sewa ini ?");
+    setShowModalConfirm(!showModalConfirm);
   };
 
   return (
@@ -182,7 +193,7 @@ const UserDetailRentalAgreement = () => {
             </div>
             <button
               className="text-white bg-secondary rounded-md text-sm w-full mt-6 p-2"
-              onClick={handleSubmit}
+              onClick={handleModalCancel}
             >
               Batalkan
             </button>
@@ -191,6 +202,16 @@ const UserDetailRentalAgreement = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalConfirm
+          isOpen={showModalConfirm}
+          title={titleModal}
+          img={modalconfirmImg}
+          desc={msg}
+          cancelText={"Kemabali"}
+          confirmText={"Batalkan"}
+          onCancel={handleModalCancel}
+          onConfirm={cancelAgreement}
+        />
       </div>
     </>
   );

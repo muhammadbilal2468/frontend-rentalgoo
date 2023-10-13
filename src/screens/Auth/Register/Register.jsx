@@ -31,6 +31,7 @@ const Register = () => {
       setTimeout(() => {
         dispatch(RegisterUser({ name, email, password, confPassword }));
       }, 1500);
+      alert("Register Berhasil");
     } catch (error) {
       console.log(error.response.data.message);
     }

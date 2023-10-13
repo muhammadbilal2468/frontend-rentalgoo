@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import Alert from "../../../components/Alert/Alert";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardProduct from "../../../components/CardProduct/CardProduct";
 
 const UserDetailUser = () => {
   const [user, setUser] = useState("");
   const [products, setProducts] = useState([]);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertColor, setAlertColor] = useState("");
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
   const { uuid } = useParams();
@@ -40,16 +44,25 @@ const UserDetailUser = () => {
     navigate(`/user/detailproduct/${uuid}`);
   };
 
-  const addSaveProduct = async (id) => {
+  const addSaveProduct = async (data) => {
     const formData = new FormData();
-    formData.append("productId", id);
-
+    formData.append("productId", data.id);
+    formData.append("ownerId", data.user.id);
     try {
-      await axios.post("http://localhost:5000/saveproducts", formData);
-      alert("nerhasil menyimpan");
+      const resp = await axios.post(
+        "http://localhost:5000/saveproducts",
+        formData
+      );
+      setMsg(resp.data.msg);
+      setAlertColor("#00ff04");
     } catch (error) {
-      console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
+      setAlertColor("#0087ff");
     }
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1500);
   };
 
   const goSendMessage = async (e) => {
@@ -159,7 +172,7 @@ const UserDetailUser = () => {
                 <CardProduct
                   key={data.uuid}
                   data={data}
-                  save={() => addSaveProduct(data.id)}
+                  save={() => addSaveProduct(data)}
                   detail={getDetailProduct}
                 />
               );
@@ -169,6 +182,7 @@ const UserDetailUser = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <Alert isOpen={showAlert} desc={msg} color={alertColor} />
       </div>
     </>
   );

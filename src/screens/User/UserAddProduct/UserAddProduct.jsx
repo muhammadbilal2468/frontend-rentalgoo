@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { updaloadProductImg } from "../../../assets";
+import { modalsuccessImg, updaloadProductImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserAddProduct = () => {
   const [name, setName] = useState("");
@@ -14,6 +15,10 @@ const UserAddProduct = () => {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [timeUnit, setTimeUnit] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,11 +34,16 @@ const UserAddProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      await axios.post("http://localhost:5000/products", formData);
-      alert("berhasil menambah barang");
-      navigate("/user/myproducts");
+      const resp = await axios.post("http://localhost:5000/products", formData);
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/myproducts");
+      }, 1500);
     } catch (error) {
-      console.log(error.response.data.msg);
+      alert(error.response.data.msg);
     }
   };
 
@@ -241,6 +251,12 @@ const UserAddProduct = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

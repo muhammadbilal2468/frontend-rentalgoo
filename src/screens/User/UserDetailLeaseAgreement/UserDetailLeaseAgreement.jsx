@@ -3,6 +3,8 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import formatRupiah from "../../../utils/FormatRupiah";
+import { modalsuccessImg } from "../../../assets";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserDetailLeaseAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -10,6 +12,10 @@ const UserDetailLeaseAgreement = () => {
   const [owner, setOwner] = useState("");
   const [renter, setRenter] = useState("");
   const [status, setStatus] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,6 +31,7 @@ const UserDetailLeaseAgreement = () => {
         `http://localhost:5000/agreementproducts/${uuid}`
       );
       setAgreementProducts(resp.data);
+      setStatus(resp.data.status);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
       setRenter(resp.data.renter);
@@ -38,11 +45,17 @@ const UserDetailLeaseAgreement = () => {
     const formData = new FormData();
     formData.append("status", status);
     try {
-      await axios.patch(
+      const resp = await axios.patch(
         `http://localhost:5000/agreementproducts/${uuid}`,
         formData
       );
-      navigate("/user/leaseagreements");
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/leaseagreements");
+      }, 1500);
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -61,7 +74,17 @@ const UserDetailLeaseAgreement = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("http://localhost:5000/isrentingproducts", requestData);
+      const resp = await axios.post(
+        "http://localhost:5000/isrentingproducts",
+        requestData
+      );
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/isrentingouts");
+      }, 1500);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -183,6 +206,7 @@ const UserDetailLeaseAgreement = () => {
               <div className="input-box-status">
                 <select
                   name="status"
+                  value={status}
                   onChange={handleStatus}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-md block w-full py-2 px-2"
                 >
@@ -231,6 +255,12 @@ const UserDetailLeaseAgreement = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

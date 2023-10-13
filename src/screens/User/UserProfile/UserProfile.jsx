@@ -4,11 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { LogoutUser, MeUser, reset } from "../../../features/authSlice";
 import axios from "axios";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import { modalconfirmImg, modalsuccessImg } from "../../../assets";
+import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
 
 const UserProfile = () => {
   const [user, setUser] = useState("");
   const [url, setUrl] = useState("");
   const [file, setFile] = useState(null);
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [showModalConfirm, setShowModalConfirm] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,10 +52,15 @@ const UserProfile = () => {
         `http://localhost:5000/photome/${uuid}`,
         formData
       );
-      console.log(resp.data.message);
-      getUserById();
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        getUserById();
+      }, 1500);
     } catch (error) {
-      console.log(error.response.data.msg);
+      alert(error.response.data.msg);
     }
   };
 
@@ -58,12 +71,14 @@ const UserProfile = () => {
   const logout = () => {
     dispatch(LogoutUser());
     dispatch(reset());
-
     navigate("/auth/login");
   };
 
-  console.log("selectedImage", file);
-  console.log("imageUrl", url);
+  const handleModalLogout = async () => {
+    setTitleModal("Keluar");
+    setMsg("apakah anda yakin keluar dari akun ini ?");
+    setShowModalConfirm(!showModalConfirm);
+  };
 
   return (
     <>
@@ -246,7 +261,7 @@ const UserProfile = () => {
             <button
               type="button"
               className="relative inline-flex items-center w-full py-4 text-base rounded-b-lg text-secondary font-bold"
-              onClick={logout}
+              onClick={handleModalLogout}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -266,6 +281,22 @@ const UserProfile = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
+        <ModalConfirm
+          isOpen={showModalConfirm}
+          title={titleModal}
+          img={modalconfirmImg}
+          desc={msg}
+          cancelText={"Batal"}
+          confirmText={"Keluar"}
+          onCancel={handleModalLogout}
+          onConfirm={logout}
+        />
       </div>
     </>
   );

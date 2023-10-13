@@ -5,9 +5,21 @@ import { useNavigate } from "react-router";
 import CardProduct from "../../../components/CardProduct/CardProduct";
 import CardMyProduct from "../../../components/CardMyProduct/CardMyProduct";
 import { Link } from "react-router-dom";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import {
+  modalconfirmImg,
+  modalerrorImg,
+  modalsuccessImg,
+} from "../../../assets";
+import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
 
 const UserMyProduct = () => {
   const [products, setProducts] = useState([]);
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [showModalConfirm, setShowModalConfirm] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [titleModal, setTitleModal] = useState("");
 
   const navigate = useNavigate();
 
@@ -28,12 +40,25 @@ const UserMyProduct = () => {
     navigate(`/user/editproduct/${uuid}`);
   };
 
+  const handleModalDelete = async () => {
+    setTitleModal("Menghapus");
+    setMsg("apakah anda yakin menghapus barang ini ?");
+    setShowModalConfirm(!showModalConfirm);
+  };
+
   const deleteProduct = async (uuid) => {
+    setShowModalConfirm(false);
     try {
-      await axios.delete(`http://localhost:5000/products/${uuid}`);
-      console.log("berhasil menghapus");
+      const resp = await axios.delete(`http://localhost:5000/products/${uuid}`);
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        getProducts();
+      }, 1500);
     } catch (error) {
-      console.log(error.response.data.msg);
+      alert(error.response.data.msg);
     }
   };
 
@@ -113,12 +138,25 @@ const UserMyProduct = () => {
           <div className="px-3 grid grid-cols-2 gap-5">
             {products.map((data) => {
               return (
-                <CardMyProduct
-                  key={data.uuid}
-                  data={data}
-                  delete={() => deleteProduct(data.uuid)}
-                  edit={() => editProduct(data.uuid)}
-                />
+                <>
+                  <CardMyProduct
+                    key={data.uuid}
+                    data={data}
+                    delete={handleModalDelete}
+                    edit={() => editProduct(data.uuid)}
+                  />
+                  <ModalConfirm
+                    key={data.uuid}
+                    isOpen={showModalConfirm}
+                    title={titleModal}
+                    img={modalconfirmImg}
+                    desc={msg}
+                    cancelText={"Batal"}
+                    confirmText={"Hapus"}
+                    onCancel={handleModalDelete}
+                    onConfirm={() => deleteProduct(data.uuid)}
+                  />
+                </>
               );
             })}
           </div>
@@ -126,6 +164,13 @@ const UserMyProduct = () => {
 
         {/* footer */}
         <ButtonNavigation />
+
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

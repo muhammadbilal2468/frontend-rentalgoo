@@ -3,9 +3,10 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import LocationMap from "../../../components/LocationMap/LocationMap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import { modalsuccessImg } from "../../../assets";
 
 const UserEditProfile = () => {
-  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [nohp, setNohp] = useState("");
   const [province, setProvince] = useState("");
@@ -15,6 +16,10 @@ const UserEditProfile = () => {
   const [location, setLocation] = useState("");
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
   const { uuid } = useParams();
@@ -27,7 +32,6 @@ const UserEditProfile = () => {
     try {
       const resp = await axios.get(`http://localhost:5000/me`);
       setName(resp.data.name);
-      setEmail(resp.data.email);
       setNohp(resp.data.nohp);
       setProvince(resp.data.province);
       setCityDistrict(resp.data.citydistrict);
@@ -57,11 +61,19 @@ const UserEditProfile = () => {
     formData.append("address", address);
     formData.append("location", location);
     try {
-      await axios.patch(`http://localhost:5000/me/${uuid}`, formData);
-      alert("berhasil di ubah");
-      navigate(`/user/profile/${uuid}`);
+      const resp = await axios.patch(
+        `http://localhost:5000/me/${uuid}`,
+        formData
+      );
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate(`/user/profile/${uuid}`);
+      }, 1500);
     } catch (error) {
-      console.log(error.response.data.msg);
+      alert(error.response.data.msg);
     }
   };
 
@@ -113,20 +125,6 @@ const UserEditProfile = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              aria-describedby="helper-text-explanation"
-              className="bg-gray-50 border border-gray-300 text-sm rounded-lg  block w-full p-2.5 mb-3"
-            />
-            <label
-              htmlFor="email"
-              className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg  block w-full p-2.5 mb-3"
             />
@@ -245,6 +243,12 @@ const UserEditProfile = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

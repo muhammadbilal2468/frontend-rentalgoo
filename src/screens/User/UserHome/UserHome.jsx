@@ -26,6 +26,11 @@ const UserHome = () => {
   const [products, setProducts] = useState([]);
   const [closestProducts, setClosestProducts] = useState([]);
   const [limit, setLimit] = useState(6);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertColor, setAlertColor] = useState("");
+  const [msg, setMsg] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,26 +54,10 @@ const UserHome = () => {
         }
       );
       setProducts(resp.data.products);
-      console.log(products);
+      setMsg(resp.data.msg);
     } catch (error) {
       console.log(error.response);
     }
-  };
-
-  const getClosestProducts = async () => {
-    try {
-      const resp = await axios.get(`http://localhost:5000/closestproducts`, {
-        withCredentials: true, // Set withCredentials ke 'true'
-      });
-      setClosestProducts(resp.data);
-      console.log("closestProducts", closestProducts);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const refreshClosestProducts = async () => {
-    getClosestProducts();
   };
 
   const getDetailProduct = (uuid) => {
@@ -80,17 +69,35 @@ const UserHome = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      await axios.post(
+      const resp = await axios.post(
         "http://localhost:5000/saveproducts",
-        {
-          withCredentials: true, // Set withCredentials ke 'true'
-        },
         formData
       );
-      console.log("berhasil Menyimpan");
+      setMsg(resp.data.msg);
+      setAlertColor("#00ff04");
     } catch (error) {
-      console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
+      setAlertColor("#0087ff");
     }
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1500);
+  };
+
+  const getClosestProducts = async () => {
+    try {
+      const resp = await axios.get(`http://localhost:5000/closestproducts`, {
+        withCredentials: true, // Set withCredentials ke 'true'
+      });
+      setClosestProducts(resp.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const refreshClosestProducts = async () => {
+    getClosestProducts();
   };
 
   const handleSearch = async (e) => {
@@ -130,10 +137,6 @@ const UserHome = () => {
 
   const handleCategory = (category) => {
     navigate(`/user/products?category=${category}`);
-  };
-
-  const handleClosest = (closest) => {
-    navigate(`/user/products?closest=${closest}`);
   };
 
   const minLimit = (e) => {
@@ -395,8 +398,8 @@ const UserHome = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <Alert isOpen={showAlert} desc={msg} color={alertColor} />
       </div>
-      <Alert />
     </>
   );
 };

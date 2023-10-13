@@ -3,6 +3,8 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import formatRupiah from "../../../utils/FormatRupiah";
+import { modalsuccessImg } from "../../../assets";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserAddAgreement = () => {
   const [product, setProduct] = useState("");
@@ -14,6 +16,10 @@ const UserAddAgreement = () => {
   const [status] = useState("Menunggu Persetujuan");
   const [productId, setProductId] = useState("");
   const [ownerId, setOwnerId] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
   const { uuid } = useParams();
@@ -46,8 +52,13 @@ const UserAddAgreement = () => {
         "http://localhost:5000/agreementproducts",
         formData
       );
-      alert("berhasil");
-      navigate("/user/products");
+      setTitleModal("Berhasil Menyewa");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/user/rentalagreements");
+      }, 1500);
     } catch (error) {
       console.log(error.data.response.msg);
       alert(error.response.data.msg);
@@ -313,6 +324,12 @@ const UserAddAgreement = () => {
 
         {/* footer */}
         <ButtonNavigation />
+        <ModalInfo
+          isOpen={showModalInfo}
+          title={titleModal}
+          img={modalsuccessImg}
+          desc={msg}
+        />
       </div>
     </>
   );

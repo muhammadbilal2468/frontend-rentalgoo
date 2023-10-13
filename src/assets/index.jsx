@@ -26,4 +26,6 @@ export { default as transportasiImg } from "./img/transportasi.svg";
 export { default as activityImg } from "./img/activity.svg";
 // ----------------- ACTIVITY ------------------------------
 export { default as modalsuccessImg } from "./img/modalsuccess.svg";
+export { default as modalconfirmImg } from "./img/modalconfirm.svg";
 export { default as modalerrorImg } from "./img/modalerror.svg";
+export { default as notfoundImg } from "./img/notfound.svg";
