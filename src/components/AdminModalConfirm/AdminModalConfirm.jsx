@@ -1,4 +1,5 @@
 import React from "react";
+import { modalconfirmImg } from "../../assets";
 
 const AdminModalConfirm = ({
   isOpen,
@@ -8,23 +9,22 @@ const AdminModalConfirm = ({
   desc,
   cancelText,
   confirmText,
-  img,
 }) => {
   if (!isOpen) {
     return null;
   }
 
   return (
-    <div className="fixed top-0 left-0 bottom-0 right-0 flex justify-center items-center z-70">
+    <div className="fixed top-0 left-0 bottom-0 right-0 flex justify-center items-center">
       <div
-        className="fixed top-0 left-0 bottom-0 right-0 bg-black opacity-10"
+        className="fixed top-0 left-0 bottom-0 right-0 bg-black opacity-40"
         onClick={onCancel}
       />
-      <div className="flex flex-col gap-4 justify-center items-center bg-white py-5 px-10 rounded-lg z-80 w-5/6">
+      <div className="flex flex-col gap-4 justify-center items-center bg-white py-5 px-10 rounded-lg z-80 w-3/12">
         <h3 className="text-2xl font-bold text-secondary text-center">
           {title}
         </h3>
-        <img src={img} alt="" className="w-3/4 h-36" />
+        <img src={modalconfirmImg} alt="" className="w-3/4 h-44" />
         <p className="text-center">{desc}</p>
         <div className="flex gap-5 w-full">
           <button

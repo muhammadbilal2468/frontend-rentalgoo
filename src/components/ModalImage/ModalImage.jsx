@@ -18,7 +18,11 @@ const ModalImage = (props) => {
         >
           x
         </p>
-        <img src={props.data.url} alt="" className="w-auto h-auto rounded-lg" />
+        <img
+          src={props.data.url}
+          alt=""
+          className="w-[500px] h-[500px] rounded-lg"
+        />
       </div>
     </div>
   );

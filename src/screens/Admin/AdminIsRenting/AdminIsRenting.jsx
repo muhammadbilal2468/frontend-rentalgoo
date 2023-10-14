@@ -2,14 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
+import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
+import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 
 const AdminIsRenting = () => {
   const [isRentings, setIsRentings] = useState([]);
+  const [limit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalIsRentings, setTotalIsRentings] = useState(0);
   const [search, setSearch] = useState("");
-  const [modalDelete, setModalDelete] = useState(false);
+
+  const [modalDelete, setModalDelete] = useState([]);
 
   useEffect(() => {
     getIsRentings();
@@ -28,12 +32,11 @@ const AdminIsRenting = () => {
     }
   };
 
-  const deleteIsRentings = async (uuid) => {
+  const deleteIsRentings = async (uuid, index) => {
     try {
       await axios.delete(`http://localhost:5000/isrentingproducts/${uuid}`);
-      alert("Berhasil Menghapus");
+      handleModalDelete(index);
       getIsRentings();
-      handleModalDelete();
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -67,8 +70,11 @@ const AdminIsRenting = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleModalDelete = () => {
-    setModalDelete(!modalDelete);
+  const handleModalDelete = (index) => {
+    const newModalDelete = [...modalDelete];
+    newModalDelete[index] = !newModalDelete[index];
+    setModalDelete(newModalDelete);
+    console.log(modalDelete[index]);
   };
 
   console.log(isRentings);
@@ -164,6 +170,8 @@ const AdminIsRenting = () => {
             </thead>
             <tbody>
               {isRentings.map((data, index) => {
+                const startingNumber = (currentPage - 1) * limit + 1;
+                const rowNumber = startingNumber + index;
                 return (
                   <tr
                     key={data.uuid}
@@ -173,7 +181,7 @@ const AdminIsRenting = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      {index + 1}
+                      {rowNumber}
                     </th>
                     <td className="px-6 py-4">{data.product.name}</td>
                     <td className="px-6 py-4">
@@ -190,16 +198,16 @@ const AdminIsRenting = () => {
                       </Link>
                       <i
                         className="fa-solid fa-trash text-red-100 bg-red-500 py-1 px-2 text-base rounded-md cursor-pointer"
-                        onClick={handleModalDelete}
+                        onClick={() => handleModalDelete(index)}
                       ></i>
-                      <ModalConfirm
+                      <AdminModalConfirm
                         data={data}
-                        isOpen={modalDelete}
-                        onCancel={handleModalDelete}
-                        onConfirm={() => deleteIsRentings(data.uuid)}
+                        isOpen={modalDelete[index]}
+                        onCancel={() => handleModalDelete(index)}
+                        onConfirm={() => deleteIsRentings(data.uuid, index)}
                         title="Hapus Proses Sewa"
-                        desc="Apakah anda ingin menghapus proses sewa telah berjalan ini ?"
-                        cancelText="Kembali"
+                        desc="Apakah anda ingin menghapus proses penyewaan ini ?"
+                        cancelText="Batal"
                         confirmText="Hapus"
                       />
                     </td>
@@ -209,52 +217,14 @@ const AdminIsRenting = () => {
             </tbody>
           </table>
 
-          <div className="grid grid-cols-3 items-center px-6 py-3 mt-5">
-            <p>Menampilkan : 1-10 dari {totalIsRentings} hasil</p>
-            <nav aria-label="Page navigation example" className="col-span-2">
-              <ul className="flex gap-3">
-                {currentPage <= 1 ? (
-                  <div className=""></div>
-                ) : (
-                  <li onClick={handlePrevPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border-none rounded-lg "
-                    >
-                      Prev
-                    </a>
-                  </li>
-                )}
-                {totalPages > 1 &&
-                  Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <button
-                        key={page}
-                        disabled={currentPage === page}
-                        onClick={() => handlePageChange(page)}
-                        className="flex items-center justify-center px-4 h-10 leading-tight  bg-primary text-white border border-gray-300 rounded-lg "
-                      >
-                        {page}
-                      </button>
-                    )
-                  )}
-                {currentPage >= 10 ? (
-                  <div className="self-center text-primary">
-                    Silahkan Cari Barang
-                  </div>
-                ) : (
-                  <li onClick={handleNextPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border-none rounded-lg rounded-r-lg "
-                    >
-                      Next
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          </div>
+          <AdminPagination
+            totalItems={totalIsRentings}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            handlePageChange={handlePageChange}
+            handleNextPage={handleNextPage}
+          />
         </div>
       </div>
     </>

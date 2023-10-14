@@ -3,15 +3,18 @@ import React, { useEffect, useState } from "react";
 import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
 import { Link } from "react-router-dom";
 import formatRupiah from "../../../utils/FormatRupiah";
+import AdminPagination from "../../../components/AdminPagination/AdminPagination";
+import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
 
 const AdminFinishRentOwners = () => {
   const [finishRents, setFinishRents] = useState([]);
+  const [limit, setLimit] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalFinishRents, setTotalFinishRents] = useState(0);
   const [search, setSearch] = useState("");
-  const [modalDelete, setModalDelete] = useState(false);
-  const [modalDetail, setModalDetail] = useState([]);
+
+  const [modalDelete, setModalDelete] = useState([]);
 
   useEffect(() => {
     getFinishRents();
@@ -20,7 +23,7 @@ const AdminFinishRentOwners = () => {
   const getFinishRents = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/finishrentbyowner?page=${currentPage}&search=${search}`
+        `http://localhost:5000/finishrentbyowner?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setFinishRents(resp.data.finishRents);
       setTotalPages(resp.data.totalPages);
@@ -30,11 +33,11 @@ const AdminFinishRentOwners = () => {
     }
   };
 
-  const deleteFinishRent = async (uuid) => {
+  const deleteFinishRent = async (uuid, index) => {
     try {
       await axios.delete(`http://localhost:5000/finishrentbyowner/${uuid}`);
+      handleModalDelete(index);
       getFinishRents();
-      handleModalDelete();
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -68,15 +71,13 @@ const AdminFinishRentOwners = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleModalDelete = () => {
-    setModalDelete(!modalDelete);
+  const handleModalDelete = (index) => {
+    const newModalDelete = [...modalDelete];
+    newModalDelete[index] = !newModalDelete[index];
+    setModalDelete(newModalDelete);
+    console.log(modalDelete[index]);
   };
 
-  const handleToggleModalDetail = (index) => {
-    const newModalDetail = [...modalDetail];
-    newModalDetail[index] = !newModalDetail[index];
-    setModalDetail(newModalDetail);
-  };
   return (
     <>
       <div className="flex bg-white justify-start items-center w-full rounded-xl p-3 gap-4 mb-8 bg-white-50">
@@ -170,12 +171,17 @@ const AdminFinishRentOwners = () => {
                   <div className="flex items-center">Berakhir</div>
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  <div className="flex items-center">Status</div>
+                </th>
+                <th scope="col" className="px-6 py-3">
                   <div className="flex items-center">Action</div>
                 </th>
               </tr>
             </thead>
             <tbody>
               {finishRents.map((data, index) => {
+                const startingNumber = (currentPage - 1) * limit + 1;
+                const rowNumber = startingNumber + index;
                 return (
                   <tr
                     key={data.uuid}
@@ -185,7 +191,7 @@ const AdminFinishRentOwners = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      {index + 1}
+                      {rowNumber}
                     </th>
                     <td className="px-6 py-4">{data.product.name}</td>
                     <td className="px-6 py-4">
@@ -198,19 +204,20 @@ const AdminFinishRentOwners = () => {
                     </td>
                     <td className="px-6 py-4">{data.start_date}</td>
                     <td className="px-6 py-4">{data.end_date}</td>
+                    <td className="px-6 py-4">{data.status}</td>
                     <td className="flex items-center gap-2 px-6 py-4">
                       <i
                         className="fa-solid fa-trash text-red-100 bg-red-500 py-1 px-2 text-base rounded-md cursor-pointer"
-                        onClick={handleModalDelete}
+                        onClick={() => handleModalDelete(index)}
                       ></i>
-                      <ModalConfirm
+                      <AdminModalConfirm
                         data={data}
-                        isOpen={modalDelete}
-                        onCancel={handleModalDelete}
-                        onConfirm={() => deleteFinishRent(data.uuid)}
-                        title="Hapus Proses Sewa"
-                        desc="Apakah anda ingin menghapus proses sewa telah berjalan ini ?"
-                        cancelText="Kembali"
+                        isOpen={modalDelete[index]}
+                        onCancel={() => handleModalDelete(index)}
+                        onConfirm={() => deleteFinishRent(data.uuid, index)}
+                        title="Hapus Riwayat"
+                        desc="Apakah anda ingin menghapus riwayat sewa ini ?"
+                        cancelText="Batal"
                         confirmText="Hapus"
                       />
                     </td>
@@ -220,52 +227,14 @@ const AdminFinishRentOwners = () => {
             </tbody>
           </table>
 
-          <div className="grid grid-cols-3 items-center px-6 py-3 mt-5">
-            <p>Menampilkan : 1-10 dari {totalFinishRents} hasil</p>
-            <nav aria-label="Page navigation example" className="col-span-2">
-              <ul className="flex gap-3">
-                {currentPage <= 1 ? (
-                  <div className=""></div>
-                ) : (
-                  <li onClick={handlePrevPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border-none rounded-lg "
-                    >
-                      Prev
-                    </a>
-                  </li>
-                )}
-                {totalPages > 1 &&
-                  Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <button
-                        key={page}
-                        disabled={currentPage === page}
-                        onClick={() => handlePageChange(page)}
-                        className="flex items-center justify-center px-4 h-10 leading-tight  bg-primary text-white border border-gray-300 rounded-lg "
-                      >
-                        {page}
-                      </button>
-                    )
-                  )}
-                {currentPage >= 10 ? (
-                  <div className="self-center text-primary">
-                    Silahkan Cari Barang
-                  </div>
-                ) : (
-                  <li onClick={handleNextPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border-none rounded-lg rounded-r-lg "
-                    >
-                      Next
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          </div>
+          <AdminPagination
+            totalItems={totalFinishRents}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            handlePageChange={handlePageChange}
+            handleNextPage={handleNextPage}
+          />
         </div>
       </div>
     </>

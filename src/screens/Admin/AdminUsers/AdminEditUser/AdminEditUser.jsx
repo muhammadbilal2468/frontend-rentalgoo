@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { updaloadProfileImg } from "../../../../assets";
+import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
 
 const AdminEditUser = () => {
   const [file, setFile] = useState(null);
@@ -15,7 +16,9 @@ const AdminEditUser = () => {
   const [subdistrict, setSubdistrict] = useState("");
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
@@ -50,9 +53,17 @@ const AdminEditUser = () => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      await axios.patch(`http://localhost:5000/photousers/${uuid}`, formData);
+      const resp = await axios.patch(
+        `http://localhost:5000/photousers/${uuid}`,
+        formData
+      );
       setUrlChange(false);
-      alert("foto berhasil di ubah");
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+      }, 1500);
     } catch (error) {
       alert(error.response.data.msg);
     }
@@ -73,8 +84,13 @@ const AdminEditUser = () => {
         `http://localhost:5000/users/${uuid}`,
         formData
       );
-      alert("Data Pengguna berhasil Diedit");
-      navigate("/admin/users");
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/admin/users");
+      }, 1500);
     } catch (error) {
       setMsg(error.response.data.msg);
     }
@@ -251,10 +267,11 @@ const AdminEditUser = () => {
             >
               Edit
             </button>
-            <p className="text-red-500 font-bold">{msg}</p>
+            {/* <p className="text-red-500 font-bold">{msg}</p> */}
           </div>
         </div>
       </form>
+      <AdminModalInfo isOpen={showModalInfo} title={titleModal} desc={msg} />
     </div>
   );
 };

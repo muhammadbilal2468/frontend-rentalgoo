@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
 
 const AdminEditProduct = () => {
   const [name, setName] = useState("");
@@ -12,6 +13,9 @@ const AdminEditProduct = () => {
   const [stock, setStock] = useState("");
   const [price, setPrice] = useState("");
   const [timeUnit, setTimeUnit] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
@@ -37,8 +41,6 @@ const AdminEditProduct = () => {
     }
   };
 
-  // console.log("product", product);
-
   const updateProduct = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -54,11 +56,14 @@ const AdminEditProduct = () => {
         `http://localhost:5000/products/${uuid}`,
         formData
       );
-      console.log(resp.data);
-      alert("barang berhasil Diedit");
-      navigate("/admin/products");
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/admin/products");
+      }, 1500);
     } catch (error) {
-      console.log(error.response.data.msg);
       setMsg(error.response.data.msg);
     }
   };
@@ -262,6 +267,7 @@ const AdminEditProduct = () => {
           </div>
         </div>
       </form>
+      <AdminModalInfo isOpen={showModalInfo} title={titleModal} desc={msg} />
     </div>
   );
 };

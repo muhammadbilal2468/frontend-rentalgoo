@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ModalConfirm from "../../../../components/ModalConfirm/ModalConfirm";
 import ModalImage from "../../../../components/ModalImage/ModalImage";
+import AdminModalConfirm from "../../../../components/AdminModalConfirm/AdminModalConfirm";
+import AdminPagination from "../../../../components/AdminPagination/AdminPagination";
 
 const AdminUser = () => {
   const [users, setUsers] = useState([]);
-  const [totalusers, setTotalUsers] = useState("");
+  const [limit, setLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalusers, setTotalUsers] = useState("");
   const [totalPages, setTotalPages] = useState(0);
   const [search, setSearch] = useState("");
   const [modalDelete, setModalDelete] = useState(false);
@@ -21,7 +24,7 @@ const AdminUser = () => {
   const getUsers = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/users?page=${currentPage}&search=${search}`
+        `http://localhost:5000/users?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setUsers(resp.data.users);
       setTotalUsers(resp.data.totalUsers);
@@ -31,12 +34,11 @@ const AdminUser = () => {
     }
   };
 
-  const deleteUser = async (id) => {
+  const deleteUser = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/users/${id}`);
+      await axios.delete(`http://localhost:5000/users/${uuid}`);
+      handleModalDelete(index);
       getUsers();
-      alert("berhasil menghapus");
-      handleModalDelete();
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -72,8 +74,11 @@ const AdminUser = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleModalDelete = () => {
-    setModalDelete(!modalDelete);
+  const handleModalDelete = (index) => {
+    const newModalDelete = [...modalDelete];
+    newModalDelete[index] = !newModalDelete[index];
+    setModalDelete(newModalDelete);
+    console.log(modalDelete[index]);
   };
 
   const handleModalImage = (index) => {
@@ -192,6 +197,8 @@ const AdminUser = () => {
             </thead>
             <tbody>
               {users.map((data, index) => {
+                const startingNumber = (currentPage - 1) * limit + 1;
+                const rowNumber = startingNumber + index;
                 return (
                   <tr
                     key={data.uuid}
@@ -201,7 +208,7 @@ const AdminUser = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      {index + 1}
+                      {rowNumber}
                     </th>
                     <td className="px-6 py-4">
                       <img src={data.url} alt="" className="w-12 h-12" />
@@ -225,13 +232,13 @@ const AdminUser = () => {
                       </Link>
                       <i
                         className="fa-solid fa-trash text-red-100 bg-red-500 py-1 px-2 text-base rounded-md cursor-pointer"
-                        onClick={handleModalDelete}
+                        onClick={() => handleModalDelete(index)}
                       ></i>
-                      <ModalConfirm
+                      <AdminModalConfirm
                         data={data}
-                        isOpen={modalDelete}
-                        onCancel={handleModalDelete}
-                        onConfirm={() => deleteUser(data.uuid)}
+                        isOpen={modalDelete[index]}
+                        onCancel={() => handleModalDelete(index)}
+                        onConfirm={() => deleteUser(data.uuid, index)}
                         title="Hapus Pengguna"
                         desc="Apakah anda ingin menghapus pengguna ini ?"
                         cancelText="Batal"
@@ -244,52 +251,14 @@ const AdminUser = () => {
             </tbody>
           </table>
 
-          <div className="grid grid-cols-3 items-center px-6 py-3 mt-5">
-            <p>Menampilkan : 1-10 dari {totalusers} hasil</p>
-            <nav aria-label="Page navigation example" className="col-span-2">
-              <ul className="flex gap-3">
-                {currentPage <= 1 ? (
-                  <div className=""></div>
-                ) : (
-                  <li onClick={handlePrevPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border-none rounded-lg "
-                    >
-                      Prev
-                    </a>
-                  </li>
-                )}
-                {totalPages > 1 &&
-                  Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <button
-                        key={page}
-                        disabled={currentPage === page}
-                        onClick={() => handlePageChange(page)}
-                        className="flex items-center justify-center px-4 h-10 leading-tight  bg-primary text-white border border-gray-300 rounded-lg "
-                      >
-                        {page}
-                      </button>
-                    )
-                  )}
-                {currentPage >= 10 ? (
-                  <div className="self-center text-primary">
-                    Silahkan Cari Barang
-                  </div>
-                ) : (
-                  <li onClick={handleNextPage}>
-                    <a
-                      href="#"
-                      className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border-none rounded-lg rounded-r-lg "
-                    >
-                      Next
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </nav>
-          </div>
+          <AdminPagination
+            totalItems={totalusers}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            handlePageChange={handlePageChange}
+            handleNextPage={handleNextPage}
+          />
         </div>
       </div>
     </>
