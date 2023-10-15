@@ -13,14 +13,11 @@ const AdminHome = () => {
   const [totalFinishRentRenters, setTotalFinishRentRenters] = useState("");
   const [totalUsers, setTotalUsers] = useState("");
 
-  const [finishRents, setFinishRents] = useState([]);
-  const [lastFinishRents, setLastFinishRents] = useState([]);
-
-  const [percentSaves, setPercentSaves] = useState("");
-  const [percentAgrees, setPercentAgrees] = useState("");
-  const [percentIsRents, setPercentIsRents] = useState("");
-  const [percentFinishRentOwners, setPercentFinishRentOwners] = useState("");
-  const [percentFinishRentRenters, setPercentFinishRentRenters] = useState("");
+  // const [percentSaves, setPercentSaves] = useState("");
+  // const [percentAgrees, setPercentAgrees] = useState("");
+  // const [percentIsRents, setPercentIsRents] = useState("");
+  // const [percentFinishRentOwners, setPercentFinishRentOwners] = useState("");
+  // const [percentFinishRentRenters, setPercentFinishRentRenters] = useState("");
 
   useEffect(() => {
     getTotalProduct();
@@ -30,8 +27,7 @@ const AdminHome = () => {
     getTotalFinishRentOwners();
     getTotalFinishRentRenters();
     getTotalUsers();
-    countPercent();
-    getFinishRents();
+    // countPercent();
   }, []);
 
   const getTotalProduct = async () => {
@@ -94,30 +90,17 @@ const AdminHome = () => {
     }
   };
 
-  const countPercent = () => {
-    setPercentSaves((totalSaves / totalProducts) * 100);
-    setPercentAgrees((totalAgrees / totalProducts) * 100);
-    setPercentIsRents((totalIsRents / totalProducts) * 100);
-    setPercentFinishRentOwners((totalFinishRentOwners / totalProducts) * 100);
-    setPercentFinishRentRenters((totalFinishRentRenters / totalProducts) * 100);
-  };
-
-  const getFinishRents = async () => {
-    try {
-      const resp = await axios.get(`http://localhost:5000/finishrentbyowner`);
-      setFinishRents(resp.data.finishRents);
-      setLastFinishRents(resp.data.finishRents.slice(-5));
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+  // const countPercent = () => {
+  //   setPercentSaves((totalSaves / totalProducts) * 100);
+  //   setPercentAgrees((totalAgrees / totalProducts) * 100);
+  //   setPercentIsRents((totalIsRents / totalProducts) * 100);
+  //   setPercentFinishRentOwners((totalFinishRentOwners / totalProducts) * 100);
+  //   setPercentFinishRentRenters((totalFinishRentRenters / totalProducts) * 100);
+  // };
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
   });
-
-  console.log(lastFinishRents);
-  console.log(finishRents);
 
   return (
     <div className="w-full">
@@ -300,7 +283,7 @@ const AdminHome = () => {
               role="list"
               className="divide-y divide-gray-200 dark:divide-gray-700"
             >
-              {lastFinishRents.map((data) => {
+              {/* {lastFinishRents.map((data) => {
                 return (
                   <li className="py-3 sm:py-4">
                     <div className="flex items-center space-x-4">
@@ -325,7 +308,7 @@ const AdminHome = () => {
                     </div>
                   </li>
                 );
-              })}
+              })} */}
             </ul>
           </div>
         </div>

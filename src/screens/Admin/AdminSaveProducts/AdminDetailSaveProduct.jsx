@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import formatRupiah from "../../../utils/FormatRupiah";
 
 const AdminDetailSaveProduct = () => {
@@ -26,6 +26,7 @@ const AdminDetailSaveProduct = () => {
       console.log(error.response);
     }
   };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-start items-center w-full rounded-xl p-3 gap-4 mb-8 bg-white">
@@ -67,7 +68,7 @@ const AdminDetailSaveProduct = () => {
               <div className="flex gap-3 items-center">
                 <img
                   src={owner.url}
-                  alt=""
+                  alt="fotoowner"
                   className="w-12 h-12 rounded-full border-2 border-primary"
                 />
                 <div className="">
@@ -78,7 +79,7 @@ const AdminDetailSaveProduct = () => {
               <div className="flex gap-3 items-center">
                 <img
                   src={user.url}
-                  alt=""
+                  alt="fotouser"
                   className="w-12 h-12 rounded-full border-2 border-primary"
                 />
                 <div className="">

@@ -29,8 +29,6 @@ const UserDetailProduct = () => {
     navigate(`/user/detailuser/${user.uuid}`);
   };
 
-  console.log(product.id);
-
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
@@ -60,14 +58,14 @@ const UserDetailProduct = () => {
           >
             <img
               src={user.url}
-              alt=""
+              alt="fotouser"
               className="w-9 h-9 rounded-full border-2 border-primary"
             />
             <p className=" font-semibold">{user.name}</p>
           </div>
           <img
             src={product.url}
-            alt=""
+            alt="fotoproduct"
             className="w-full rounded-lg border-2 border-primary"
           />
           <div className="flex items-center gap-2 font-bold text-lg">
@@ -76,6 +74,9 @@ const UserDetailProduct = () => {
             </p>
             <p className="text-primary font-extrabold">{product.time_unit}</p>
           </div>
+          <p className="text-sm text-secondary font-bold -mt-3">
+            {product.leased}x disewa
+          </p>
           <div className="flex items-start justify-between gap-20 text-sm border-b-2 pb-2">
             <p className="text-tertiary font-bold">Alamat</p>
             <p className="text-end">

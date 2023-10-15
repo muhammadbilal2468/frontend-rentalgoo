@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ const User = () => {
       <div className="header">
         <Link to={`/`} style={{ textDecoration: "none", color: "black" }}>
           <div className="left">
-            <img src={logoImg} alt="" />
+            <img src={logoImg} alt="logoImg" />
             <p>ental Goo</p>
           </div>
         </Link>
@@ -53,7 +53,7 @@ const User = () => {
             <i className="fa-solid fa-comment"></i>
           </Link>
           <div className={`profile`} onClick={editProfile}>
-            <img src={user && user.url} alt="" />
+            <img src={user && user.url} alt="fotouser" />
           </div>
         </div>
       </div>

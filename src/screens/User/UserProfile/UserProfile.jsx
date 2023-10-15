@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
-import { LogoutUser, MeUser, reset } from "../../../features/authSlice";
 import axios from "axios";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import { modalconfirmImg, modalsuccessImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import { LogoutUser, reset } from "../../../features/authSlice";
 
 const UserProfile = () => {
   const [user, setUser] = useState("");
@@ -23,16 +23,16 @@ const UserProfile = () => {
   const { uuid } = useParams();
 
   useEffect(() => {
-    getUserById();
+    getMe();
   }, [uuid]);
 
-  const getUserById = async () => {
+  const getMe = async () => {
     try {
       const resp = await axios.get(`http://localhost:5000/me`);
       setUser(resp.data);
       setUrl(resp.data.url);
     } catch (error) {
-      console.log(error.response);
+      setMsg(error.response);
     }
   };
 
@@ -43,7 +43,7 @@ const UserProfile = () => {
     setUrl(imageUrl);
   };
 
-  const updatePhotoProfile = async (e) => {
+  const updatePhotoMe = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
@@ -57,10 +57,10 @@ const UserProfile = () => {
       setShowModalInfo(true);
       setTimeout(() => {
         setShowModalInfo(false);
-        getUserById();
+        getMe();
       }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      setMsg(error.response.data.msg);
     }
   };
 
@@ -125,10 +125,10 @@ const UserProfile = () => {
             <img
               src={url}
               className="w-40 h-40 rounded-full border-4 border-primary"
-              alt=""
+              alt="fotouser"
             />
             <div className="absolute -bottom-2 right-24 flex items-center justify-center">
-              <form onSubmit={updatePhotoProfile}>
+              <form onSubmit={updatePhotoMe}>
                 {url === user.url ? (
                   <label
                     htmlFor="dropzone-file"
@@ -184,20 +184,17 @@ const UserProfile = () => {
           <dl className="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700 mb-5">
             <div className="flex flex-col pb-3">
               <dt className="mb-1 text-primary text-xs">Nama Lengkap</dt>
-              <dd className="text-lg font-semibold">{user.name}</dd>
+              <dd className="font-semibold">{user.name}</dd>
             </div>
             <div className="flex flex-col py-3">
               <dt className="mb-1 text-primary text-xs">Email</dt>
-              <dd className="text-lg font-semibold">{user.email}</dd>
+              <dd className="font-semibold">{user.email}</dd>
             </div>
             <div className="flex flex-col pt-3">
               <dt className="mb-1 text-primary text-xs">Phone number</dt>
-              <dd className="text-lg font-semibold">{user.nohp}</dd>
+              <dd className="font-semibold">{user.nohp}</dd>
             </div>
           </dl>
-          {/* <button className="bg-primary py-2 w-full rounded-lg text-white">
-            Edit Profile
-          </button> */}
 
           <div className="text-gray-900 border-gray-200 rounded-lg w-full">
             <button

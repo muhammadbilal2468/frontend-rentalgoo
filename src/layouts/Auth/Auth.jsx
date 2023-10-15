@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router";
-import { loginImg, logoImg } from "../../assets";
 import { Link } from "react-router-dom";
+import { logoImg } from "../../assets";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Auth = () => {
       <div className="relative grid grid-cols-2 gap-10 h-full w-full">
         <div className="absolute left-0 top-0 ">
           <Link to={"/landing-page"}>
-            <img src={logoImg} alt="" className="w-10 md:w-12 " />
+            <img src={logoImg} alt="logoImg" className="w-10 md:w-12 " />
           </Link>
         </div>
         <div className="flex flex-col justify-center items-center col-span-2 lg:col-span-1">

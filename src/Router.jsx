@@ -14,6 +14,7 @@ import AdminEditProduct from "./screens/Admin/AdminProducts/AdminEditProduct/Adm
 import AdminProduct from "./screens/Admin/AdminProducts/AdminProduct/AdminProduct";
 import AdminDetailSaveProduct from "./screens/Admin/AdminSaveProducts/AdminDetailSaveProduct";
 import AdminSaveProducts from "./screens/Admin/AdminSaveProducts/AdminSaveProducts";
+import AdminSetting from "./screens/Admin/AdminSetting/AdminSetting";
 import AdminAddUser from "./screens/Admin/AdminUsers/AdminAddUser/AdminAddUser";
 import AdminEditUser from "./screens/Admin/AdminUsers/AdminEditUser/AdminEditUser";
 import AdminUser from "./screens/Admin/AdminUsers/AdminUser/AdminUser";
@@ -46,7 +47,6 @@ import UserProfile from "./screens/User/UserProfile/UserProfile";
 import UserRentalAgreement from "./screens/User/UserRentalAgreement/UserRentalAgreement";
 import UserSaveProduct from "./screens/User/UserSaveProduct/UserSaveProduct";
 import UserSearch from "./screens/User/UserSearch/UserSearch";
-import UserTest from "./screens/User/UserTest";
 
 const Router = () => {
   return (
@@ -106,6 +106,8 @@ const Router = () => {
           <Route path="/admin/users" element={<AdminUser />} />
           <Route path="/admin/add-user" element={<AdminAddUser />} />
           <Route path="/admin/edit-user/:uuid" element={<AdminEditUser />} />
+
+          <Route path="/admin/setting" element={<AdminSetting />} />
         </Route>
 
         {/* ------------------ USER -------------------- */}
@@ -161,8 +163,6 @@ const Router = () => {
 
         <Route path="/user/chats" element={<UserChat />} />
         <Route path="/user/detailchat/:uuid" element={<UserDetailChat />} />
-
-        <Route path="/user/test/" element={<UserTest />} />
       </Routes>
     </BrowserRouter>
   );

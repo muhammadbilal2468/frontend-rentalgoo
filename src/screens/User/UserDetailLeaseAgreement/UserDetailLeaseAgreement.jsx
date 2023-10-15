@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import formatRupiah from "../../../utils/FormatRupiah";
 import { modalsuccessImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import formatRupiah from "../../../utils/FormatRupiah";
 
 const UserDetailLeaseAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -57,7 +57,7 @@ const UserDetailLeaseAgreement = () => {
         navigate("/user/leaseagreements");
       }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
   };
 
@@ -176,10 +176,18 @@ const UserDetailLeaseAgreement = () => {
                 onClick={getDetailUser}
               >
                 <p>{renter.name}</p>
-                <img src={renter.url} className="w-6 h-6 rounded-full" alt="" />
+                <img
+                  src={renter.url}
+                  className="w-6 h-6 rounded-full"
+                  alt="fotopenyewa"
+                />
               </div>
             </div>
-            <img src={product.url} alt="" className="rounded-lg mb-3" />
+            <img
+              src={product.url}
+              alt="fotoproduk"
+              className="rounded-lg mb-3"
+            />
             <p className="text-xl text-primary font-bold">{product.name}</p>
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-2 justify-between items-center w-full">

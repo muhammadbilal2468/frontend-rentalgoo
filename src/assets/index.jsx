@@ -12,7 +12,17 @@ export { default as costumerImg2 } from "./img/costumer2.svg";
 export { default as igImg } from "./img/instagram.png";
 export { default as fbImg } from "./img/facebook.png";
 export { default as githubImg } from "./img/github.png";
-// ----------------- Home ---------------------------------
+// ----------------- Admin-----------------------------------
+export { default as admindashboardImg } from "./img/admindashboard.svg";
+export { default as adminproductImg } from "./img/adminproduct.svg";
+export { default as adminsaveproductImg } from "./img/adminsaveproduct.svg";
+export { default as adminagreementImg } from "./img/adminagreement.svg";
+export { default as adminisrentingImg } from "./img/adminisrenting.svg";
+export { default as adminfinishrentImg } from "./img/adminfinishrent.svg";
+export { default as adminuserImg } from "./img/adminuser.svg";
+export { default as adminsettingImg } from "./img/adminsetting.svg";
+
+// ----------------- User Home ---------------------------------
 export { default as aksesorisImg } from "./img/aksesoris.svg";
 export { default as bukuImg } from "./img/buku.svg";
 export { default as elektronikImg } from "./img/elektronik.svg";

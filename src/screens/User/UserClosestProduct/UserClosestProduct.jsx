@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import { useNavigate } from "react-router";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import Alert from "../../../components/Alert/Alert";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 
 const UserClosestProduct = () => {
@@ -48,8 +48,9 @@ const UserClosestProduct = () => {
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {
-      setMsg(error.response.data.msg);
       setAlertColor("#0087ff");
+      setMsg(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
     setShowAlert(true);
     setTimeout(() => {
@@ -60,12 +61,10 @@ const UserClosestProduct = () => {
   const minLimit = (e) => {
     e.preventDefault();
     setLimit(limit - 2);
-    console.log("limit", limit);
   };
   const plusLimit = (e) => {
     e.preventDefault();
     setLimit(limit + 2);
-    console.log("limit", limit);
   };
 
   return (
@@ -89,42 +88,44 @@ const UserClosestProduct = () => {
       </div>
 
       {/* content */}
-      {closestProducts.length === 0 ? (
-        <NotFoundPage desc={"Belum Ada Barang Sedang Disewakan"} />
-      ) : (
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
-          <div className="grid grid-cols-2 mb-5 gap-3">
-            {closestProducts.map((data) => {
-              return (
-                <CardClosestProduct
-                  key={data.uuid}
-                  data={data}
-                  save={() => addSaveProduct(data)}
-                  detail={getDetailProduct}
-                />
-              );
-            })}
-          </div>
-          <div className="px-3 mb-5 flex justify-center gap-5 w-full">
-            {limit > 6 && (
-              <button
-                onClick={minLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Sedikit
-              </button>
-            )}
-            {closestProducts.length >= limit && (
-              <button
-                onClick={plusLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Banyak
-              </button>
-            )}
-          </div>
-        </div>
-      )}
+      <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
+        {closestProducts.length === 0 ? (
+          <NotFoundPage desc={"Belum Ada Barang Didekat Anda"} />
+        ) : (
+          <>
+            <div className="grid grid-cols-2 mb-5 gap-3">
+              {closestProducts.map((data) => {
+                return (
+                  <CardClosestProduct
+                    key={data.uuid}
+                    data={data}
+                    save={() => addSaveProduct(data)}
+                    detail={getDetailProduct}
+                  />
+                );
+              })}
+            </div>
+            <div className="px-3 mb-5 flex justify-center gap-5 w-full">
+              {limit > 6 && (
+                <button
+                  onClick={minLimit}
+                  className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                >
+                  Lebih Sedikit
+                </button>
+              )}
+              {closestProducts.length >= limit && (
+                <button
+                  onClick={plusLimit}
+                  className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                >
+                  Lebih Banyak
+                </button>
+              )}
+            </div>
+          </>
+        )}
+      </div>
 
       {/* footer */}
       <ButtonNavigation />

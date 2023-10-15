@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { modalsuccessImg, updaloadProductImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserEditProduct = () => {
@@ -67,7 +67,7 @@ const UserEditProduct = () => {
         navigate("/user/myproducts");
       }, 2000);
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
   };
 
@@ -113,7 +113,7 @@ const UserEditProduct = () => {
                 <img
                   src={updaloadProductImg}
                   className="w-64 h-64 rounded-xl border-4 border-primary p-2"
-                  alt=""
+                  alt="uploadgambar"
                 />
               )}
               <div className="absolute -bottom-3 right-10 flex items-center justify-center">

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import CardProduct from "../../../components/CardProduct/CardProduct";
-import CardMyProduct from "../../../components/CardMyProduct/CardMyProduct";
 import { Link } from "react-router-dom";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
-import {
-  modalconfirmImg,
-  modalerrorImg,
-  modalsuccessImg,
-} from "../../../assets";
+import { modalconfirmImg, modalsuccessImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import CardMyProduct from "../../../components/CardMyProduct/CardMyProduct";
 import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
+import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 
 const UserMyProduct = () => {
   const [products, setProducts] = useState([]);
@@ -58,7 +54,7 @@ const UserMyProduct = () => {
         getProducts();
       }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
   };
 
@@ -135,31 +131,34 @@ const UserMyProduct = () => {
             </button>
           </Link>
 
-          <div className="px-3 grid grid-cols-2 gap-5">
-            {products.map((data) => {
-              return (
-                <>
-                  <CardMyProduct
-                    key={data.uuid}
-                    data={data}
-                    delete={handleModalDelete}
-                    edit={() => editProduct(data.uuid)}
-                  />
-                  <ModalConfirm
-                    key={data.uuid}
-                    isOpen={showModalConfirm}
-                    title={titleModal}
-                    img={modalconfirmImg}
-                    desc={msg}
-                    cancelText={"Batal"}
-                    confirmText={"Hapus"}
-                    onCancel={handleModalDelete}
-                    onConfirm={() => deleteProduct(data.uuid)}
-                  />
-                </>
-              );
-            })}
-          </div>
+          {products.length === 0 ? (
+            <NotFoundPage desc={"Anda Belum Punya Barang"} />
+          ) : (
+            <div className="px-3 grid grid-cols-2 gap-5">
+              {products.map((data) => {
+                return (
+                  <>
+                    <CardMyProduct
+                      data={data}
+                      delete={handleModalDelete}
+                      edit={() => editProduct(data.uuid)}
+                    />
+                    <ModalConfirm
+                      key={data.uuid}
+                      isOpen={showModalConfirm}
+                      title={titleModal}
+                      img={modalconfirmImg}
+                      desc={msg}
+                      cancelText={"Batal"}
+                      confirmText={"Hapus"}
+                      onCancel={handleModalDelete}
+                      onConfirm={() => deleteProduct(data.uuid)}
+                    />
+                  </>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* footer */}

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import LocationMap from "../../../components/LocationMap/LocationMap";
 
 const UserDetailIsRenting = () => {
@@ -12,8 +12,6 @@ const UserDetailIsRenting = () => {
 
   const [longitude, setLongitude] = useState("");
   const [latitude, setLatitude] = useState("");
-
-  const navigate = useNavigate();
 
   const { uuid } = useParams();
 
@@ -100,7 +98,11 @@ const UserDetailIsRenting = () => {
               <p className="text-tertiary font-extrabold">Pemilik</p>
               <div className="flex gap-2 justify-end">
                 <p>{owner.name}</p>
-                <img src={owner.url} className="w-6 h-6 rounded-full" alt="" />
+                <img
+                  src={owner.url}
+                  className="w-6 h-6 rounded-full"
+                  alt="fotoowner"
+                />
               </div>
               <p className="text-sm text-tertiary font-extrabold">
                 No Hp Pemilik
@@ -145,7 +147,11 @@ const UserDetailIsRenting = () => {
               <div className=""></div>
             )}
 
-            <img src={product.url} alt="" className="rounded-lg mb-2" />
+            <img
+              src={product.url}
+              alt="fotoproduct"
+              className="rounded-lg mb-2"
+            />
             <p className="text-xl text-primary font-bold">{product.name}</p>
             <div className="grid grid-cols-2 gap-2 justify-between w-full">
               <p className="text-sm text-tertiary font-extrabold">Jaminan</p>

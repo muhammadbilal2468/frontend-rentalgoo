@@ -1,10 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { modalsuccessImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import LocationMap from "../../../components/LocationMap/LocationMap";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router";
 import ModalInfo from "../../../components/ModalInfo/ModalInfo";
-import { modalsuccessImg } from "../../../assets";
 
 const UserEditProfile = () => {
   const [name, setName] = useState("");
@@ -25,10 +25,10 @@ const UserEditProfile = () => {
   const { uuid } = useParams();
 
   useEffect(() => {
-    getUserById();
+    getMe();
   }, [uuid, latitude, longitude]);
 
-  const getUserById = async () => {
+  const getMe = async () => {
     try {
       const resp = await axios.get(`http://localhost:5000/me`);
       setName(resp.data.name);
@@ -50,7 +50,7 @@ const UserEditProfile = () => {
     }
   };
 
-  const updateProfile = async (e) => {
+  const updateMe = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
@@ -73,7 +73,7 @@ const UserEditProfile = () => {
         navigate(`/user/profile/${uuid}`);
       }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
   };
 
@@ -113,7 +113,7 @@ const UserEditProfile = () => {
 
         {/* content */}
         <div className="bg-background rounded-b-lg min-h-screen px-5 py-5">
-          <form onSubmit={updateProfile}>
+          <form onSubmit={updateMe}>
             <label
               htmlFor="name"
               className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
@@ -236,7 +236,7 @@ const UserEditProfile = () => {
               type="submit"
               className="w-full bg-primary text-white py-2 rounded-lg mt-5"
             >
-              Edit
+              Simpan
             </button>
           </form>
         </div>

@@ -1,11 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import axios from "axios";
-import "./UserDetailChat.css";
-import { updaloadProfileImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { MeUser } from "../../../features/authSlice";
+import "./UserDetailChat.css";
 
 const UserDetailChat = () => {
   const [messages, setMessages] = useState([]);
@@ -65,7 +64,6 @@ const UserDetailChat = () => {
 
   const scrollToBottom = () => {
     if (divRef.current) {
-      // Gulirkan ke paling bawah dengan efek auto scroll
       divRef.current.scrollIntoView({ behavior: "auto", block: "end" });
     }
   };
@@ -77,13 +75,12 @@ const UserDetailChat = () => {
         <div className="sticky top-0 flex gap-3 items-center bg-primary p-3">
           <img
             src={receiver && receiver.url}
-            // src={updaloadProfileImg}
             className="w-10 h-10 rounded-full border-2 border-white bg-white"
-            alt=""
+            alt="fotopenerima"
           />
           <p className="text-white font-bold">{receiver && receiver.name}</p>
-          {/* <p className="text-white font-bold">Error</p> */}
         </div>
+
         {/* content */}
         <div
           className="bg-background rounded-b-lg pt-5 min-h-screen overflow-y-scroll"
@@ -108,7 +105,7 @@ const UserDetailChat = () => {
                     <img
                       src={data.sender.url}
                       className="w-7 h-7 rounded-full border-2 border-tertiary"
-                      alt=""
+                      alt="fotopengirim"
                     />
                     <div className="">
                       <p className={`text-sm ${messageClassName}`}>
@@ -132,7 +129,7 @@ const UserDetailChat = () => {
                     <img
                       src={data.sender.url}
                       className="w-7 h-7 rounded-full border-2 border-tertiary"
-                      alt=""
+                      alt="fotopengirim"
                     />
                   </>
                 )}

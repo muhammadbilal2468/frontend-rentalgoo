@@ -29,7 +29,11 @@ const UserMyActivity = () => {
         <div className="bg-background rounded-b-lg pb-5 min-h-screen">
           <div className="relative bg-primary pt-8 rounded-b-xl px-3 h-20">
             <div className="w-full flex items-center bg-white border border-gray-400 rounded-lg py-2 px-6 border-b-4 border-b-primary">
-              <img src={activityImg} alt="" className="w-20 h-16" />
+              <img
+                src={activityImg}
+                alt="hambaraktifitas"
+                className="w-20 h-16"
+              />
               <p className="w-full text-center text-2xl text-primary font-extrabold tracking-widest">
                 Aktifitas
               </p>

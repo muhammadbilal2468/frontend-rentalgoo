@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { modalsuccessImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import ModalInfo from "../../../components/ModalInfo/ModalInfo";
 
 const UserDetailIsRentingOut = () => {
@@ -206,14 +206,22 @@ const UserDetailIsRentingOut = () => {
                 onClick={getDetailUser}
               >
                 <p>{renter.name}</p>
-                <img src={renter.url} className="w-6 h-6 rounded-full" alt="" />
+                <img
+                  src={renter.url}
+                  className="w-6 h-6 rounded-full"
+                  alt="fotopenyewa"
+                />
               </div>
               <p className="text-sm text-tertiary font-extrabold">
                 No Hp Penyewa
               </p>
               <p className="text-sm text-end justify-end">{renter.nohp}</p>
             </div>
-            <img src={product.url} alt="" className="rounded-lg mb-3" />
+            <img
+              src={product.url}
+              alt="fotoproduk"
+              className="rounded-lg mb-3"
+            />
             <p className="text-xl text-primary font-bold">{product.name}</p>
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-2 justify-between w-full">
@@ -250,11 +258,11 @@ const UserDetailIsRentingOut = () => {
                   <option value="Berakhir, Belum Dikembalikan">
                     Berakhir, Belum Dikembalikan
                   </option>
-                  <option value="Telah Dikembalikan, Namun Lambat">
-                    Telah Dikembalikan, Namun Lambat
-                  </option>
                   <option value="Telah Dikembalikan">
                     Dikembalikan Tepat Waktu
+                  </option>
+                  <option value="Telah Dikembalikan, Namun Lambat">
+                    Telah Dikembalikan, Namun Lambat
                   </option>
                 </select>
               </div>

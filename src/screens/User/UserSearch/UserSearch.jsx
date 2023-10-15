@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { useNavigate } from "react-router";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 
 const UserSearch = () => {
   const [searchs, setSearchs] = useState([]);
@@ -40,6 +40,10 @@ const UserSearch = () => {
     e.preventDefault();
     addSearch();
     navigate(`/user/products?search=${inputSearch}`);
+  };
+
+  const handleHistorySearchSubmit = async (search) => {
+    navigate(`/user/products?search=${search}`);
   };
 
   const deleteSearch = async (uuid) => {
@@ -99,7 +103,11 @@ const UserSearch = () => {
         <div className="flex flex-col gap-5 px-5 justify-start bg-background rounded-b-lg py-5 min-h-screen">
           {searchs.map((data) => {
             return (
-              <div className="flex justify-between border-b-2" key={data.uuid}>
+              <div
+                className="flex justify-between border-b-2"
+                key={data.uuid}
+                onClick={() => handleHistorySearchSubmit(data.text)}
+              >
                 <p>{data.text}</p>
                 <p
                   onClick={() => deleteSearch(data.uuid)}

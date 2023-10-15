@@ -1,8 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { MeUser } from "../../../features/authSlice";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   aksesorisImg,
   bukuImg,
@@ -16,11 +16,12 @@ import {
   souvenirImg,
   transportasiImg,
 } from "../../../assets";
-import CardProduct from "../../../components/CardProduct/CardProduct";
+import Alert from "../../../components/Alert/Alert";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
-import { Link } from "react-router-dom";
-import Alert from "../../../components/Alert/Alert";
+import CardProduct from "../../../components/CardProduct/CardProduct";
+import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import { MeUser } from "../../../features/authSlice";
 
 const UserHome = () => {
   const [products, setProducts] = useState([]);
@@ -34,7 +35,7 @@ const UserHome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isError } = useSelector((state) => state.auth);
+  const { isError } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(MeUser());
@@ -157,7 +158,7 @@ const UserHome = () => {
         <div className="flex items-center gap-3 justify-between sticky top-0 bg-primary px-2 py-2 z-50">
           <img
             src={logoImg}
-            alt=""
+            alt="logo"
             className="w-8 h-8 p-1 bg-white rounded-full"
           />
           <form className="w-full">
@@ -218,7 +219,7 @@ const UserHome = () => {
         </div>
 
         {/* content */}
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen">
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen overflow-y-scroll">
           <div className="relative bg-primary pt-3 rounded-b-xl px-3 h-28">
             <div className=" grid grid-cols-5 gap-5 justify-between items-center bg-white rounded-xl p-5 border-b-4 border-b-primary">
               <div
@@ -227,7 +228,7 @@ const UserHome = () => {
               >
                 <img
                   src={aksesorisImg}
-                  alt=""
+                  alt="aksesoris"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Aksesoris</p>
@@ -238,7 +239,7 @@ const UserHome = () => {
               >
                 <img
                   src={bukuImg}
-                  alt=""
+                  alt="buku"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Buku</p>
@@ -249,7 +250,7 @@ const UserHome = () => {
               >
                 <img
                   src={elektronikImg}
-                  alt=""
+                  alt="elektronik"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Elektronik</p>
@@ -260,7 +261,7 @@ const UserHome = () => {
               >
                 <img
                   src={kesehatanImg}
-                  alt=""
+                  alt="kesehatan"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Kesehatan</p>
@@ -271,7 +272,7 @@ const UserHome = () => {
               >
                 <img
                   src={olahragaImg}
-                  alt=""
+                  alt="olahraga"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Olahraga</p>
@@ -282,7 +283,7 @@ const UserHome = () => {
               >
                 <img
                   src={outdoorImg}
-                  alt=""
+                  alt="outdoor"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Outdoor</p>
@@ -293,7 +294,7 @@ const UserHome = () => {
               >
                 <img
                   src={pakaianImg}
-                  alt=""
+                  alt="pakaian"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Pakaian</p>
@@ -304,7 +305,7 @@ const UserHome = () => {
               >
                 <img
                   src={peralatanImg}
-                  alt=""
+                  alt="peralatan"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Peralatan</p>
@@ -315,7 +316,7 @@ const UserHome = () => {
               >
                 <img
                   src={souvenirImg}
-                  alt=""
+                  alt="souvenir"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Souvenir</p>
@@ -326,72 +327,81 @@ const UserHome = () => {
               >
                 <img
                   src={transportasiImg}
-                  alt=""
+                  alt="transportasi"
                   className="p-1 border-2 rounded-lg h-12 w-12"
                 />
                 <p className="text-xs pt-1">Tranportasi</p>
               </div>
             </div>
-          </div>
 
-          <div className="px-3 pt-32">
-            <div className="flex justify-between">
-              <div className="flex items-center gap-2 mb-3 font-bold">
-                <p>Barang Terdekat</p>
-                <i
-                  className="fa-solid fa-arrows-rotate cursor-pointer"
-                  onClick={refreshClosestProducts}
-                ></i>
-              </div>
-              <Link to={"/user/closestproducts"}>
-                <p className="text-sm text-tertiary italic underline font-bold cursor-pointer">
-                  Lihat Semua
-                </p>
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 mb-5 gap-3">
-              {closestProducts.map((data) => {
-                return (
-                  <CardClosestProduct
-                    key={data.uuid}
-                    data={data}
-                    save={() => addSaveProduct(data)}
-                    detail={getDetailProduct}
-                  />
-                );
-              })}
-            </div>
-          </div>
+            {products.length === 0 ? (
+              <NotFoundPage desc={"Belum Ada Barang"} />
+            ) : (
+              <>
+                {closestProducts.length !== 0 && (
+                  <div className="pt-5">
+                    <div className="flex justify-between">
+                      <div className="flex items-center gap-2 mb-3 font-bold">
+                        <p>Barang Terdekat</p>
+                        <i
+                          className="fa-solid fa-arrows-rotate cursor-pointer"
+                          onClick={refreshClosestProducts}
+                        ></i>
+                      </div>
+                      <Link to={"/user/closestproducts"}>
+                        <p className="text-sm text-tertiary italic underline font-bold cursor-pointer">
+                          Lihat Semua
+                        </p>
+                      </Link>
+                    </div>
+                    <div className="grid grid-cols-2 mb-5 gap-3">
+                      {closestProducts.map((data) => {
+                        return (
+                          <CardClosestProduct
+                            key={data.uuid}
+                            data={data}
+                            save={() => addSaveProduct(data)}
+                            detail={getDetailProduct}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
-          <p className="px-3 mb-3 font-bold">Barang Lainnya</p>
-          <div className="px-3 grid grid-cols-2 gap-5">
-            {products.map((data) => {
-              return (
-                <CardProduct
-                  key={data.uuid}
-                  data={data}
-                  save={() => addSaveProduct(data)}
-                  detail={getDetailProduct}
-                />
-              );
-            })}
-          </div>
-          <div className="px-3 mt-5 flex justify-center gap-5 w-full">
-            {limit > 6 && (
-              <button
-                onClick={minLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Sedikit
-              </button>
-            )}
-            {products.length >= limit && (
-              <button
-                onClick={plusLimit}
-                className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
-              >
-                Lebih Banyak
-              </button>
+                <p className="my-3 font-bold">Barang Lainnya</p>
+                <div className="grid grid-cols-2 gap-5">
+                  {products.map((data) => {
+                    return (
+                      <CardProduct
+                        key={data.uuid}
+                        data={data}
+                        save={() => addSaveProduct(data)}
+                        detail={getDetailProduct}
+                      />
+                    );
+                  })}
+                </div>
+
+                <div className="px-3 mt-5 flex justify-center gap-5 w-full">
+                  {limit > 6 && (
+                    <button
+                      onClick={minLimit}
+                      className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                    >
+                      Lebih Sedikit
+                    </button>
+                  )}
+                  {products.length >= limit && (
+                    <button
+                      onClick={plusLimit}
+                      className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
+                    >
+                      Lebih Banyak
+                    </button>
+                  )}
+                </div>
+              </>
             )}
           </div>
         </div>

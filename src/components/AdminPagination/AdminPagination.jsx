@@ -12,7 +12,7 @@ const AdminPagination = ({
   const nonActivePageClass = "bg-white text-black";
   return (
     <div className="grid grid-cols-3 items-center px-6 py-3 mt-5">
-      <p>Menampilkan : 1-10 dari {totalItems} hasil</p>
+      <p>Total Semua Data : {totalItems}</p>
       <nav aria-label="Page navigation example" className="col-span-2">
         <ul className="flex gap-3">
           {currentPage > 1 && (

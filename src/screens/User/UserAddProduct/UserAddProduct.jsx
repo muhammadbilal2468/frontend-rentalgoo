@@ -43,7 +43,7 @@ const UserAddProduct = () => {
         navigate("/user/myproducts");
       }, 1500);
     } catch (error) {
-      alert(error.response.data.msg);
+      console.log(error.response.data.msg);
     }
   };
 
@@ -89,7 +89,7 @@ const UserAddProduct = () => {
                 <img
                   src={updaloadProductImg}
                   className="w-48 h-w-48 rounded-xl border-4 border-primary p-2"
-                  alt=""
+                  alt="fotouploadgambar"
                 />
               )}
               <div className="absolute -bottom-4 right-14 flex items-center justify-center">
@@ -116,13 +116,14 @@ const UserAddProduct = () => {
                     type="file"
                     className="hidden"
                     onChange={handleChangeFile}
+                    required
                   />
                 </label>
               </div>
             </div>
             <label
               htmlFor="name"
-              className="block mb-1 text-sm font-extrabold text-tertiary dark:text-white"
+              className="block mb-1 text-xs font-extrabold text-tertiary dark:text-white"
             >
               Nama Barang
             </label>
@@ -134,11 +135,12 @@ const UserAddProduct = () => {
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg  block w-full p-2.5 mb-3"
               placeholder="nama barang"
+              required
             />
 
             <label
               htmlFor="category"
-              className="block mb-1 text-sm font-extrabold text-tertiary dark:text-white"
+              className="block mb-1 text-xs font-extrabold text-tertiary dark:text-white"
             >
               Kategori
             </label>
@@ -147,6 +149,7 @@ const UserAddProduct = () => {
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              required
             >
               <option value="" disabled hidden>
                 Pilih Ketegori Barang
@@ -174,13 +177,14 @@ const UserAddProduct = () => {
               rows="4"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="block p-2.5 w-full text-sm text-tertiary bg-gray-50 rounded-lg border border-gray-300 mb-3"
+              className="block p-2.5 w-full text-sm bg-gray-50 rounded-lg border border-gray-300 mb-3"
               placeholder="Deskripsi Barang ..."
+              required
             ></textarea>
 
             <label
               htmlFor="guarantee"
-              className="block mb-1 text-sm font-extrabold text-tertiary dark:text-white"
+              className="block mb-1 text-xs font-extrabold text-tertiary dark:text-white"
             >
               Jaminan
             </label>
@@ -189,6 +193,7 @@ const UserAddProduct = () => {
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               value={guarantee}
               onChange={(e) => setGuarantee(e.target.value)}
+              required
             >
               <option value="" disabled hidden>
                 Pilih Jaminan
@@ -199,7 +204,7 @@ const UserAddProduct = () => {
 
             <label
               htmlFor="stock"
-              className="block mb-1 text-sm font-extrabold text-tertiary dark:text-white"
+              className="block mb-1 text-xs font-extrabold text-tertiary dark:text-white"
             >
               Stok
             </label>
@@ -211,10 +216,11 @@ const UserAddProduct = () => {
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               placeholder="jumlah stok"
+              required
             />
             <label
               htmlFor="price"
-              className="block mb-1 text-sm font-extrabold text-tertiary dark:text-white"
+              className="block mb-1 text-xs font-extrabold text-tertiary dark:text-white"
             >
               Harga Per Waktu
             </label>
@@ -227,11 +233,13 @@ const UserAddProduct = () => {
                 aria-describedby="helper-text-explanation"
                 className="col-span-2 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                 placeholder=" Rp.xxx.xxx"
+                required
               />
               <select
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                 vvalue={timeUnit}
                 onChange={(e) => setTimeUnit(e.target.value)}
+                required
               >
                 <option value="" disabled hidden>
                   / Waktu

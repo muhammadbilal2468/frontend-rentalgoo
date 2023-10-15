@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { updaloadProfileImg } from "../../../../assets";
+import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
 
 const AdminAddUser = () => {
   const [file, setFile] = useState(null);
@@ -10,7 +10,9 @@ const AdminAddUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
-  const [role, setRole] = useState("");
+
+  const [showModalInfo, setShowModalInfo] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
   const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
@@ -27,12 +29,15 @@ const AdminAddUser = () => {
 
     try {
       const resp = await axios.post("http://localhost:5000/users", formData);
-      console.log(resp.data);
-      alert("Pengguna berhasil ditambahkan");
-      navigate("/admin/users");
+      setTitleModal("Berhasil");
+      setMsg(resp.data.msg);
+      setShowModalInfo(true);
+      setTimeout(() => {
+        setShowModalInfo(false);
+        navigate("/admin/users");
+      }, 1500);
     } catch (error) {
       console.log(error.response.data.msg);
-      setMsg(error.response.data.msg);
     }
   };
 
@@ -197,6 +202,7 @@ const AdminAddUser = () => {
           </div>
         </div>
       </form>
+      <AdminModalInfo isOpen={showModalInfo} title={titleModal} desc={msg} />
     </div>
   );
 };

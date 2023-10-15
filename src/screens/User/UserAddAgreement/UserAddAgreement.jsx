@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import { useNavigate, useParams } from "react-router";
 import axios from "axios";
-import formatRupiah from "../../../utils/FormatRupiah";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { modalsuccessImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import formatRupiah from "../../../utils/FormatRupiah";
 
 const UserAddAgreement = () => {
   const [product, setProduct] = useState("");
@@ -61,7 +61,6 @@ const UserAddAgreement = () => {
       }, 1500);
     } catch (error) {
       console.log(error.data.response.msg);
-      alert(error.response.data.msg);
     }
   };
 
@@ -158,14 +157,14 @@ const UserAddAgreement = () => {
               <div className="flex items-center gap-2" onClick={getDetailUser}>
                 <img
                   src={user.url}
-                  alt=""
+                  alt="fotouser"
                   className="w-9 h-9 rounded-full border-2 border-primary"
                 />
                 <p>{user.name}</p>
               </div>
               <img
                 src={product.url}
-                alt=""
+                alt="fotoproduct"
                 className="w-full rounded-lg border-2 border-primary"
               />
               <div className="">

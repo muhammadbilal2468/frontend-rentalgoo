@@ -34,7 +34,6 @@ const UserDetailUser = () => {
     try {
       const resp = await axios.get(`http://localhost:5000/hisproducts/${uuid}`);
       setProducts(resp.data);
-      console.log(products);
     } catch (error) {
       console.log(error.response);
     }
@@ -73,7 +72,6 @@ const UserDetailUser = () => {
     };
     try {
       const resp = await axios.post(`http://localhost:5000/chats`, requestData);
-      console.log(resp.data);
       alert("pesan berhasil terkirim");
       navigate(`/user/detailchat/${uuid}`);
     } catch (error) {
@@ -107,11 +105,11 @@ const UserDetailUser = () => {
           <div className="flex flex-col gap-2 items-center">
             <img
               src={user.url}
-              alt=""
+              alt="fotouser"
               className="w-32 h-32 rounded-full border-4 border-tertiary"
             />
             <p className="text-2xl text-tertiary font-bold">{user.name}</p>
-            <div className="flex items-start w-5/6">
+            <div className="flex justify-center items-start w-5/6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -121,8 +119,8 @@ const UserDetailUser = () => {
                 <g
                   fill="none"
                   stroke="currentColor"
-                  strokLinecap="round"
-                  strokLinejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="M11.5 5c0 2.49-4.5 8.5-4.5 8.5S2.5 7.49 2.5 5a4.5 4.5 0 0 1 9 0Z" />
                   <circle cx="7" cy="5" r="1.5" />

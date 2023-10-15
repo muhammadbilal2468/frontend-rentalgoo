@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import { useNavigate, useParams } from "react-router";
 import axios from "axios";
-import formatRupiah from "../../../utils/FormatRupiah";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { modalconfirmImg } from "../../../assets";
+import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import LocationMap from "../../../components/LocationMap/LocationMap";
 import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
-import { modalconfirmImg } from "../../../assets";
+import formatRupiah from "../../../utils/FormatRupiah";
 
 const UserDetailRentalAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -123,7 +123,11 @@ const UserDetailRentalAgreement = () => {
                 onClick={getDetailUser}
               >
                 <p className="text-sm">{owner.name}</p>
-                <img src={owner.url} className="w-6 h-6 rounded-full" alt="" />
+                <img
+                  src={owner.url}
+                  className="w-6 h-6 rounded-full"
+                  alt="fotopemilik"
+                />
               </div>
               <p className="text-sm text-tertiary font-extrabold">
                 No Hp Pemilik
@@ -167,7 +171,11 @@ const UserDetailRentalAgreement = () => {
             ) : (
               <div className=""></div>
             )}
-            <img src={product.url} alt="" className="rounded-lg mb-2" />
+            <img
+              src={product.url}
+              alt="fotoproduk"
+              className="rounded-lg mb-2"
+            />
             <p className="text-xl text-primary font-bold">{product.name}</p>
             <div className="grid grid-cols-2 gap-2 justify-between items-center">
               <p className="text-sm text-tertiary font-extrabold">Jaminan</p>
