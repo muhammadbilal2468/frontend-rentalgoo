@@ -190,18 +190,6 @@ const UserProduct = () => {
         <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
           <div className="flex justify-between py-2 mt-2">
             <p className="flex items-center gap-2 my-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 20 20"
-                className="text-tertiary"
-              >
-                <path
-                  fill="currentColor"
-                  d="M1 4h2v2H1V4zm4 0h14v2H5V4zM1 9h2v2H1V9zm4 0h14v2H5V9zm-4 5h2v2H1v-2zm4 0h14v2H5v-2z"
-                />
-              </svg>{" "}
               <span className="text-tertiary font-bold text-lg">Barang</span>
             </p>
             <p

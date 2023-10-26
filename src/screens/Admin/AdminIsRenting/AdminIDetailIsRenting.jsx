@@ -14,7 +14,7 @@ const AdminIDetailIsRenting = () => {
 
   useEffect(() => {
     getIsRentingProductById(uuid);
-  }, [uuid]);
+  }, [uuid, isRentingProducts]);
 
   const getIsRentingProductById = async (uuid) => {
     try {
@@ -25,10 +25,13 @@ const AdminIDetailIsRenting = () => {
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
       setRenter(resp.data.renter);
+      console.log(resp.data);
     } catch (error) {
       console.log(error.response);
     }
   };
+
+  console.log("remaining_time :", isRentingProducts.remaining_time);
 
   return (
     <div className="flex flex-col gap-4">
@@ -102,7 +105,7 @@ const AdminIDetailIsRenting = () => {
               {isRentingProducts.end_date}
             </p>
 
-            <p className="">Siwa Waktu</p>
+            <p className="">Sisa Waktu</p>
             <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
               {isRentingProducts.remaining_time}
             </p>

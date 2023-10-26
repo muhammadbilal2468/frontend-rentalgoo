@@ -11,11 +11,13 @@ const UserIsRenting = () => {
 
   useEffect(() => {
     getIsRentingOuts();
-  }, [isRentings]);
+  }, []);
 
   const getIsRentingOuts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/isrentingproducts`);
+      const resp = await axios.get(
+        `http://localhost:5000/isrentingproductsbyrenter`
+      );
       setIsRentings(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -86,7 +88,7 @@ const UserIsRenting = () => {
                       onClick={() => getDetail(data.uuid)}
                     >
                       <div className="flex flex-col gap-2">
-                        <p className="text-xl text-primary font-bold">
+                        <p className="text-lg text-primary font-bold">
                           {data.product.name}
                         </p>
                         <div className="flex gap-2 items-center">
@@ -95,7 +97,7 @@ const UserIsRenting = () => {
                             className="w-5 h-5 rounded-full"
                             alt="fotoowner"
                           />
-                          <p>{data.owner.name}</p>
+                          <p className="text-xs font-bold">{data.owner.name}</p>
                         </div>
                         <div className="">
                           <p className="text-xs text-primary font-bold">
@@ -110,7 +112,7 @@ const UserIsRenting = () => {
                       </div>
                       <img
                         src={data.product.url}
-                        className="w-1/2 h-15 rounded-md"
+                        className="w-1/2 h-32 rounded-md"
                         alt="fotoproduk"
                       />
                     </li>

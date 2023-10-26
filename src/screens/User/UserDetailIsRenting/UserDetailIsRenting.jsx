@@ -17,7 +17,7 @@ const UserDetailIsRenting = () => {
 
   useEffect(() => {
     getIsRentingOutById(uuid);
-  }, []);
+  }, [isRenting]);
 
   // --- Get IsRentingOut By ID
   const getIsRentingOutById = async (uuid) => {
@@ -91,13 +91,13 @@ const UserDetailIsRenting = () => {
           <div className="flex flex-col gap-2 bg-white rounded-lg mx-3 p-3">
             <div className="bg-primary w-full py-2 rounded-lg">
               <p className="text-sm text-center text-white">
-                {isRenting.status}
+                {isRenting.remaining_time}
               </p>
             </div>
             <div className="grid grid-cols-2 gap-2 justify-between items-center">
               <p className="text-tertiary font-extrabold">Pemilik</p>
-              <div className="flex gap-2 justify-end">
-                <p>{owner.name}</p>
+              <div className="flex gap-2 items-center justify-end">
+                <p className="text-sm">{owner.name}</p>
                 <img
                   src={owner.url}
                   className="w-6 h-6 rounded-full"

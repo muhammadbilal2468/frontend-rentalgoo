@@ -15,7 +15,9 @@ const UserIsRentingOut = () => {
 
   const getIsRentingOuts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/isrentingproducts`);
+      const resp = await axios.get(
+        `http://localhost:5000/isrentingproductsbyowner`
+      );
       setIsRentingOuts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -86,7 +88,7 @@ const UserIsRentingOut = () => {
                       onClick={() => getDetail(data.uuid)}
                     >
                       <div className="flex flex-col gap-2">
-                        <p className="text-xl text-primary font-bold">
+                        <p className="text-lg text-primary font-bold">
                           {data.product.name}
                         </p>
                         <div className="flex gap-2 items-center">
@@ -95,7 +97,9 @@ const UserIsRentingOut = () => {
                             className="w-5 h-5 rounded-full"
                             alt="fotopenyewa"
                           />
-                          <p>{data.renter.name}</p>
+                          <p className="text-xs font-bold">
+                            {data.renter.name}
+                          </p>
                         </div>
                         <div className="">
                           <p className="text-xs text-primary font-bold">
@@ -111,7 +115,7 @@ const UserIsRentingOut = () => {
                       <img
                         src={data.product.url}
                         alt="fotoproduk"
-                        className="w-1/2 h-15 rounded-md"
+                        className="w-1/2 h-32 rounded-md"
                       />
                     </li>
                   );
