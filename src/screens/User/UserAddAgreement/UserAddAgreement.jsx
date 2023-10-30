@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { modalsuccessImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import formatRupiah from "../../../utils/FormatRupiah";
+import UserHeader from "../../../components/UserHeader/UserHeader";
+import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 
 const UserAddAgreement = () => {
   const [product, setProduct] = useState("");
@@ -66,7 +68,7 @@ const UserAddAgreement = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    let newValue = Math.max(1, parseInt(value)); // Membatasi input menjadi angka positif atau 0
+    let newValue = Math.max(1, parseInt(value));
 
     if (name === "amount") {
       setAmount(newValue);
@@ -133,41 +135,23 @@ const UserAddAgreement = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3  sticky top-0 bg-primary px-3 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Detail Barang</p>
-          <p></p>
-        </div>
+        <UserHeader title="Sewa Barang" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg py-5 min-h-screen px-5">
           <form onSubmit={createAgreementProducts}>
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-2" onClick={getDetailUser}>
-                <img
-                  src={user.url}
-                  alt="fotouser"
-                  className="w-9 h-9 rounded-full border-2 border-primary"
-                />
-                <p>{user.name}</p>
-              </div>
-              <img
-                src={product.url}
-                alt="fotoproduct"
-                className="w-full rounded-lg border-2 border-primary"
+              <UserAvatar
+                status="Pemilik"
+                name={user.name}
+                img={user.url}
+                uuid={user.uuid}
               />
-              <div className="">
+              <div
+                className="w-full h-60 bg-cover bg-no-repeat bg-center rounded-lg border-2 border-primary"
+                style={{ backgroundImage: `url(${product.url})` }}
+              ></div>
+              <div className="border-b-2 pb-2">
                 <p className="text-primary font-bold text-lg">{product.name}</p>
                 <p className="text-tertiary font-bold">
                   {formatRupiah(product.price)} / {product.time_unit}
@@ -175,7 +159,7 @@ const UserAddAgreement = () => {
               </div>
               <label
                 htmlFor="amount"
-                className="block text-sm font-medium text-tertiary dark:text-white"
+                className="block text-sm font-bold text-tertiary dark:text-white"
               >
                 Jumlah Barang
               </label>
@@ -198,11 +182,10 @@ const UserAddAgreement = () => {
                   </svg>
                 </div>
                 <input
-                  type="number"
-                  min={0}
+                  type="text"
                   id="amount"
                   name="amount"
-                  className="bg-gray-50 border border-tertiary text-tertiary text-sm rounded-lg block w-full p-2.5 text-center"
+                  className="bg-gray-50 border-2 border-tertiary text-tertiary text-sm rounded-lg block w-full p-2.5 text-center"
                   placeholder="masukkan angka"
                   value={amount}
                   onChange={handleChange}
@@ -233,11 +216,11 @@ const UserAddAgreement = () => {
 
               <label
                 htmlFor="time"
-                className="block text-sm font-medium text-tertiary dark:text-white"
+                className="block text-sm font-bold text-tertiary dark:text-white"
               >
                 Jumlah Waktu / Satuan Waktu
               </label>
-              <div className="grid grid-cols-3 gap-3 items-center">
+              <div className="grid grid-cols-3 gap-3 items-center border-b-2 pb-4">
                 <div className="col-span-2 relative flex">
                   <div
                     className="absolute inset-y-0 left-0 flex items-center pl-3.5 cursor-pointer"
@@ -257,11 +240,10 @@ const UserAddAgreement = () => {
                     </svg>
                   </div>
                   <input
-                    type="number"
-                    min={0}
+                    type="text"
                     id="time"
                     name="time"
-                    className="bg-gray-50 border border-tertiary text-tertiary text-sm rounded-lg block w-full p-2.5 text-center"
+                    className="bg-gray-50 border-2 border-tertiary text-tertiary text-sm font-extrabold rounded-lg block w-full p-2.5 text-center"
                     placeholder="masukkan angka"
                     value={time}
                     onChange={handleChange}
@@ -292,7 +274,7 @@ const UserAddAgreement = () => {
 
                 <select
                   name="timeUnit"
-                  className="col-span-1 bg-gray-50 border border-tertiary text-sm rounded-lg block w-full p-2.5"
+                  className="col-span-1 bg-gray-50 border-2 border-tertiary text-sm rounded-lg block w-full p-2.5"
                   defaultValue={""}
                   onChange={((e) => setTimeUnit(e.target.value), handleChange)}
                   required

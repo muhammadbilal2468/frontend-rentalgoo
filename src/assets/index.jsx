@@ -1,4 +1,4 @@
-export { default as updaloadProductImg } from "./img/uploadproduct.png";
+export { default as updaloadProductImg } from "./img/uploadproduct.svg";
 export { default as updaloadProfileImg } from "./img/uploadprofile.png";
 
 export { default as logoImg } from "./img/logo.png";
@@ -22,6 +22,9 @@ export { default as adminfinishrentImg } from "./img/adminfinishrent.svg";
 export { default as adminuserImg } from "./img/adminuser.svg";
 export { default as adminsettingImg } from "./img/adminsetting.svg";
 
+// ------------------------ User ------------------------------
+export { default as googlemapsImg } from "./img/googlemaps.svg";
+
 // ----------------- User Home ---------------------------------
 export { default as aksesorisImg } from "./img/aksesoris.svg";
 export { default as bukuImg } from "./img/buku.svg";
@@ -35,6 +38,12 @@ export { default as souvenirImg } from "./img/souvenir.svg";
 export { default as transportasiImg } from "./img/transportasi.svg";
 export { default as activityImg } from "./img/activity.svg";
 // ----------------- ACTIVITY ------------------------------
+export { default as leaseagreementImg } from "./img/leaseagreement.png";
+export { default as rentalagreementImg } from "./img/rentalagreement.png";
+export { default as isrentingoutImg } from "./img/isrentingout.png";
+export { default as isrentingImg } from "./img/isrenting.png";
+export { default as finishrentownerImg } from "./img/finishrentowner.png";
+export { default as finishrentrenterImg } from "./img/finishrentrenter.png";
 export { default as modalsuccessImg } from "./img/modalsuccess.svg";
 export { default as modalconfirmImg } from "./img/modalconfirm.svg";
 export { default as modalerrorImg } from "./img/modalerror.svg";

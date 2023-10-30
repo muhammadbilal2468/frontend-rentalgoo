@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import Alert from "../../../components/Alert/Alert";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardProduct from "../../../components/CardProduct/CardProduct";
+import UserHeader from "../../../components/UserHeader/UserHeader";
 
 const UserDetailUser = () => {
   const [user, setUser] = useState("");
@@ -83,22 +84,7 @@ const UserDetailUser = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3 justify-between sticky top-0 bg-primary px-3 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Profile Saya</p>
-          <div className=""></div>
-        </div>
+        <UserHeader title="Profil Pengguna" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg min-h-screen px-5 pt-5">

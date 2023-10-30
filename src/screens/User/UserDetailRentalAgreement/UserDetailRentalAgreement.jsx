@@ -4,8 +4,10 @@ import { useNavigate, useParams } from "react-router";
 import { modalconfirmImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import LocationMap from "../../../components/LocationMap/LocationMap";
-import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
+import UserModalConfirm from "../../../components/UserModalConfirm/UserModalConfirm";
 import formatRupiah from "../../../utils/FormatRupiah";
+import UserHeader from "../../../components/UserHeader/UserHeader";
+import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 
 const UserDetailRentalAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -68,26 +70,11 @@ const UserDetailRentalAgreement = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3  sticky top-0 bg-primary px-3 mb-5 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Persetujuan Menyewakan</p>
-          <p></p>
-        </div>
+        <UserHeader title="Persetujuan Menyewakan" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg pb-5 min-h-screen">
-          <div className="bg-white rounded-lg overflow-hidden shadow-md bg-white-50 mb-5 mx-3 my-3 border-b-4 border-b-primary">
+          <div className="bg-white rounded-lg overflow-hidden shadow-md bg-white-50 mb-5 mx-4 my-3 border-b-4 border-b-primary">
             <div className="p-3">
               <div className="flex items-center">
                 <div className="mr-4 bg-primary rounded-xl p-2">
@@ -110,30 +97,24 @@ const UserDetailRentalAgreement = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 bg-white rounded-lg mx-3 p-3">
-            <div className="bg-white w-full py-2 rounded-lg">
-              <p className=" text-center text-primary border-2 border-tertiary p-1 rounded-lg font-bold">
+          <div className="flex flex-col gap-2 bg-white rounded-lg mx-4">
+            <div className="bg-primary w-full py-2 rounded-lg">
+              <p className="text-sm text-center text-white">
                 {agreementProducts.status}
               </p>
             </div>
+            <UserAvatar
+              status="Pemilik"
+              name={owner.name}
+              img={owner.url}
+              uuid={owner.uuid}
+            />
             <div className="grid grid-cols-2 gap-2 justify-between items-center">
-              <p className="text-sm text-tertiary font-extrabold">Pemilik</p>
-              <div
-                className="flex items-center gap-2 justify-end cursor-pointer"
-                onClick={getDetailUser}
-              >
-                <p className="text-sm">{owner.name}</p>
-                <img
-                  src={owner.url}
-                  className="w-6 h-6 rounded-full"
-                  alt="fotopemilik"
-                />
-              </div>
               <p className="text-sm text-tertiary font-extrabold">
                 No Hp Pemilik
               </p>
               <p className="text-sm text-end justify-end">{owner.nohp}</p>
-              <p className="text-sm text-tertiary font-extrabold">Alamat :</p>
+              <p className="text-sm text-tertiary font-extrabold">Alamat</p>
               <p
                 className="flex items-center text-sm justify-end cursor-pointer text-tertiary font-bold"
                 onClick={toggleShowMaps}
@@ -171,34 +152,35 @@ const UserDetailRentalAgreement = () => {
             ) : (
               <div className=""></div>
             )}
-            <img
-              src={product.url}
-              alt="fotoproduk"
-              className="rounded-lg mb-2"
-            />
+            <div
+              className="w-full h-60 bg-cover bg-no-repeat bg-center rounded-lg border-2 border-primary"
+              style={{ backgroundImage: `url(${product.url})` }}
+            ></div>
             <p className="text-xl text-primary font-bold">{product.name}</p>
-            <div className="grid grid-cols-2 gap-2 justify-between items-center">
-              <p className="text-sm text-tertiary font-extrabold">Jaminan</p>
-              <p className="text-sm text-end justify-end">
-                {product.guarantee}
-              </p>
-              <p className="text-sm text-tertiary font-extrabold">
-                Jumlah Barang
-              </p>
-              <p className="text-sm text-end justify-end">
-                {agreementProducts.amount}
-              </p>
+
+            <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
+              <p className="text-tertiary font-bold">jaminan</p>
+              <p>{product.guarantee}</p>
+            </div>
+            <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
+              <p className="text-tertiary font-bold">Jumlah Barang</p>
+              <p className="text-sm text-end">{agreementProducts.amount}</p>
+            </div>
+            <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">Waktu</p>
-              <p className="text-sm text-end justify-end">
+              <p className="text-sm text-end">
                 {agreementProducts.time} {agreementProducts.time_unit}
               </p>
+            </div>
+            <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">
                 Total Bayar
               </p>
-              <p className="text-lg text-tertiary font-bold text-end">
+              <p className="text-lg text-tertiary font-extrabold  text-end">
                 {formatRupiah(agreementProducts.total_price)}
               </p>
             </div>
+
             <button
               className="text-white bg-secondary rounded-md text-sm w-full mt-6 p-2"
               onClick={handleModalCancel}
@@ -210,7 +192,7 @@ const UserDetailRentalAgreement = () => {
 
         {/* footer */}
         <ButtonNavigation />
-        <ModalConfirm
+        <UserModalConfirm
           isOpen={showModalConfirm}
           title={titleModal}
           img={modalconfirmImg}

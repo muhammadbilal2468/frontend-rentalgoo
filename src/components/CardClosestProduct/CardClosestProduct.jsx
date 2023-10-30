@@ -30,7 +30,7 @@ const CardClosestProduct = (props) => {
         </svg>
       </p>
       <img
-        className="rounded-t-md w-full h-28"
+        className="w-full bg-cover bg-no-repeat bg-center rounded-t-md h-36"
         src={props.data.url}
         alt=""
         onClick={() => props.detail(props.data.uuid)}

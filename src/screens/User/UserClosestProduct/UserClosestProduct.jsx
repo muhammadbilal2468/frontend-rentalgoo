@@ -5,11 +5,13 @@ import Alert from "../../../components/Alert/Alert";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import UserHeader from "../../../components/UserHeader/UserHeader";
 
 const UserClosestProduct = () => {
   const [closestProducts, setClosestProducts] = useState([]);
   const [limit, setLimit] = useState(6);
 
+  const [showAlertLocation, setShowAlertLocation] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertColor, setAlertColor] = useState("");
   const [msg, setMsg] = useState("");
@@ -58,6 +60,10 @@ const UserClosestProduct = () => {
     }, 1500);
   };
 
+  const toggleAlertLocation = () => {
+    setShowAlertLocation(!showAlertLocation);
+  };
+
   const minLimit = (e) => {
     e.preventDefault();
     setLimit(limit - 2);
@@ -70,29 +76,66 @@ const UserClosestProduct = () => {
   return (
     <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
       {/* Header */}
-      <div className="flex items-center gap-3  sticky top-0 bg-primary px-3 mb-5 py-2 z-50 text-white">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          className="cursor-pointer"
-        >
-          <path
-            fill="currentColor"
-            d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-          />
-        </svg>
-        <p className="">Barang Terdekat</p>
-        <p></p>
-      </div>
+      <UserHeader title="Barang Terdekat" />
 
       {/* content */}
-      <div className="bg-background rounded-b-lg pb-5 min-h-screen px-3">
+      <div className="bg-background rounded-b-lg py-5 min-h-screen px-3">
         {closestProducts.length === 0 ? (
           <NotFoundPage desc={"Belum Ada Barang Didekat Anda"} />
         ) : (
           <>
+            {showAlertLocation && (
+              <div
+                id="alert-border-4"
+                class="flex items-center gap-1 p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800"
+                role="alert"
+              >
+                <svg
+                  class="flex-shrink-0 w-4 h-4"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <div class="ml-3 text-xs font-medium">
+                  Barang terdekat dideteksi antara titik lokasi pada data
+                  location di{"   "}
+                  <a
+                    href="#"
+                    class="font-semibold underline hover:no-underline"
+                  >
+                    profile{"   "}
+                  </a>
+                  setiap user .
+                </div>
+                <button
+                  type="button"
+                  class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
+                  data-dismiss-target="#alert-border-4"
+                  aria-label="Close"
+                  onClick={toggleAlertLocation}
+                >
+                  <span class="sr-only">Dismiss</span>
+                  <svg
+                    class="w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
             <div className="grid grid-cols-2 mb-5 gap-3">
               {closestProducts.map((data) => {
                 return (

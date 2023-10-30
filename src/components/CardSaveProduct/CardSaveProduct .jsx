@@ -28,7 +28,7 @@ const CardSaveProduct = (props) => {
         </svg>
       </p>
       <img
-        className="rounded-t-md w-full h-28"
+        className="w-full bg-cover bg-no-repeat bg-center rounded-t-md h-36"
         src={props.data.product.url}
         alt=""
         onClick={() => props.detail(props.data.product.uuid)}
@@ -43,7 +43,7 @@ const CardSaveProduct = (props) => {
           </h5>
         </a>
         <p className="text-xs mb-1 font-normal text-gray-700 dark:text-gray-400">
-          {props.data.product.description.slice(0, 50)} ...
+          {props.data.owner.citydistrict}, {props.data.owner.subdistrict}
         </p>
         <p
           className="text-secondary font-bold text-end"

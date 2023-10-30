@@ -7,7 +7,11 @@ const CardMyProduct = (props) => {
       className="max-w-sm h-fit border border-gray-200 rounded-lg shadow-md"
       key={props.data.uuid}
     >
-      <img className="rounded-t-md w-full h-28" src={props.data.url} alt="" />
+      <img
+        className="w-full bg-cover bg-no-repeat bg-center rounded-t-md h-36"
+        src={props.data.url}
+        alt=""
+      />
       <div className="px-3 py-2 bg-white rounded-b-lg">
         <a href="#">
           <h5 className="mb-1 text-sm font-bold tracking-tight text-tertiary">

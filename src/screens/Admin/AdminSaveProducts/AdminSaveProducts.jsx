@@ -172,7 +172,7 @@ const AdminSaveProducts = () => {
                           <img
                             src={data.product.url}
                             alt="fotoproduct"
-                            className="w-12"
+                            className="w-12 h-12"
                           />
                         </td>
                         <td className="px-6 py-4">{data.owner.name}</td>

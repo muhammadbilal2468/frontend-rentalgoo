@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { modalsuccessImg, updaloadProductImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
+import formatRupiah from "../../../utils/FormatRupiah";
+import UserHeader from "../../../components/UserHeader/UserHeader";
 
 const UserEditProduct = () => {
   const [name, setName] = useState("");
@@ -78,29 +80,19 @@ const UserEditProduct = () => {
     setUrl(imageUrl);
   };
 
+  const handlePriceChange = (e) => {
+    const inputPrice = e.target.value.replace(/[^\d]/g, ""); // Menghapus semua karakter kecuali angka
+    setPrice(inputPrice); // Simpan nilai angka saja dalam `price`
+  };
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3  sticky top-0 bg-primary px-4 mb-5 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Tambah Barang</p>
-          <p></p>
-        </div>
+        <UserHeader title="Edit Barang" />
 
         {/* content */}
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-4">
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-4 mt-5">
           <form onSubmit={updateProduct}>
             <div className="relative flex justify-center w-full mb-10">
               {url ? (
@@ -232,7 +224,7 @@ const UserEditProduct = () => {
               Stok
             </label>
             <input
-              type="text"
+              type="number"
               id="stock"
               value={stock}
               onChange={(e) => setStock(e.target.value)}
@@ -251,8 +243,8 @@ const UserEditProduct = () => {
               <input
                 type="text"
                 id="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={`${formatRupiah(price)}`}
+                onChange={handlePriceChange}
                 aria-describedby="helper-text-explanation"
                 className="col-span-2 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                 placeholder=" Rp.xxx.xxx"
@@ -283,7 +275,7 @@ const UserEditProduct = () => {
         {/* footer */}
         <ButtonNavigation />
 
-        <ModalInfo
+        <UserModalInfo
           isOpen={showModalInfo}
           title={titleModal}
           img={modalsuccessImg}

@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { modalsuccessImg, updaloadProductImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
+import formatRupiah from "../../../utils/FormatRupiah";
+import UserHeader from "../../../components/UserHeader/UserHeader";
 
 const UserAddProduct = () => {
   const [name, setName] = useState("");
@@ -44,6 +46,7 @@ const UserAddProduct = () => {
       }, 1500);
     } catch (error) {
       console.log(error.response.data.msg);
+      setMsg(error.response.data.msg);
     }
   };
 
@@ -54,29 +57,24 @@ const UserAddProduct = () => {
     setUrl(imageUrl);
   };
 
+  const handleStockChange = (e) => {
+    const inputStock = e.target.value.replace(/[^\d]/g, "");
+    setStock(inputStock);
+  };
+
+  const handlePriceChange = (e) => {
+    const inputPrice = e.target.value.replace(/[^\d]/g, "");
+    setPrice(inputPrice);
+  };
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3  sticky top-0 bg-primary px-4 mb-5 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Tambah Barang</p>
-          <p></p>
-        </div>
+        <UserHeader title="Tambah Barang" />
 
         {/* content */}
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-4">
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-4 mt-5">
           <form onSubmit={createProduct}>
             <div className="relative flex justify-center w-full mb-10">
               {url ? (
@@ -88,7 +86,7 @@ const UserAddProduct = () => {
               ) : (
                 <img
                   src={updaloadProductImg}
-                  className="w-48 h-w-48 rounded-xl border-4 border-primary p-2"
+                  className="w-48 h-w-48 rounded-xl border-4 border-tertiary p-2"
                   alt="fotouploadgambar"
                 />
               )}
@@ -114,6 +112,7 @@ const UserAddProduct = () => {
                   <input
                     id="dropzone-file"
                     type="file"
+                    name="file"
                     className="hidden"
                     onChange={handleChangeFile}
                     required
@@ -212,7 +211,7 @@ const UserAddProduct = () => {
               type="text"
               id="stock"
               value={stock}
-              onChange={(e) => setStock(e.target.value)}
+              onChange={handleStockChange}
               aria-describedby="helper-text-explanation"
               className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 mb-3"
               placeholder="jumlah stok"
@@ -228,8 +227,8 @@ const UserAddProduct = () => {
               <input
                 type="text"
                 id="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                value={`${formatRupiah(price)}`}
+                onChange={handlePriceChange}
                 aria-describedby="helper-text-explanation"
                 className="col-span-2 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
                 placeholder=" Rp.xxx.xxx"
@@ -241,13 +240,14 @@ const UserAddProduct = () => {
                 onChange={(e) => setTimeUnit(e.target.value)}
                 required
               >
-                <option value="" disabled hidden>
+                <option value="" selected disabled>
                   / Waktu
                 </option>
                 <option value="Jam">/ Jam</option>
                 <option value="Hari">/ Hari</option>
               </select>
             </div>
+            <p>{msg}</p>
             <button
               type="submit"
               className="w-full bg-primary text-white py-2 rounded-lg "

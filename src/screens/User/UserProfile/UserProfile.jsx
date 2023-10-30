@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { modalconfirmImg, modalsuccessImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalConfirm from "../../../components/ModalConfirm/ModalConfirm";
-import ModalInfo from "../../../components/ModalInfo/ModalInfo";
+import UserModalConfirm from "../../../components/UserModalConfirm/UserModalConfirm";
+import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import { LogoutUser, reset } from "../../../features/authSlice";
 
 const UserProfile = () => {
@@ -278,13 +278,13 @@ const UserProfile = () => {
 
         {/* footer */}
         <ButtonNavigation />
-        <ModalInfo
+        <UserModalInfo
           isOpen={showModalInfo}
           title={titleModal}
           img={modalsuccessImg}
           desc={msg}
         />
-        <ModalConfirm
+        <UserModalConfirm
           isOpen={showModalConfirm}
           title={titleModal}
           img={modalconfirmImg}

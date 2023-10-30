@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import LocationMap from "../../../components/LocationMap/LocationMap";
+import UserHeader from "../../../components/UserHeader/UserHeader";
+import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 
 const UserDetailIsRenting = () => {
   const [isRenting, setIsRenting] = useState("");
@@ -46,26 +48,11 @@ const UserDetailIsRenting = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto  border-x-4 border-primary">
         {/* Header */}
-        <div className="flex items-center gap-3  sticky top-0 bg-primary px-3 mb-5 py-2 z-50 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            className="cursor-pointer"
-          >
-            <path
-              fill="currentColor"
-              d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z"
-            />
-          </svg>
-          <p className="">Detail Barang Disewakan</p>
-          <p></p>
-        </div>
+        <UserHeader title="Detail Barang Disewakan" />
 
         {/* content */}
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen">
-          <div className="bg-white rounded-lg overflow-hidden shadow-md bg-white-50 mb-5 mx-3 my-3 border-b-4 border-b-primary">
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen px-4">
+          <div className="bg-white rounded-lg overflow-hidden shadow-md bg-white-50 mb-5 my-3 border-b-4 border-b-primary">
             <div className="p-3">
               <div className="flex items-center">
                 <div className="mr-4 bg-primary rounded-xl p-2">
@@ -88,22 +75,19 @@ const UserDetailIsRenting = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 bg-white rounded-lg mx-3 p-3">
+          <div className="flex flex-col gap-2 bg-white rounded-lg ">
             <div className="bg-primary w-full py-2 rounded-lg">
               <p className="text-sm text-center text-white">
                 {isRenting.remaining_time}
               </p>
             </div>
+            <UserAvatar
+              status="Pemilik"
+              name={owner.name}
+              img={owner.url}
+              uuid={owner.uuid}
+            />
             <div className="grid grid-cols-2 gap-2 justify-between items-center">
-              <p className="text-tertiary font-extrabold">Pemilik</p>
-              <div className="flex gap-2 items-center justify-end">
-                <p className="text-sm">{owner.name}</p>
-                <img
-                  src={owner.url}
-                  className="w-6 h-6 rounded-full"
-                  alt="fotoowner"
-                />
-              </div>
               <p className="text-sm text-tertiary font-extrabold">
                 No Hp Pemilik
               </p>
@@ -146,28 +130,34 @@ const UserDetailIsRenting = () => {
             ) : (
               <div className=""></div>
             )}
-
-            <img
-              src={product.url}
-              alt="fotoproduct"
-              className="rounded-lg mb-2"
-            />
+            <div
+              className="w-full h-60 bg-cover bg-no-repeat bg-center rounded-lg border-2 border-primary"
+              style={{ backgroundImage: `url(${product.url})` }}
+            ></div>
             <p className="text-xl text-primary font-bold">{product.name}</p>
-            <div className="grid grid-cols-2 gap-2 justify-between w-full">
+            <div className="flex items-center justify-between gap-10 text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">Jaminan</p>
               <p className="text-sm text-end">{product.guarantee}</p>
+            </div>
+            <div className="flex items-center justify-between gap-10 text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">
                 Jumlah Barang
               </p>
               <p className="text-sm text-end">{isRenting.amount}</p>
+            </div>
+            <div className="flex items-center justify-between gap-10 text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">Waktu</p>
               <p className="text-sm text-end">
                 {isRenting.time} {isRenting.time_unit}
               </p>
+            </div>
+            <div className="flex items-start justify-between gap-10 text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">
                 Waktu Mulai
               </p>
               <p className="text-sm text-end">{isRenting.start_date}</p>
+            </div>
+            <div className="flex items-start justify-between gap-10 text-sm border-b-2 py-1.5">
               <p className="text-sm text-tertiary font-extrabold">
                 Waktu Berakhir
               </p>
