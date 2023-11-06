@@ -9,6 +9,8 @@ import "./UserDetailChat.css";
 const UserDetailChat = () => {
   const [messages, setMessages] = useState([]);
   const [receiver, setReceiver] = useState("");
+  const [receiverUrl, setReceiverUrl] = useState("");
+  const [receiverName, setReceiverName] = useState("");
   const [sendMessage, setSendMessage] = useState("");
 
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ const UserDetailChat = () => {
     try {
       const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
       setReceiver(resp.data);
+      setReceiverUrl(resp.data.url);
+      setReceiverName(resp.data.name);
     } catch (error) {
       console.error(error);
     }
@@ -74,11 +78,11 @@ const UserDetailChat = () => {
         {/* header */}
         <div className="sticky top-0 flex gap-3 items-center bg-primary p-3">
           <img
-            src={receiver && receiver.url}
+            src={receiverUrl}
             className="w-10 h-10 rounded-full border-2 border-white bg-white"
             alt="fotopenerima"
           />
-          <p className="text-white font-bold">{receiver && receiver.name}</p>
+          <p className="text-white font-bold">{receiverName}</p>
         </div>
 
         {/* content */}
