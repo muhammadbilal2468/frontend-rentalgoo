@@ -20,7 +20,7 @@ const AdminModalConfirm = ({
         className="fixed top-0 left-0 bottom-0 right-0 bg-black opacity-40"
         onClick={onCancel}
       />
-      <div className="flex flex-col gap-4 justify-center items-center bg-white py-5 px-10 rounded-lg z-80 w-3/12">
+      <div className="flex flex-col gap-4 justify-center items-center bg-white py-5 px-5 rounded-lg z-80 w-3/12 overflow-y-scroll">
         <h3 className="text-2xl font-bold text-secondary text-center">
           {title}
         </h3>

@@ -47,6 +47,8 @@ import UserProfile from "./screens/User/UserProfile/UserProfile";
 import UserRentalAgreement from "./screens/User/UserRentalAgreement/UserRentalAgreement";
 import UserSaveProduct from "./screens/User/UserSaveProduct/UserSaveProduct";
 import UserSearch from "./screens/User/UserSearch/UserSearch";
+import AdminSuggestions from "./screens/Admin/AdminSuggestions/AdminSuggestions";
+import UserAddSuggestion from "./screens/User/UserAddSuggestion/UserAddSuggestion";
 
 const Router = () => {
   return (
@@ -107,6 +109,8 @@ const Router = () => {
           <Route path="/admin/add-user" element={<AdminAddUser />} />
           <Route path="/admin/edit-user/:uuid" element={<AdminEditUser />} />
 
+          <Route path="/admin/suggestions" element={<AdminSuggestions />} />
+
           <Route path="/admin/setting" element={<AdminSetting />} />
         </Route>
 
@@ -160,6 +164,7 @@ const Router = () => {
 
         <Route path="/user/profile/:uuid" element={<UserProfile />} />
         <Route path="/user/editprofile/:uuid" element={<UserEditProfile />} />
+        <Route path="/user/add-suggestion" element={<UserAddSuggestion />} />
 
         <Route path="/user/chats" element={<UserChat />} />
         <Route path="/user/detailchat/:uuid" element={<UserDetailChat />} />

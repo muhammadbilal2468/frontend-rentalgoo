@@ -8,6 +8,7 @@ import {
   adminfinishrentImg,
   adminisrentingImg,
   adminproductImg,
+  adminsuggImg,
   adminuserImg,
   logoImg,
   updaloadProfileImg,
@@ -113,19 +114,17 @@ const Admin = () => {
                   <ul className="py-1" role="none">
                     <Link to={"/admin/home"}>
                       <li>
-                        <a
-                          href="#"
+                        <p
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                           role="menuitem"
                         >
                           Dashboard
-                        </a>
+                        </p>
                       </li>
                     </Link>
                     <Link to={"/admin/setting"}>
                       <li>
                         <a
-                          href="#"
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                           role="menuitem"
                         >
@@ -134,13 +133,12 @@ const Admin = () => {
                       </li>
                     </Link>
                     <li onClick={Logout}>
-                      <a
-                        href="#"
+                      <p
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                         role="menuitem"
                       >
                         Sign out
-                      </a>
+                      </p>
                     </li>
                   </ul>
                 </div>
@@ -159,10 +157,7 @@ const Admin = () => {
           <ul className="flex flex-col gap-5 space-y-2 font-medium">
             <Link to={"/admin/home"}>
               <li>
-                <p
-                  href="#"
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
+                <p className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <img
                     src={admindashboardImg}
                     alt="admindashboardImg"
@@ -187,7 +182,7 @@ const Admin = () => {
                   className="w-6"
                 />
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                  Produk
+                  Barang
                 </span>
                 <svg
                   className="w-3 h-3"
@@ -208,21 +203,15 @@ const Admin = () => {
               <ul id="dropdown-product" className="hidden py-2 space-y-2">
                 <Link to={"/admin/products"}>
                   <li>
-                    <p
-                      href="#"
-                      className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 text-white hover:text-primary"
-                    >
-                      Semua Produk
+                    <p className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 text-white hover:text-primary">
+                      Semua Barang
                     </p>
                   </li>
                 </Link>
                 <Link to={"/admin/saveproducts"}>
                   <li>
-                    <p
-                      href="#"
-                      className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 text-white hover:text-primary"
-                    >
-                      Produk Tersimpan
+                    <p className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 text-white hover:text-primary">
+                      Barang Tersimpan
                     </p>
                   </li>
                 </Link>
@@ -230,10 +219,7 @@ const Admin = () => {
             </li>
             <Link to={"/admin/agreementproducts"}>
               <li>
-                <p
-                  href="#"
-                  className="flex items-center p-2  rounded-lg  hover:bg-gray-100 group"
-                >
+                <p className="flex items-center p-2  rounded-lg  hover:bg-gray-100 group">
                   <img
                     src={adminagreementImg}
                     alt="adminagreementImg"
@@ -247,10 +233,7 @@ const Admin = () => {
             </Link>
             <Link to={"/admin/isrentingproducts"}>
               <li>
-                <p
-                  href="#"
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
+                <p className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <img
                     src={adminisrentingImg}
                     alt="adminisrentingImg"
@@ -296,20 +279,14 @@ const Admin = () => {
               <ul id="dropdown-finish" className="hidden py-2 space-y-2">
                 <Link to={"/admin/finishrentowners"}>
                   <li>
-                    <p
-                      href="#"
-                      className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 text-white hover:text-primary"
-                    >
+                    <p className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 text-white hover:text-primary">
                       Pemilik
                     </p>
                   </li>
                 </Link>
                 <Link to={"/admin/finishrentrenters"}>
                   <li>
-                    <p
-                      href="#"
-                      className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 text-white hover:text-primary"
-                    >
+                    <p className="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 text-white hover:text-primary">
                       Penyewa
                     </p>
                   </li>
@@ -318,13 +295,20 @@ const Admin = () => {
             </li>
             <Link to={"/admin/users"}>
               <li>
-                <p
-                  href="#"
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
+                <p className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <img src={adminuserImg} alt="adminuserImg" className="w-6" />
                   <span className="flex-1 ml-3 whitespace-nowrap text-white hover:text-primary">
                     Pengguna
+                  </span>
+                </p>
+              </li>
+            </Link>
+            <Link to={"/admin/suggestions"}>
+              <li>
+                <p className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                  <img src={adminsuggImg} alt="adminuserImg" className="w-6" />
+                  <span className="flex-1 ml-3 whitespace-nowrap text-white hover:text-primary">
+                    Saran
                   </span>
                 </p>
               </li>

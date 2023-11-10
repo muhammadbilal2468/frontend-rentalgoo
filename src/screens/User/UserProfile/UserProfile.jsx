@@ -7,6 +7,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import UserModalConfirm from "../../../components/UserModalConfirm/UserModalConfirm";
 import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import { LogoutUser, reset } from "../../../features/authSlice";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [user, setUser] = useState("");
@@ -140,12 +141,17 @@ const UserProfile = () => {
                         width="32"
                         height="32"
                         viewBox="0 0 24 24"
-                        className="text-white"
                       >
-                        <path
-                          fill="currentColor"
-                          d="M17.5 12a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11Zm0 2l-.09.008a.5.5 0 0 0-.402.402L17 14.5V17h-2.502l-.09.009a.5.5 0 0 0-.402.402l-.008.09l.008.09a.5.5 0 0 0 .402.402l.09.008H17v2.503l.008.09a.5.5 0 0 0 .402.402l.09.008l.09-.008a.5.5 0 0 0 .402-.402l.008-.09V18h2.504l.09-.007a.5.5 0 0 0 .402-.402l.008-.09l-.008-.09a.5.5 0 0 0-.403-.402l-.09-.008H18v-2.5l-.008-.09a.5.5 0 0 0-.402-.403L17.5 14ZM13.925 2.504a2.25 2.25 0 0 1 1.94 1.11l.814 1.387h2.071A3.25 3.25 0 0 1 22 8.25v4.56a6.52 6.52 0 0 0-1.499-1.077L20.5 8.25a1.75 1.75 0 0 0-1.75-1.75h-2.5a.75.75 0 0 1-.647-.37l-1.032-1.757a.75.75 0 0 0-.646-.37h-3.803a.75.75 0 0 0-.574.268l-.065.09L8.39 6.142a.75.75 0 0 1-.639.358h-2.5A1.75 1.75 0 0 0 3.5 8.25v9.5c0 .966.784 1.75 1.75 1.75h6.063c.173.533.412 1.037.709 1.5H5.25A3.25 3.25 0 0 1 2 17.75v-9.5A3.25 3.25 0 0 1 5.25 5h2.08l.875-1.424a2.25 2.25 0 0 1 1.917-1.073h3.803ZM12 8a4.502 4.502 0 0 1 4.283 3.114c-.5.095-.98.247-1.433.449A2.999 2.999 0 0 0 9 12.5c0 1.43 1 2.625 2.338 2.927a6.446 6.446 0 0 0-.31 1.467A4.501 4.501 0 0 1 12 8.001Z"
-                        />
+                        <g
+                          fill="none"
+                          stroke="white"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                        >
+                          <path d="M9.533 11.15A1.823 1.823 0 0 0 9 12.438V15h2.578c.483 0 .947-.192 1.289-.534l7.6-7.604a1.822 1.822 0 0 0 0-2.577l-.751-.751a1.822 1.822 0 0 0-2.578 0L9.533 11.15Z" />
+                          <path d="M21 12c0 4.243 0 6.364-1.318 7.682C18.364 21 16.242 21 12 21c-4.243 0-6.364 0-7.682-1.318C3 18.364 3 16.242 3 12c0-4.243 0-6.364 1.318-7.682C5.636 3 7.758 3 12 3" />
+                        </g>
                       </svg>
                     </div>
                     <input
@@ -199,62 +205,40 @@ const UserProfile = () => {
           <div className="text-gray-900 border-gray-200 rounded-lg w-full">
             <button
               type="button"
-              className="relative inline-flex items-center w-full py-4 text-base font-medium border-b border-gray-200 rounded-t-lg "
+              className="relative inline-flex gap-2 items-center w-full py-4 text-base font-medium border-b border-gray-200 rounded-t-lg "
             >
               <svg
-                className="w-3 h-3 mr-2.5"
-                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
-              </svg>
-              Null
-            </button>
-            <button
-              type="button"
-              className="relative inline-flex items-center w-full py-4 text-base font-medium border-b border-gray-200 "
-            >
-              <svg
-                className="w-3 h-3 mr-2.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
+                width="26"
+                height="26"
+                viewBox="0 0 26 26"
               >
                 <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M7.75 4H19M7.75 4a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 4h2.25m13.5 6H19m-2.25 0a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 10h11.25m-4.5 6H19M7.75 16a2.25 2.25 0 0 1-4.5 0m4.5 0a2.25 2.25 0 0 0-4.5 0M1 16h2.25"
+                  fill="#1d3354"
+                  d="M13 0c-1.7 0-3 1.3-3 3v6c0 1.7 1.3 3 3 3h6l4 4v-4c1.7 0 3-1.3 3-3V3c0-1.7-1.3-3-3-3H13zm4.188 3h1.718l1.688 6h-1.5l-.407-1.5h-1.5L16.813 9H15.5l1.688-6zM18 4c-.1.4-.212.888-.313 1.188l-.28 1.312h1.187l-.282-1.313C18.113 4.888 18 4.4 18 4zM3 10c-1.7 0-3 1.3-3 3v6c0 1.7 1.3 3 3 3v4l4-4h6c1.7 0 3-1.3 3-3v-6h-3c-1.9 0-3.406-1.3-3.906-3H3zm4.594 2.906c1.7 0 2.5 1.4 2.5 3c0 1.4-.481 2.288-1.281 2.688c.4.2.874.306 1.374.406l-.374 1c-.7-.2-1.426-.512-2.126-.813c-.1-.1-.275-.093-.375-.093C6.112 18.994 5 18 5 16c0-1.7.994-3.094 2.594-3.094zm0 1.094c-.8 0-1.188.9-1.188 2c0 1.2.388 2 1.188 2c.8 0 1.218-.9 1.218-2s-.418-2-1.218-2z"
                 />
               </svg>
-              Null
+              FAQ
             </button>
-            <button
-              type="button"
-              className="relative inline-flex items-center w-full py-4 text-base font-medium border-b border-gray-200 "
-            >
-              <svg
-                className="w-3 h-3 mr-2.5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 18"
-                fill="currentColor"
+            <Link to={"/user/add-suggestion"}>
+              <button
+                type="button"
+                className="relative inline-flex gap-3 items-center w-full py-4 text-base font-medium border-b border-gray-200 rounded-t-lg "
               >
-                <path
-                  d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M12 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V9C0 9.53043 0.210714 10.0391 0.585786 10.4142C0.960859 10.7893 1.46957 11 2 11H3V13C3 13.1857 3.05171 13.3678 3.14935 13.5257C3.24698 13.6837 3.38668 13.8114 3.55279 13.8944C3.71889 13.9775 3.90484 14.0126 4.08981 13.996C4.27477 13.9793 4.45143 13.9114 4.6 13.8L8.333 11H12C12.5304 11 13.0391 10.7893 13.4142 10.4142C13.7893 10.0391 14 9.53043 14 9V2C14 1.46957 13.7893 0.960859 13.4142 0.585786C13.0391 0.210714 12.5304 0 12 0Z"
-                  fill="currentColor"
-                />
-              </svg>
-              Null
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill="#1d3354"
+                    d="M15.002 2a3.001 3.001 0 1 0 0 6.003c.46 0 .89-.105 1.283-.293a.5.5 0 0 1 .43.903c-.52.248-1.097.39-1.713.39a4.001 4.001 0 1 1 4.001-4.005v.5a1.501 1.501 0 0 1-2.646.972a2 2 0 1 1-.312-3.176A.5.5 0 0 1 17 3.5v1.998a.501.501 0 1 0 1.003 0v-.496A3.001 3.001 0 0 0 15.001 2ZM14 5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Zm1 5a4.978 4.978 0 0 0 3-1v3.276c0 1.418-1.164 2.566-2.6 2.566h-4.59l-4.011 2.961a1.009 1.009 0 0 1-1.4-.199a.978.978 0 0 1-.199-.59v-2.172h-.6c-1.436 0-2.6-1.149-2.6-2.566v-6.71C2 4.149 3.164 3 4.6 3h5.816A5 5 0 0 0 15 10Z"
+                  />
+                </svg>
+                Berikan Saran
+              </button>
+            </Link>
             <button
               type="button"
               className="relative inline-flex items-center w-full py-4 text-base rounded-b-lg text-secondary font-bold"
