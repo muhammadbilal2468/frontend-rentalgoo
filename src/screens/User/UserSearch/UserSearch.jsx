@@ -50,6 +50,7 @@ const UserSearch = () => {
     try {
       await axios.delete(`http://localhost:5000/searchs/${uuid}`);
       console.log("berhasil menghapus");
+      getSearchs();
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -103,12 +104,10 @@ const UserSearch = () => {
         <div className="flex flex-col gap-5 px-5 justify-start bg-background rounded-b-lg py-5 min-h-screen">
           {searchs.map((data) => {
             return (
-              <div
-                className="flex justify-between border-b-2"
-                key={data.uuid}
-                onClick={() => handleHistorySearchSubmit(data.text)}
-              >
-                <p>{data.text}</p>
+              <div className="flex justify-between border-b-2" key={data.uuid}>
+                <p onClick={() => handleHistorySearchSubmit(data.text)}>
+                  {data.text}
+                </p>
                 <p
                   onClick={() => deleteSearch(data.uuid)}
                   className="cursor-pointer"

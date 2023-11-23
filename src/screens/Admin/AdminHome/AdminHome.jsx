@@ -10,6 +10,7 @@ const AdminHome = () => {
   const [totalAgrees, setTotalAgrees] = useState("");
   const [totalIsRents, setTotalIsRents] = useState("");
   const [totalFinishRentOwners, setTotalFinishRentOwners] = useState("");
+  const [finishRentOwners, seFinishRentOwners] = useState([]);
   const [totalFinishRentRenters, setTotalFinishRentRenters] = useState("");
   const [totalUsers, setTotalUsers] = useState("");
 
@@ -69,6 +70,7 @@ const AdminHome = () => {
     try {
       const resp = await axios.get("http://localhost:5000/finishrentbyowner");
       setTotalFinishRentOwners(resp.data.totalFinishRents);
+      seFinishRentOwners(resp.data.finishRents);
     } catch (error) {
       console.log(error.response);
     }
@@ -283,9 +285,9 @@ const AdminHome = () => {
               role="list"
               className="divide-y divide-gray-200 dark:divide-gray-700"
             >
-              {/* {lastFinishRents.map((data) => {
+              {finishRentOwners.map((data) => {
                 return (
-                  <li className="py-3 sm:py-4">
+                  <li className="py-3 sm:py-4" key={data.uuid}>
                     <div className="flex items-center space-x-4">
                       <div className="flex-shrink-0">
                         <img
@@ -308,7 +310,7 @@ const AdminHome = () => {
                     </div>
                   </li>
                 );
-              })} */}
+              })}
             </ul>
           </div>
         </div>
