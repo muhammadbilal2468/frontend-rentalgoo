@@ -32,6 +32,7 @@ const ButtonNavigation = () => {
                 d="m2 8l9.732-4.866a.6.6 0 0 1 .536 0L22 8m-2 3v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"
               />
             </svg>
+            <p className="text-[10px]">Home</p>
           </div>
         </Link>
         <Link to={"/user/myproducts"}>
@@ -47,6 +48,7 @@ const ButtonNavigation = () => {
                 d="M1.5 2.5V2a.5.5 0 0 0-.49.402l.49.098Zm12 0l.49-.098A.5.5 0 0 0 13.5 2v.5Zm1 5V8a.5.5 0 0 0 .49-.598l-.49.098Zm-14 0l-.49-.098A.5.5 0 0 0 .5 8v-.5Zm3 3H3v.5h.5v-.5Zm8 0v.5h.5v-.5h-.5ZM0 15h15v-1H0v1Zm1-7.5v7h1v-7H1Zm12 0v7h1v-7h-1ZM1.5 3h12V2h-12v1Zm11.51-.402l1 5l.98-.196l-1-5l-.98.196ZM14.5 7H.5v1h14V7ZM.99 7.598l1-5l-.98-.196l-1 5l.98.196ZM1 1h13V0H1v1Zm2 6.5v3h1v-3H3Zm.5 3.5h8v-1h-8v1Zm8.5-.5v-3h-1v3h1Z"
               />
             </svg>
+            <p className="text-[10px]">Toko</p>
           </div>
         </Link>
         <Link to={"/user/myactivity"}>
@@ -66,6 +68,7 @@ const ButtonNavigation = () => {
                 d="M22 12h-4l-3 9L9 3l-3 9H2"
               />
             </svg>
+            <p className="text-[10px]">Aktifitas</p>
           </div>
         </Link>
         <Link to={"/user/saveproducts"}>
@@ -84,6 +87,7 @@ const ButtonNavigation = () => {
                 />
               </g>
             </svg>
+            <p className="text-[10px]">Simpan</p>
           </div>
         </Link>
         <Link to={`/user/profile/${user && user.uuid}`}>
@@ -99,6 +103,7 @@ const ButtonNavigation = () => {
                 d="M1201 784q47 14 89.5 38t89 73t79.5 115.5t55 172t22 236.5q0 154-100 263.5T1195 1792H341q-141 0-241-109.5T0 1419q0-131 22-236.5t55-172T156.5 895t89-73t89.5-38q-79-125-79-272q0-104 40.5-198.5T406 150T569.5 40.5T768 0t198.5 40.5T1130 150t109.5 163.5T1280 512q0 147-79 272zM768 128q-159 0-271.5 112.5T384 512t112.5 271.5T768 896t271.5-112.5T1152 512t-112.5-271.5T768 128zm427 1536q88 0 150.5-71.5T1408 1419q0-239-78.5-377T1104 897q-145 127-336 127T432 897q-147 7-225.5 145T128 1419q0 102 62.5 173.5T341 1664h854z"
               />
             </svg>
+            <p className="text-[10px]">Profil</p>
           </div>
         </Link>
       </div>

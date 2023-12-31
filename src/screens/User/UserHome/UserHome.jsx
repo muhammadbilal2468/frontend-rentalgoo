@@ -143,12 +143,10 @@ const UserHome = () => {
   const minLimit = (e) => {
     e.preventDefault();
     setLimit(limit - 2);
-    console.log("limit", limit);
   };
   const plusLimit = (e) => {
     e.preventDefault();
     setLimit(limit + 2);
-    console.log("limit", limit);
   };
 
   return (

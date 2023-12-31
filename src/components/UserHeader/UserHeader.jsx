@@ -4,6 +4,7 @@ const UserHeader = (props) => {
   const back = () => {
     window.history.back();
   };
+
   return (
     <div className="flex justify-between items-center gap-1 sticky top-0 bg-primary px-2 py-2 z-50 text-white">
       <svg

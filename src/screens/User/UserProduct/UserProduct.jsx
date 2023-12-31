@@ -123,11 +123,26 @@ const UserProduct = () => {
     console.log("limit", limit);
   };
 
+  const back = () => {
+    window.history.back();
+  };
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
         <div className="flex items-center gap-3 justify-between sticky top-0 bg-primary px-2 py-2 z-50">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            className="cursor-pointer"
+            onClick={back}
+            fill="#ffff"
+          >
+            <path d="M15.41 7.41L14 6l-6 6l6 6l1.41-1.41L10.83 12l4.58-4.59z" />
+          </svg>
           <form className="w-full" onSubmit={handleSearchSubmit}>
             <label
               htmlFor="default-search"

@@ -77,7 +77,7 @@ const UserDetailIsRenting = () => {
           </div>
           <div className="flex flex-col gap-2 bg-white rounded-lg ">
             <div className="bg-primary w-full py-2 rounded-lg">
-              <p className="text-sm text-center text-white">
+              <p className="animate-pulse text-sm text-center text-white">
                 {isRenting.remaining_time}
               </p>
             </div>

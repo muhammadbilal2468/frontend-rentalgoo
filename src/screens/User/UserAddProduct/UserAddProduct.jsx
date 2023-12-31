@@ -197,8 +197,8 @@ const UserAddProduct = () => {
               <option value="" disabled hidden>
                 Pilih Jaminan
               </option>
-              <option value="Aksesoris">KTP</option>
-              <option value="Buku">KTM</option>
+              <option value="KTP">KTP</option>
+              <option value="KTM">KTM</option>
             </select>
 
             <label

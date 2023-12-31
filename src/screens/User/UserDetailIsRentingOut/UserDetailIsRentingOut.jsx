@@ -150,6 +150,8 @@ const UserDetailIsRentingOut = () => {
     setStatus(e.target.value);
   };
 
+  console.log("status : ", status);
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto  border-x-4 border-primary">
@@ -182,7 +184,7 @@ const UserDetailIsRentingOut = () => {
             </div>
           </div>
           <div className="bg-primary w-full py-2 rounded-lg">
-            <p className="text-sm text-center text-white">
+            <p className="animate-pulse text-sm text-center text-white">
               {isRentingOut.remaining_time}
             </p>
           </div>
@@ -248,7 +250,7 @@ const UserDetailIsRentingOut = () => {
                   <option value="Berakhir, Belum Dikembalikan">
                     Berakhir, Belum Dikembalikan
                   </option>
-                  <option value="Telah Dikembalikan">
+                  <option value="Dikembalikan Tepat Waktu">
                     Dikembalikan Tepat Waktu
                   </option>
                   <option value="Telah Dikembalikan, Namun Lambat">
@@ -256,6 +258,45 @@ const UserDetailIsRentingOut = () => {
                   </option>
                 </select>
               </div>
+
+              {/* -- Duplicate code -- */}
+              {status === "Dikembalikan Tepat Waktu" && (
+                <p className="text-xs text-yellow-500 mt-2 inline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 1024 1024"
+                    className="text-yellow-300 inline"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M512 64a448 448 0 1 1 0 896a448 448 0 0 1 0-896zm0 192a58.432 58.432 0 0 0-58.24 63.744l23.36 256.384a35.072 35.072 0 0 0 69.76 0l23.296-256.384A58.432 58.432 0 0 0 512 256zm0 512a51.2 51.2 0 1 0 0-102.4a51.2 51.2 0 0 0 0 102.4z"
+                    />
+                  </svg>{" "}
+                  jika Anda mengubah barang telah diambil maka barang akan masuk
+                  ke proses berjalannya sewa barang
+                </p>
+              )}
+
+              {status === "Telah Dikembalikan, Namun Lambat" && (
+                <p className="text-xs text-yellow-500 mt-2 inline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 1024 1024"
+                    className="text-yellow-300 inline"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M512 64a448 448 0 1 1 0 896a448 448 0 0 1 0-896zm0 192a58.432 58.432 0 0 0-58.24 63.744l23.36 256.384a35.072 35.072 0 0 0 69.76 0l23.296-256.384A58.432 58.432 0 0 0 512 256zm0 512a51.2 51.2 0 1 0 0-102.4a51.2 51.2 0 0 0 0 102.4z"
+                    />
+                  </svg>{" "}
+                  jika Anda mengubah barang telah diambil maka barang akan masuk
+                  ke proses berjalannya sewa barang
+                </p>
+              )}
 
               <button
                 type="submit"

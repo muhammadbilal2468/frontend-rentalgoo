@@ -48,12 +48,8 @@ const UserDetailRentalAgreement = () => {
       await axios.delete(`http://localhost:5000/agreementproducts/${uuid}`);
       navigate("/user/rentalagreements");
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.response.data.msg);
     }
-  };
-
-  const getDetailUser = () => {
-    navigate(`/user/detailuser/${owner.uuid}`);
   };
 
   const toggleShowMaps = () => {
@@ -99,7 +95,7 @@ const UserDetailRentalAgreement = () => {
           </div>
           <div className="flex flex-col gap-2 bg-white rounded-lg mx-4">
             <div className="bg-primary w-full py-2 rounded-lg">
-              <p className="text-sm text-center text-white">
+              <p className="animate-pulse text-sm text-center text-white">
                 {agreementProducts.status}
               </p>
             </div>
@@ -197,7 +193,7 @@ const UserDetailRentalAgreement = () => {
           title={titleModal}
           img={modalconfirmImg}
           desc={msg}
-          cancelText={"Kemabali"}
+          cancelText={"Kembali"}
           confirmText={"Batalkan"}
           onCancel={handleModalCancel}
           onConfirm={cancelAgreement}

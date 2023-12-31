@@ -106,10 +106,6 @@ const UserAddAgreement = () => {
     return totalPrice.toFixed(0);
   };
 
-  const getDetailUser = () => {
-    navigate(`/user/detailuser/${user.uuid}`);
-  };
-
   const minAmount = (e) => {
     if (amount > 0) {
       setAmount(amount - 1);

@@ -81,6 +81,10 @@ const UserProfile = () => {
     setShowModalConfirm(!showModalConfirm);
   };
 
+  const back = () => {
+    window.history.back();
+  };
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
@@ -92,6 +96,7 @@ const UserProfile = () => {
             height="30"
             viewBox="0 0 24 24"
             className="cursor-pointer"
+            onClick={back}
           >
             <path
               fill="currentColor"

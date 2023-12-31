@@ -79,19 +79,19 @@ const UserFinishRentOwner = () => {
                       key={data.uuid}
                     >
                       <div className="flex flex-col justify-between gap-2">
-                        <div
-                          className="flex flex-col"
-                          onClick={() => getDetailUser(data.owner.uuid)}
-                        >
-                          <div className="flex gap-2 items-center">
+                        <div className="flex flex-col gap-2">
+                          <div
+                            className="flex gap-2 items-center"
+                            onClick={() => getDetailUser(data.owner.uuid)}
+                          >
                             <img
                               src={data.owner.url}
                               className="w-5 h-5 rounded-full"
                               alt="fotopemilik"
                             />
-                            <p>{data.owner.name}</p>
+                            <p className="text-sm">{data.owner.name}</p>
                           </div>
-                          <p className="text-xl text-primary font-bold">
+                          <p className="text-sm text-primary font-bold">
                             {data.product.name}
                           </p>
                         </div>

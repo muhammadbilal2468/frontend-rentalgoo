@@ -1,12 +1,30 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const UserAvatar = (props) => {
+  const [user, setUser] = useState("");
   const navigate = useNavigate();
 
-  const getDetailUser = (uuid) => {
-    navigate(`/user/detailuser/${uuid}`);
+  useEffect(() => {
+    getMe();
+  }, []);
+
+  const getMe = async () => {
+    const resp = await axios.get(`http://localhost:5000/me`);
+    setUser(resp.data);
   };
+
+  const getDetailUser = (uuid) => {
+    if (user.uuid === uuid) {
+      navigate(`/user/profile/${uuid}`);
+    } else {
+      navigate(`/user/detailuser/${uuid}`);
+    }
+  };
+
+  console.log(user.uuid);
+
   return (
     <div className="flex justify-between items-center">
       <p className="text-tertiary font-extrabold">{props.status}</p>
