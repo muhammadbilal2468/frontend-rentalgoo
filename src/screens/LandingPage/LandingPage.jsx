@@ -17,23 +17,6 @@ import {
 } from "../../assets";
 
 const LandingPage = () => {
-  const [name, setName] = useState("");
-  const [suggestion, setSuggestion] = useState("");
-
-  const addSuggestion = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/suggestions", {
-        name: name,
-        suggestion: suggestion,
-      });
-      setName("");
-      setSuggestion("");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
@@ -215,36 +198,37 @@ const LandingPage = () => {
         id="contact"
         className="relative lg:pt-40 sm:pt-10 pb-2 xl:px-32 lg:px-16 sm:px-7 bg-primary"
       >
-        <div className="grid grid-cols-8 justify-between absolute mx-32 -top-16 right-0 left-0 bg-tertiary backdrop-blur hover:blur-0 hover:bg-opacity-80 bg-opacity-60 bg-blur-md p-12 rounded-2xl shadow-lg ease-out duration-300 gap-10 border-2 lg:inline-flex sm:hidden">
-          <p className="col-span-3 text-1xl font-bold text-white">
-            Berikan Saran Anda <br /> Untuk Kami
-          </p>
-          <form
-            onSubmit={addSuggestion}
-            className="col-span-5 flex gap-5 items-center justify-between bg-white rounded-xl py-0 px-5 w-full"
-          >
-            <input
-              className="border-none w-1.5/5"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Masukkan Email"
-            />
-            <p className="text-secondary text-5xl">|</p>
-            <input
-              className="border-none w-3.5/5"
-              type="text"
-              value={suggestion}
-              onChange={(e) => setSuggestion(e.target.value)}
-              placeholder="Berikan Kritik dan saran"
-            />
-            <button
-              type="submit"
-              className="text-white w-fit h-fit bg-secondary font-medium rounded-xl text-sm px-10 py-3 text-center "
-            >
-              Kirim
-            </button>
-          </form>
+        <div className="grid grid-cols-8 justify-center absolute mx-32 -top-16 right-0 left-0 bg-tertiary backdrop-blur hover:blur-0 hover:bg-opacity-80 bg-opacity-60 bg-blur-md p-12 rounded-2xl shadow-lg ease-out duration-300 gap-10 border-2 lg:inline-flex sm:hidden">
+          <h1 className="flex items-center text-4xl font-bold p-4 rounded-lg bg-white animate-pulse">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="42"
+                height="42"
+                viewBox="0 0 64 64"
+              >
+                <path
+                  fill="#699635"
+                  d="M60 42c-5.5 0-10-4.5-10-10H10.8v21.2C16.2 58.6 23.7 62 32 62c13.1 0 24.2-8.4 28.3-20z"
+                />
+                <path
+                  fill="#3e4347"
+                  d="M60 22h.3C56.2 10.4 45.1 2 32 2c-8.3 0-15.8 3.4-21.2 8.8V32H50c0-5.5 4.5-10 10-10"
+                />
+                <path
+                  fill="#f9f9f9"
+                  d="M60.3 22H10.8v20h49.5c1.1-3.1 1.7-6.5 1.7-10s-.6-6.9-1.7-10"
+                />
+                <path
+                  fill="#c94747"
+                  d="M10.8 10.8C5.4 16.2 2 23.7 2 32s3.4 15.8 8.8 21.2L32 32z"
+                />
+              </svg>
+            </span>
+            <span className="text-green-700">Free </span>
+            <span className="text-red-700">Pales</span>
+            <span className="text-black">tine</span>
+          </h1>
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-1 text-white pb-10">
           <div className="flex flex-col gap-3 align-start">

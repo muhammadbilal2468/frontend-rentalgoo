@@ -124,7 +124,7 @@ const UserDetailLeaseAgreement = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto  border-x-4 border-primary">
         {/* Header */}
-        <UserHeader title="Sedang Disewakan" />
+        <UserHeader title="Persetujuan Menyewakan" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg pb-5 min-h-screen">
@@ -144,7 +144,7 @@ const UserDetailLeaseAgreement = () => {
                 </div>
                 <div>
                   <p className="font-bold text-sm text-gray-900">
-                    Detail Barang Sedang Disewakan
+                    Detail Persetujuan Menyewakan
                   </p>
                 </div>
                 <p></p>
@@ -164,20 +164,58 @@ const UserDetailLeaseAgreement = () => {
             ></div>
             <p className="text-xl text-primary font-bold">{product.name}</p>
             <form onSubmit={handleSubmit}>
-              <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
-                <p className="text-tertiary font-bold">jaminan</p>
-                <p>{product.guarantee}</p>
+              <div className="grid grid-cols-3 gap-6 my-4">
+                <div className="flex flex-col justify-between items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v12h7V6zm16 12V6h-1.24c.24.54.19 1.07.19 1.13c-.07.67-.54 1.37-.71 1.62l-2.33 2.55l3.32-.02l.01 1.22l-5.2-.03l-.04-1s3.05-3.23 3.2-3.52c.14-.28.71-1.95-.7-1.95c-1.23.05-1.09 1.3-1.09 1.3l-1.54.01s.01-.66.38-1.31H13v12h2.58l-.01-.86l.97-.01s.91-.16.92-1.05c.04-1-.81-1-.96-1c-.13 0-1.07.05-1.07.87h-1.52s.04-2.06 2.59-2.06c2.6 0 2.46 2.02 2.46 2.02s.04 1.25-1.11 1.72l.52.37zM8.92 16h-1.5v-5.8l-1.8.56V9.53l3.14-1.12h.16z"
+                    />
+                  </svg>
+                  <p className="text-base font-semibold">
+                    {agreementProducts.amount}
+                  </p>
+                  <p className="text-[10px] text-slate-500">Jumlah Barang</p>
+                </div>
+                <div className="flex flex-col justify-between items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9 3V1h6v2zm1 11.75l-1.1-2.2q-.125-.275-.375-.413T8 12H3.05q.375-3.375 2.925-5.687T12 4q1.55 0 2.975.5t2.675 1.45l1.4-1.4l1.4 1.4l-1.4 1.4q.8 1.05 1.275 2.213T20.95 12h-4.325L14.9 8.55q-.275-.575-.9-.575t-.9.575zM12 22q-3.475 0-6.025-2.312T3.05 14h4.325L9.1 17.45q.275.575.9.575t.9-.575l3.1-6.2l1.1 2.2q.125.275.375.413T16 14h4.95q-.375 3.375-2.925 5.687T12 22"
+                    />
+                  </svg>
+                  <p className="text-base font-semibold">
+                    {agreementProducts.time} {agreementProducts.time_unit}
+                  </p>
+                  <p className="text-[10px] text-slate-500">Jangka Sewa</p>
+                </div>
+                <div className="flex flex-col justify-between items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M19 3H1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1m-6 4h4v1h-4zm-2 7.803a2.31 2.31 0 0 0-.529-.303c-1.18-.508-2.961-1.26-2.961-2.176c0-.551.359-.371.518-1.379c.066-.418.385-.007.445-.961c0-.38-.174-.475-.174-.475s.088-.562.123-.996c.036-.453-.221-1.8-1.277-2.097c-.186-.188-.311-.111.258-.412c-1.244-.059-1.534.592-2.196 1.071c-.564.42-.717 1.085-.689 1.439c.037.433.125.996.125.996s-.175.094-.175.474c.061.954.38.543.445.961c.158 1.008.519.828.519 1.379c0 .916-1.781 1.668-2.961 2.176a2.503 2.503 0 0 0-.471.26V5h9zM18 11h-5v-1h5z"
+                    />
+                  </svg>
+                  <p className="text-base font-semibold">{product.guarantee}</p>
+                  <p className="text-[10px] text-slate-500">Jaminan</p>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
-                <p className="text-tertiary font-bold">Jumlah Barang</p>
-                <p className="text-sm text-end">{agreementProducts.amount}</p>
-              </div>
-              <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
-                <p className="text-sm text-tertiary font-extrabold">Waktu</p>
-                <p className="text-sm text-end">
-                  {agreementProducts.time} {agreementProducts.time_unit}
-                </p>
-              </div>
+
               <div className="flex items-center justify-between text-sm border-b-2 py-1.5">
                 <p className="text-sm text-tertiary font-extrabold">
                   Total Bayar

@@ -36,7 +36,6 @@ const UserAddAgreement = () => {
     setProductId(resp.data.id);
     setOwnerId(resp.data.user.id);
     setUser(resp.data.user);
-    setTimeUnit(resp.data.time_unit);
   };
 
   const createAgreementProducts = async (e) => {
@@ -69,6 +68,10 @@ const UserAddAgreement = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     let newValue = Math.max(1, parseInt(value));
+
+    if (isNaN(newValue) || newValue < 1) {
+      newValue = "";
+    }
 
     if (name === "amount") {
       setAmount(newValue);
@@ -106,26 +109,7 @@ const UserAddAgreement = () => {
     return totalPrice.toFixed(0);
   };
 
-  const minAmount = (e) => {
-    if (amount > 0) {
-      setAmount(amount - 1);
-    }
-  };
-  const plusAmount = (e) => {
-    e.preventDefault();
-    setAmount(amount + 1);
-  };
-
-  const minTime = (e) => {
-    e.preventDefault();
-    if (time > 0) {
-      setTime(time - 1);
-    }
-  };
-  const plusTime = (e) => {
-    e.preventDefault();
-    setTime(time + 1);
-  };
+  console.log("time Unit :", timeUnit);
 
   return (
     <>
@@ -155,28 +139,11 @@ const UserAddAgreement = () => {
               </div>
               <label
                 htmlFor="amount"
-                className="block text-sm font-bold text-tertiary dark:text-white"
+                className="block text-sm font-bold dark:text-white"
               >
                 Jumlah Barang
               </label>
               <div className="relative flex">
-                <div
-                  className="absolute inset-y-0 left-0 flex items-center pl-3.5 cursor-pointer"
-                  onClick={minAmount}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    className="text-tertiary"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M18 12.998H6a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2z"
-                    />
-                  </svg>
-                </div>
                 <input
                   type="text"
                   id="amount"
@@ -187,54 +154,16 @@ const UserAddAgreement = () => {
                   onChange={handleChange}
                   required
                 />
-                <div
-                  className="absolute inset-y-0 right-0 flex items-center pr-3.5 cursor-pointer"
-                  onClick={plusAmount}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    className="text-tertiary"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 5v14m-7-7h14"
-                    />
-                  </svg>
-                </div>
               </div>
 
               <label
                 htmlFor="time"
-                className="block text-sm font-bold text-tertiary dark:text-white"
+                className="block text-sm font-bold dark:text-white"
               >
                 Jumlah Waktu / Satuan Waktu
               </label>
               <div className="grid grid-cols-3 gap-3 items-center border-b-2 pb-4">
                 <div className="col-span-2 relative flex">
-                  <div
-                    className="absolute inset-y-0 left-0 flex items-center pl-3.5 cursor-pointer"
-                    onClick={minTime}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      className="text-tertiary"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M18 12.998H6a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2z"
-                      />
-                    </svg>
-                  </div>
                   <input
                     type="text"
                     id="time"
@@ -245,34 +174,16 @@ const UserAddAgreement = () => {
                     onChange={handleChange}
                     required
                   />
-                  <div
-                    className="absolute inset-y-0 right-0 flex items-center pr-3.5 cursor-pointer"
-                    onClick={plusTime}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      className="text-tertiary"
-                    >
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 5v14m-7-7h14"
-                      />
-                    </svg>
-                  </div>
                 </div>
 
                 <select
                   name="timeUnit"
                   className="col-span-1 bg-gray-50 border-2 border-tertiary text-sm rounded-lg block w-full p-2.5"
                   defaultValue={""}
-                  onChange={((e) => setTimeUnit(e.target.value), handleChange)}
+                  onChange={(e) => {
+                    setTimeUnit(e.target.value);
+                    handleChange(e);
+                  }}
                   required
                 >
                   <option value="" disabled hidden>
@@ -282,9 +193,9 @@ const UserAddAgreement = () => {
                   <option value="Hari">/ Hari</option>
                 </select>
               </div>
-              <div className="">
-                <p>Total Bayar</p>
-                <p className="font-bold text-tertiary text-xl">
+              <div className="flex flex-col justify-center items-center my-5">
+                <p className="text-sm font-bold">Total Bayar : </p>
+                <p className="font-bold text-secondary text-2xl">
                   {formatRupiah(totalPrice === "" ? "0" : totalPrice)}
                 </p>
               </div>

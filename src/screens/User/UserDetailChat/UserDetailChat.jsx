@@ -123,10 +123,10 @@ const UserDetailChat = () => {
                 ) : (
                   <>
                     <div className="">
-                      <p className={`text-sm ${messageClassName}`}>
+                      <p className={`text-xs ${messageClassName}`}>
                         {data.message}
                       </p>
-                      <p className="text-xs text-gray-500 text-end mr-4">
+                      <p className="text-[10px] text-gray-500 text-end mr-4">
                         {data.message_time}
                       </p>
                     </div>
@@ -141,12 +141,12 @@ const UserDetailChat = () => {
             );
           })}
         </div>
-        <div className="sticky bg-white justify-between bottom-[52px] p-2 z-50 shadow-xl">
+        <div className="sticky bg-white justify-between bottom-[60px] p-2 z-50 shadow-xl border-2">
           <form onSubmit={goSendMessage} className="grid grid-cols-4 gap-1 ">
             <input
               type="text"
               placeholder="Ketik Pesan dan Kirim"
-              className="col-span-3 py-1 rounded-lg"
+              className="col-span-3 py-1 rounded-lg text-sm"
               value={sendMessage}
               onChange={handleMessage}
             />

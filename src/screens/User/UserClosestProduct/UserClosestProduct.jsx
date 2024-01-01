@@ -9,7 +9,8 @@ import UserHeader from "../../../components/UserHeader/UserHeader";
 
 const UserClosestProduct = () => {
   const [closestProducts, setClosestProducts] = useState([]);
-  const [limit, setLimit] = useState(6);
+  const [totalClosestProducts, setTotalClosestProducts] = useState();
+  const [limit, setLimit] = useState(2);
 
   const [showAlertLocation, setShowAlertLocation] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
@@ -27,8 +28,10 @@ const UserClosestProduct = () => {
       const resp = await axios.get(
         `http://localhost:5000/closestproducts?limit=${limit}`
       );
+      const total = await axios.get(`http://localhost:5000/closestproducts`);
       setClosestProducts(resp.data);
-      setLimit(resp.data.length);
+      setTotalClosestProducts(total.data.length);
+      // setLimit(resp.data.length);
     } catch (error) {
       console.log(error.response);
     }
@@ -73,6 +76,9 @@ const UserClosestProduct = () => {
     setLimit(limit + 2);
   };
 
+  console.log("limit :", limit);
+  console.log("total :", totalClosestProducts);
+
   return (
     <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
       {/* Header */}
@@ -87,11 +93,11 @@ const UserClosestProduct = () => {
             {showAlertLocation && (
               <div
                 id="alert-border-4"
-                class="flex items-center gap-1 p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800"
+                className="flex items-center gap-1 p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:bg-gray-800 dark:border-yellow-800"
                 role="alert"
               >
                 <svg
-                  class="flex-shrink-0 w-4 h-4"
+                  className="flex-shrink-0 w-4 h-4"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -99,12 +105,12 @@ const UserClosestProduct = () => {
                 >
                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                 </svg>
-                <div class="ml-3 text-xs font-medium">
+                <div className="ml-3 text-xs font-medium">
                   Barang terdekat dideteksi antara titik lokasi pada data
                   location di{"   "}
                   <a
                     href="#"
-                    class="font-semibold underline hover:no-underline"
+                    className="font-semibold underline hover:no-underline"
                   >
                     profile{"   "}
                   </a>
@@ -112,14 +118,14 @@ const UserClosestProduct = () => {
                 </div>
                 <button
                   type="button"
-                  class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
+                  className="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
                   data-dismiss-target="#alert-border-4"
                   aria-label="Close"
                   onClick={toggleAlertLocation}
                 >
-                  <span class="sr-only">Dismiss</span>
+                  <span className="sr-only">Dismiss</span>
                   <svg
-                    class="w-3 h-3"
+                    className="w-3 h-3"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -127,9 +133,9 @@ const UserClosestProduct = () => {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                     />
                   </svg>
@@ -149,7 +155,7 @@ const UserClosestProduct = () => {
               })}
             </div>
             <div className="px-3 mb-5 flex justify-center gap-5 w-full">
-              {limit > 6 && (
+              {limit > 2 && (
                 <button
                   onClick={minLimit}
                   className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"
@@ -157,7 +163,7 @@ const UserClosestProduct = () => {
                   Lebih Sedikit
                 </button>
               )}
-              {closestProducts.length >= limit && (
+              {limit < totalClosestProducts && (
                 <button
                   onClick={plusLimit}
                   className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"

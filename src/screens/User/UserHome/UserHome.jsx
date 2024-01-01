@@ -88,9 +88,12 @@ const UserHome = () => {
 
   const getClosestProducts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/closestproducts`, {
-        withCredentials: true, // Set withCredentials ke 'true'
-      });
+      const resp = await axios.get(
+        `http://localhost:5000/closestproducts?limit=${2}`,
+        {
+          withCredentials: true, // Set withCredentials ke 'true'
+        }
+      );
       setClosestProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -390,7 +393,7 @@ const UserHome = () => {
                       Lebih Sedikit
                     </button>
                   )}
-                  {products.length >= limit && (
+                  {limit <= products.length && (
                     <button
                       onClick={plusLimit}
                       className="bg-secondary text-white py-1 px-2 rounded-lg border-none text-sm"

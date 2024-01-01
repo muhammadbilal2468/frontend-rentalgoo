@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { adminproductImg } from "../../../../assets";
 import AdminCardHeader from "../../../../components/AdminCardHeader/AdminCardHeader";
 import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
+import formatRupiah from "../../../../utils/FormatRupiah";
 
 const AdminEditProduct = () => {
   const [name, setName] = useState("");
@@ -75,6 +76,11 @@ const AdminEditProduct = () => {
     const imageUrl = URL.createObjectURL(selectedImage);
     setFile(selectedImage);
     setUrl(imageUrl);
+  };
+
+  const handlePriceChange = (e) => {
+    const inputPrice = e.target.value.replace(/[^\d]/g, "");
+    setPrice(inputPrice);
   };
 
   return (
@@ -211,8 +217,8 @@ const AdminEditProduct = () => {
                 <input
                   type="text"
                   id="price"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
+                  value={`${formatRupiah(price)}`}
+                  onChange={handlePriceChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg mb-6 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Masukkan Harga"
                   required

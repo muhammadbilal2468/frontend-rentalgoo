@@ -76,7 +76,23 @@ const UserLeaseAgreement = () => {
                           <p className="text-base font-semibold text-primary self-end">
                             {formatRupiah(data.total_price)}
                           </p>
-                          <p className="text-[9px] text-white py-1 px-3 bg-tertiary rounded-md">
+                          <p
+                            className={`
+                           ${(() => {
+                             if (
+                               data.status === "Diterima, Silahkan Ambil Barang"
+                             ) {
+                               return "bg-green-800";
+                             } else if (
+                               data.status === "Ditolak, Barang Belum Ready"
+                             ) {
+                               return "bg-red-800";
+                             } else {
+                               return "bg-primary";
+                             }
+                           })()}
+                          text-[9px] text-white py-1 px-3 rounded-md`}
+                          >
                             {data.status}
                           </p>
                         </div>

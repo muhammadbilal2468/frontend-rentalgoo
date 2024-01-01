@@ -58,7 +58,7 @@ const UserFinishRentRenter = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <UserHeader title="Selesai Menyewa" />
+        <UserHeader title="Riwayat Selesai Menyewa" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg pb-5 min-h-screen">

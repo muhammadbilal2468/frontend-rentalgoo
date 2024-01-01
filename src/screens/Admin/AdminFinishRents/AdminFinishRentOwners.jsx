@@ -136,11 +136,11 @@ const AdminFinishRentOwners = () => {
                     <th scope="col" className="px-6 py-3">
                       No
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    {/* <th scope="col" className="px-6 py-3">
                       <div className="flex items-center">Nama Barang</div>
-                    </th>
+                    </th> */}
                     <th scope="col" className="px-6 py-3">
-                      <div className="flex items-center">Gambar</div>
+                      <div className="flex items-center">Barang</div>
                     </th>
                     <th scope="col" className="px-6 py-3">
                       <div className="flex items-center">Pemilik</div>
@@ -180,7 +180,7 @@ const AdminFinishRentOwners = () => {
                         >
                           {rowNumber}
                         </th>
-                        <td className="px-6 py-4">{data.product.name}</td>
+                        {/* <td className="px-6 py-4">{data.product.name}</td> */}
                         <td className="px-6 py-4">
                           <img
                             src={data.product.url}
@@ -193,8 +193,8 @@ const AdminFinishRentOwners = () => {
                         <td className="px-6 py-4">
                           {formatRupiah(data.total_price)}
                         </td>
-                        <td className="px-6 py-4">{data.start_date}</td>
-                        <td className="px-6 py-4">{data.end_date}</td>
+                        <td className="px-6 py-4 text-xs">{data.start_date}</td>
+                        <td className="px-6 py-4 text-xs">{data.end_date}</td>
                         <td className="px-6 py-4">{data.status}</td>
                         <td className="flex items-center gap-2 px-6 py-4">
                           <i

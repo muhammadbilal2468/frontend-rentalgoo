@@ -58,7 +58,7 @@ const UserFinishRentOwner = () => {
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
         {/* Header */}
-        <UserHeader title="Selesai Menyewakan" />
+        <UserHeader title="Riwayat Selesai Menyewakan" />
 
         {/* content */}
         <div className="bg-background rounded-b-lg pb-5 min-h-screen">
@@ -85,11 +85,13 @@ const UserFinishRentOwner = () => {
                             onClick={() => getDetailUser(data.owner.uuid)}
                           >
                             <img
-                              src={data.owner.url}
+                              src={data.renter.url}
                               className="w-5 h-5 rounded-full"
                               alt="fotopemilik"
                             />
-                            <p className="text-sm">{data.owner.name}</p>
+                            <p className="text-sm font-bold">
+                              {data.renter.name}
+                            </p>
                           </div>
                           <p className="text-sm text-primary font-bold">
                             {data.product.name}

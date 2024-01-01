@@ -31,7 +31,7 @@ const UserMyActivity = () => {
 
           <div className="grid grid-cols-2 gap-5 justify-between mt-12 mx-4">
             <Link to={"/user/leaseagreements"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={leaseagreementImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">
                   Persetujuan Menyewakan
@@ -39,7 +39,7 @@ const UserMyActivity = () => {
               </div>
             </Link>
             <Link to={"/user/rentalagreements"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={rentalagreementImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">
                   Persetujuan Menyewa
@@ -47,7 +47,7 @@ const UserMyActivity = () => {
               </div>
             </Link>
             <Link to={"/user/isrentingouts"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={isrentingoutImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">
                   Sedang Menyewakan
@@ -55,13 +55,13 @@ const UserMyActivity = () => {
               </div>
             </Link>
             <Link to={"/user/isrentings"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={isrentingImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">Sedang Menyewa</p>
               </div>
             </Link>
             <Link to={"/user/finishrentowner"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={finishrentownerImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">
                   Selesai Menyewakan
@@ -69,7 +69,7 @@ const UserMyActivity = () => {
               </div>
             </Link>
             <Link to={"/user/finishrentrenter"}>
-              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white px-5 cursor-pointer">
+              <div className="flex flex-col gap-3 justify-center items-center w-full h-40 border border-gray-400 rounded-lg border-b-8 border-b-primary bg-white hover:bg-slate-100 px-5 cursor-pointer">
                 <img src={finishrentrenterImg} alt="" className="w-2/4 h-18" />
                 <p className="text-center text-sm font-bold">Selesai Menyewa</p>
               </div>

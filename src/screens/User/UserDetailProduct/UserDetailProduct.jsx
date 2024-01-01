@@ -128,6 +128,7 @@ const UserDetailProduct = () => {
               {user.province}, {user.citydistrict}, {user.subdistrict},{" "}
               {user.address}
             </p>
+            <hr className="mb-3" />
             <p className="font-bold text-sm">Deskripsi :</p>
             <p className="text-sm text-justify">{product.description}</p>
             <button
