@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { adminisrentingImg } from "../../../assets";
 import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader";
+import { adminisrentingImg } from "../../../assets";
 
-const AdminIDetailIsRenting = () => {
-  const [isRentingProducts, setIsRentingProducts] = useState("");
+const AdminDetailFinishRentOwners = () => {
+  const [finishRent, setFinishRent] = useState("");
   const [product, setProduct] = useState("");
   const [owner, setOwner] = useState("");
   const [renter, setRenter] = useState("");
@@ -14,29 +14,27 @@ const AdminIDetailIsRenting = () => {
 
   useEffect(() => {
     getIsRentingProductById(uuid);
-  }, [uuid, isRentingProducts]);
+  }, []);
 
   const getIsRentingProductById = async (uuid) => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/isrentingproducts/${uuid}`
+        `http://localhost:5000/finishrentbyowner/${uuid}`
       );
-      setIsRentingProducts(resp.data);
+      setFinishRent(resp.data);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
       setRenter(resp.data.renter);
-      console.log(resp.data);
     } catch (error) {
       console.log(error.response);
     }
   };
-
   return (
     <div className="flex flex-col gap-4">
       <AdminCardHeader
         img={adminisrentingImg}
-        title={"Detail Sedang Sewa"}
-        desc={"Akses menampilkan detail data sedang sewa"}
+        title={"Detail Riawayat Menyewa"}
+        desc={"Akses menampilkan detail data riwayat menyewa"}
       />
 
       <div>
@@ -79,7 +77,7 @@ const AdminIDetailIsRenting = () => {
                 {product.name}
               </p>
               <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
-                {isRentingProducts.amount} Pcs
+                {finishRent.amount} Pcs
               </p>
             </div>
 
@@ -88,24 +86,19 @@ const AdminIDetailIsRenting = () => {
               {product.guarantee}
             </p>
 
-            <p className="">Jangka Sewa</p>
-            <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
-              {isRentingProducts.time} {isRentingProducts.time_unit}
-            </p>
-
             <p className="">Waktu Mulai</p>
             <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
-              {isRentingProducts.start_date}
+              {finishRent.start_date}
             </p>
 
             <p className="">Waktu Berakhir</p>
             <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
-              {isRentingProducts.end_date}
+              {finishRent.end_date}
             </p>
 
-            <p className="">Sisa Waktu</p>
+            <p className="">Status</p>
             <p className="text-tertiary font-semibold border border-tirtext-tertiary p-2 rounded-lg mb-4">
-              {isRentingProducts.remaining_time}
+              {finishRent.status}
             </p>
           </div>
         </div>
@@ -114,4 +107,4 @@ const AdminIDetailIsRenting = () => {
   );
 };
 
-export default AdminIDetailIsRenting;
+export default AdminDetailFinishRentOwners;

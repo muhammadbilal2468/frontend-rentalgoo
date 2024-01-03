@@ -29,6 +29,10 @@ const UserFinishRentOwner = () => {
     }
   };
 
+  const getDetail = (uuid) => {
+    navigate(`/user/finishrentowner/${uuid}`);
+  };
+
   const deleteFinishRent = async (uuid) => {
     try {
       const resp = await axios.delete(
@@ -44,10 +48,6 @@ const UserFinishRentOwner = () => {
       setShowAlert(false);
     }, 2000);
     getFinishRent();
-  };
-
-  const getDetailProduct = (uuid) => {
-    navigate(`/user/detailproduct/${uuid}`);
   };
 
   const getDetailUser = (uuid) => {
@@ -110,9 +110,9 @@ const UserFinishRentOwner = () => {
                         <div className="flex gap-1">
                           <button
                             className="text-sm text-white py-1 bg-tertiary w-full rounded-md"
-                            onClick={() => getDetailProduct(data.product.uuid)}
+                            onClick={() => getDetail(data.uuid)}
                           >
-                            Lihat Produk
+                            Lihat Riwayat
                           </button>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

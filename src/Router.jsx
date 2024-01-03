@@ -49,6 +49,10 @@ import UserSaveProduct from "./screens/User/UserSaveProduct/UserSaveProduct";
 import UserSearch from "./screens/User/UserSearch/UserSearch";
 import AdminSuggestions from "./screens/Admin/AdminSuggestions/AdminSuggestions";
 import UserAddSuggestion from "./screens/User/UserAddSuggestion/UserAddSuggestion";
+import UserDetailFinishRentRenter from "./screens/User/UserDetailFinishRentRenter/UserDetailFinishRentRenter";
+import UserDetailFinishRentOwner from "./screens/User/UserDetailFinishRentOwner/UserDetailFinishRentOwner";
+import AdminDetailFinishRentOwners from "./screens/Admin/AdminFinishRents/AdminDetailFinishRentOwners";
+import AdminDetailFinishRentRenters from "./screens/Admin/AdminFinishRents/AdminDetailFinishRentRenters";
 
 const Router = () => {
   return (
@@ -101,8 +105,17 @@ const Router = () => {
             element={<AdminFinishRentOwners />}
           />
           <Route
+            path="/admin/finishrentowners/:uuid"
+            element={<AdminDetailFinishRentOwners />}
+          />
+
+          <Route
             path="/admin/finishrentrenters/"
             element={<AdminFinishRentRenters />}
+          />
+          <Route
+            path="/admin/finishrentrenters/:uuid"
+            element={<AdminDetailFinishRentRenters />}
           />
 
           <Route path="/admin/users" element={<AdminUser />} />
@@ -154,10 +167,20 @@ const Router = () => {
           path="/user/detailisrenting/:uuid"
           element={<UserDetailIsRenting />}
         />
+
         <Route path="/user/finishrentowner" element={<UserFinishRentOwner />} />
+        <Route
+          path="/user/finishrentowner/:uuid"
+          element={<UserDetailFinishRentOwner />}
+        />
+
         <Route
           path="/user/finishrentrenter"
           element={<UserFinishRentRenter />}
+        />
+        <Route
+          path="/user/finishrentrenter/:uuid"
+          element={<UserDetailFinishRentRenter />}
         />
 
         <Route path="/user/detailuser/:uuid" element={<UserDetailUser />} />

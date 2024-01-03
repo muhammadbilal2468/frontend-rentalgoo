@@ -6,6 +6,7 @@ import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalC
 import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import formatRupiah from "../../../utils/FormatRupiah";
+import { Link } from "react-router-dom";
 
 const AdminFinishRentOwners = () => {
   const [finishRents, setFinishRents] = useState([]);
@@ -197,6 +198,9 @@ const AdminFinishRentOwners = () => {
                         <td className="px-6 py-4 text-xs">{data.end_date}</td>
                         <td className="px-6 py-4">{data.status}</td>
                         <td className="flex items-center gap-2 px-6 py-4">
+                          <Link to={`/admin/finishrentowners/${data.uuid}`}>
+                            <i className="fa-solid fa-eye text-blue-100 bg-blue-500 py-1 px-2 text-base rounded-md cursor-pointer"></i>
+                          </Link>
                           <i
                             className="fa-solid fa-trash text-red-100 bg-red-500 py-1 px-2 text-base rounded-md cursor-pointer"
                             onClick={() => handleModalDelete(index)}

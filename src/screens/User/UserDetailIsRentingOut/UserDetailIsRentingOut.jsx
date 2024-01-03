@@ -17,7 +17,7 @@ const UserDetailIsRentingOut = () => {
   const [minute, setMinute] = useState("");
   const [second, setSecond] = useState("");
 
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("Sedang Disewa");
   const [product, setProduct] = useState("");
   const [owner, setOwner] = useState("");
   const [renter, setRenter] = useState("");
@@ -318,7 +318,9 @@ const UserDetailIsRentingOut = () => {
                   onChange={handleStatus}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-md block w-full py-2 px-2"
                 >
-                  <option hidden>{isRentingOut.status}</option>
+                  <option hidden value={isRentingOut.status}>
+                    {isRentingOut.status}
+                  </option>
                   <option value="Sedang Disewa">Sedang Disewa</option>
                   <option value="Berakhir, Belum Dikembalikan">
                     Berakhir, Belum Dikembalikan
