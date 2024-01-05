@@ -91,6 +91,22 @@ const UserEditProfile = () => {
     }
   };
 
+  const [selectedLocation, setSelectedLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+    address: "",
+  });
+
+  const handleMapClick = (e) => {
+    const { lat, lng } = e.latlng;
+
+    setSelectedLocation({
+      latitude: lat,
+      longitude: lng,
+      address: address || "", // Use entered address or empty string if not entered
+    });
+  };
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
@@ -216,7 +232,11 @@ const UserEditProfile = () => {
               latitude={latitude}
               longitude={longitude}
               address={address}
+              onMapClick={handleMapClick}
             />
+
+            <p>{selectedLocation.latitude}</p>
+            <p>{selectedLocation.longitude}</p>
 
             <button
               type="submit"
