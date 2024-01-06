@@ -6,6 +6,7 @@ import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader
 import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
 import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import API_BASE_URL from "../../../config/config";
 
 const AdminAgreementProducts = () => {
   const [agreementProducts, setAgreementProducts] = useState([]);
@@ -24,7 +25,7 @@ const AdminAgreementProducts = () => {
   const getAgreementProducts = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/agreementproductsbyadmin?page=${currentPage}&search=${search}&limit=${limit}`
+        `${API_BASE_URL}/agreementproductsbyadmin?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setAgreementProducts(resp.data.agreementProducts);
       setTotalPages(resp.data.totalPages);
@@ -36,7 +37,7 @@ const AdminAgreementProducts = () => {
 
   const deleteAgreementProducts = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/agreementproducts/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/agreementproducts/${uuid}`);
       handleModalDelete(index);
       getAgreementProducts();
     } catch (error) {
@@ -48,7 +49,7 @@ const AdminAgreementProducts = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/agreementproductsbyadmin?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/agreementproductsbyadmin?page=${currentPage}&search=${search}`
       );
       setAgreementProducts(resp.data.agreementProducts);
     } catch (error) {

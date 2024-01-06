@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminAddUser = () => {
   const [file, setFile] = useState(null);
@@ -28,7 +29,7 @@ const AdminAddUser = () => {
     formData.append("role", "user");
 
     try {
-      const resp = await axios.post("http://localhost:5000/users", formData);
+      const resp = await axios.post(`${API_BASE_URL}/users`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

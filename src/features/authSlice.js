@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import API_BASE_URL from "../config/config";
 
 const initialState = {
   user: null,
@@ -13,7 +14,7 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user, thunkAPI) => {
     try {
-      const resp = await axios.post("http://localhost:5000/login", {
+      const resp = await axios.post(`${API_BASE_URL}/login`, {
         email: user.email,
         password: user.password,
       });
@@ -31,7 +32,7 @@ export const RegisterUser = createAsyncThunk(
   "user/RegisterUser",
   async (req, thunkAPI) => {
     try {
-      const resp = await axios.post("http://localhost:5000/register", {
+      const resp = await axios.post(`${API_BASE_URL}/register`, {
         name: req.name,
         email: req.email,
         password: req.password,
@@ -49,7 +50,17 @@ export const RegisterUser = createAsyncThunk(
 
 export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
   try {
-    const resp = await axios.get("http://localhost:5000/me");
+    // Dapatkan token dari state Redux menggunakan getState()
+    const state = thunkAPI.getState();
+    const token = state.auth.user.token;
+
+    // Lakukan permintaan HTTP dengan menyertakan token otentikasi
+    const resp = await axios.get(`${API_BASE_URL}/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     return resp.data;
   } catch (error) {
     if (error.response) {
@@ -60,7 +71,7 @@ export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
 });
 
 export const LogoutUser = createAsyncThunk("user/LogoutUser", async () => {
-  await axios.delete("http://localhost:5000/logout");
+  await axios.delete(`${API_BASE_URL}/logout`);
 });
 
 export const authSlice = createSlice({

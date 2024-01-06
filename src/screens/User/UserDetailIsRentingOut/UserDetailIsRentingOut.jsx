@@ -7,6 +7,7 @@ import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 import UserRemainingTime from "../../../components/UserRemainingTime/UserRemainingTime";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailIsRentingOut = () => {
   const [isRentingOut, setIsRentingOut] = useState("");
@@ -50,9 +51,7 @@ const UserDetailIsRentingOut = () => {
 
   const getIsRentingOutById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/isrentingproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/isrentingproducts/${uuid}`);
       setIsRentingOut(resp.data);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
@@ -78,7 +77,7 @@ const UserDetailIsRentingOut = () => {
     };
     try {
       const resp = await axios.post(
-        "http://localhost:5000/finishrentbyowner",
+        `${API_BASE_URL}/finishrentbyowner`,
         requestData
       );
       setTitleModal("Berhasil");
@@ -100,7 +99,7 @@ const UserDetailIsRentingOut = () => {
       renterId: renter.id,
     };
     try {
-      await axios.post("http://localhost:5000/finishrentbyrenter", requestData);
+      await axios.post(`${API_BASE_URL}/finishrentbyrenter`, requestData);
     } catch (error) {
       console.log(error.response.message);
     }
@@ -112,7 +111,7 @@ const UserDetailIsRentingOut = () => {
     };
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/isrentingproducts/${isRentingOut.uuid}`,
+        `${API_BASE_URL}/isrentingproducts/${isRentingOut.uuid}`,
         requestData
       );
       setTitleModal("Berhasil");
@@ -124,7 +123,7 @@ const UserDetailIsRentingOut = () => {
 
   const updateLeasedProduct = async () => {
     try {
-      await axios.patch(`http://localhost:5000/leasedproduct/${product.uuid}`);
+      await axios.patch(`${API_BASE_URL}/leasedproduct/${product.uuid}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -133,7 +132,7 @@ const UserDetailIsRentingOut = () => {
   const deleteIsRentingOut = async (id) => {
     try {
       const resp = await axios.delete(
-        `http://localhost:5000/isrentingproducts/${id}`
+        `${API_BASE_URL}/isrentingproducts/${id}`
       );
     } catch (error) {
       console.log(error.response.data.msg);

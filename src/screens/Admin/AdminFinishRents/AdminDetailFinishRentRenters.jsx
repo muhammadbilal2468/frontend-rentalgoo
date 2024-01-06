@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader";
 import { adminisrentingImg } from "../../../assets";
+import API_BASE_URL from "../../../config/config";
 
 const AdminDetailFinishRentRenters = () => {
   const [finishRent, setFinishRent] = useState("");
@@ -19,7 +20,7 @@ const AdminDetailFinishRentRenters = () => {
   const getIsRentingProductById = async (uuid) => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/finishrentbyrenter/${uuid}`
+        `${API_BASE_URL}/finishrentbyrenter/${uuid}`
       );
       setFinishRent(resp.data);
       setProduct(resp.data.product);

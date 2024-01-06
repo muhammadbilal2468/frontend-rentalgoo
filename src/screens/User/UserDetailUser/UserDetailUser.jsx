@@ -5,6 +5,7 @@ import Alert from "../../../components/Alert/Alert";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardProduct from "../../../components/CardProduct/CardProduct";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailUser = () => {
   const [user, setUser] = useState("");
@@ -24,7 +25,7 @@ const UserDetailUser = () => {
 
   const getUser = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/users/${uuid}`);
       setUser(resp.data);
     } catch (error) {
       console.log(error.response.data.message);
@@ -33,7 +34,7 @@ const UserDetailUser = () => {
 
   const getProducts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/hisproducts/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/hisproducts/${uuid}`);
       setProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -49,10 +50,7 @@ const UserDetailUser = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/saveproducts",
-        formData
-      );
+      const resp = await axios.post(`${API_BASE_URL}/saveproducts`, formData);
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {
@@ -72,7 +70,7 @@ const UserDetailUser = () => {
       message: "Hallo Min",
     };
     try {
-      const resp = await axios.post(`http://localhost:5000/chats`, requestData);
+      const resp = await axios.post(`${API_BASE_URL}/chats`, requestData);
       alert("pesan berhasil terkirim");
       navigate(`/user/detailchat/${uuid}`);
     } catch (error) {

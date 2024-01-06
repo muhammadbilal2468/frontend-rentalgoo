@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { adminsettingImg } from "../../../assets";
 import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader";
 import AdminModalInfo from "../../../components/AdminModalInfo/AdminModalInfo";
+import API_BASE_URL from "../../../config/config";
 
 const AdminSetting = () => {
   const [uuid, setUUid] = useState("");
@@ -30,7 +31,7 @@ const AdminSetting = () => {
 
   const getMe = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/me`);
+      const resp = await axios.get(`${API_BASE_URL}/me`);
       setUUid(resp.data.uuid);
       setUrl(resp.data.url);
       setName(resp.data.name);
@@ -51,7 +52,7 @@ const AdminSetting = () => {
     formData.append("file", file);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/photome/${uuid}`,
+        `${API_BASE_URL}/photome/${uuid}`,
         formData
       );
       setUrlChange(false);
@@ -78,10 +79,7 @@ const AdminSetting = () => {
     formData.append("subdistrict", subDistrict);
     formData.append("address", address);
     try {
-      const resp = await axios.patch(
-        `http://localhost:5000/me/${uuid}`,
-        formData
-      );
+      const resp = await axios.patch(`${API_BASE_URL}/me/${uuid}`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

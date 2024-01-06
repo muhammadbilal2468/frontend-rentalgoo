@@ -5,6 +5,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailProduct = () => {
   const [product, setProduct] = useState("");
@@ -18,7 +19,7 @@ const UserDetailProduct = () => {
   }, []);
 
   const getProductById = async () => {
-    const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
+    const resp = await axios.get(`${API_BASE_URL}/products/${uuid}`);
     setProduct(resp.data);
     setUser(resp.data.user);
   };

@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import { MeUser } from "../../../features/authSlice";
 import "./UserDetailChat.css";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailChat = () => {
   const [messages, setMessages] = useState([]);
@@ -25,7 +26,7 @@ const UserDetailChat = () => {
 
   const getChatPersonal = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/chats/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/chats/${uuid}`);
       setMessages(resp.data);
       setReceiver(resp.data.receiver);
     } catch (error) {
@@ -35,7 +36,7 @@ const UserDetailChat = () => {
 
   const getReceiver = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/users/${uuid}`);
       setReceiver(resp.data);
       setReceiverUrl(resp.data.url);
       setReceiverName(resp.data.name);
@@ -55,7 +56,7 @@ const UserDetailChat = () => {
       message: sendMessage,
     };
     try {
-      const resp = await axios.post(`http://localhost:5000/chats`, requestData);
+      const resp = await axios.post(`${API_BASE_URL}/chats`, requestData);
       console.log(resp.data);
       scrollToBottom();
       setSendMessage("");

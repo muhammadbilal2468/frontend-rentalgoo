@@ -5,6 +5,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserCardHeader from "../../../components/UserCardHeader/UserCardHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserIsRentingOut = () => {
   const [isRentingOuts, setIsRentingOuts] = useState([]);
@@ -17,9 +18,7 @@ const UserIsRentingOut = () => {
 
   const getIsRentingOuts = async () => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/isrentingproductsbyowner`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/isrentingproductsbyowner`);
       setIsRentingOuts(resp.data);
     } catch (error) {
       console.log(error.response);

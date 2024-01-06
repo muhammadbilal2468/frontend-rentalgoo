@@ -3,6 +3,7 @@ import "aos/dist/aos.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import formatRupiah from "../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../config/config";
 
 const AdminHome = () => {
   const [totalProducts, setTotalProducts] = useState("");
@@ -14,12 +15,6 @@ const AdminHome = () => {
   const [totalFinishRentRenters, setTotalFinishRentRenters] = useState("");
   const [totalUsers, setTotalUsers] = useState("");
 
-  // const [percentSaves, setPercentSaves] = useState("");
-  // const [percentAgrees, setPercentAgrees] = useState("");
-  // const [percentIsRents, setPercentIsRents] = useState("");
-  // const [percentFinishRentOwners, setPercentFinishRentOwners] = useState("");
-  // const [percentFinishRentRenters, setPercentFinishRentRenters] = useState("");
-
   useEffect(() => {
     getTotalProduct();
     getTotalSaves();
@@ -28,12 +23,11 @@ const AdminHome = () => {
     getTotalFinishRentOwners();
     getTotalFinishRentRenters();
     getTotalUsers();
-    // countPercent();
   }, []);
 
   const getTotalProduct = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/products");
+      const resp = await axios.get(`${API_BASE_URL}/products`);
       setTotalProducts(resp.data.totalProducts);
     } catch (error) {
       console.log(error.response);
@@ -42,7 +36,7 @@ const AdminHome = () => {
 
   const getTotalSaves = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/saveproducts");
+      const resp = await axios.get(`${API_BASE_URL}/saveproducts`);
       setTotalSaves(resp.data.totalSaveProducts);
     } catch (error) {
       console.log(error.response);
@@ -50,9 +44,7 @@ const AdminHome = () => {
   };
   const getTotalAgrees = async () => {
     try {
-      const resp = await axios.get(
-        "http://localhost:5000/agreementproductsbyadmin"
-      );
+      const resp = await axios.get(`${API_BASE_URL}/agreementproductsbyadmin`);
       setTotalAgrees(resp.data.totalAgreementProducts);
     } catch (error) {
       console.log(error.response);
@@ -60,7 +52,7 @@ const AdminHome = () => {
   };
   const getTotalIsRents = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/isrentingproducts");
+      const resp = await axios.get(`${API_BASE_URL}/isrentingproducts`);
       setTotalIsRents(resp.data.totalIsRentings);
     } catch (error) {
       console.log(error.response);
@@ -68,7 +60,7 @@ const AdminHome = () => {
   };
   const getTotalFinishRentOwners = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/finishrentbyowner");
+      const resp = await axios.get(`${API_BASE_URL}/finishrentbyowner`);
       setTotalFinishRentOwners(resp.data.totalFinishRents);
       seFinishRentOwners(resp.data.finishRents);
     } catch (error) {
@@ -77,7 +69,7 @@ const AdminHome = () => {
   };
   const getTotalFinishRentRenters = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/finishrentbyrenter");
+      const resp = await axios.get(`${API_BASE_URL}/finishrentbyrenter`);
       setTotalFinishRentRenters(resp.data.totalFinishRents);
     } catch (error) {
       console.log(error.response);
@@ -85,20 +77,12 @@ const AdminHome = () => {
   };
   const getTotalUsers = async () => {
     try {
-      const resp = await axios.get("http://localhost:5000/users");
+      const resp = await axios.get(`${API_BASE_URL}/users`);
       setTotalUsers(resp.data.totalUsers);
     } catch (error) {
       console.log(error.response);
     }
   };
-
-  // const countPercent = () => {
-  //   setPercentSaves((totalSaves / totalProducts) * 100);
-  //   setPercentAgrees((totalAgrees / totalProducts) * 100);
-  //   setPercentIsRents((totalIsRents / totalProducts) * 100);
-  //   setPercentFinishRentOwners((totalFinishRentOwners / totalProducts) * 100);
-  //   setPercentFinishRentRenters((totalFinishRentRenters / totalProducts) * 100);
-  // };
 
   useEffect(() => {
     Aos.init({ duration: 1000 });

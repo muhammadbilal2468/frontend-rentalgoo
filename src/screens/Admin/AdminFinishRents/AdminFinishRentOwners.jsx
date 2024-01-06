@@ -7,6 +7,7 @@ import AdminPagination from "../../../components/AdminPagination/AdminPagination
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import formatRupiah from "../../../utils/FormatRupiah";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../../../config/config";
 
 const AdminFinishRentOwners = () => {
   const [finishRents, setFinishRents] = useState([]);
@@ -26,7 +27,7 @@ const AdminFinishRentOwners = () => {
   const getFinishRents = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/finishrentbyowner?page=${currentPage}&search=${search}&limit=${limit}`
+        `${API_BASE_URL}/finishrentbyowner?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setFinishRents(resp.data.finishRents);
       setTotalPages(resp.data.totalPages);
@@ -38,7 +39,7 @@ const AdminFinishRentOwners = () => {
 
   const deleteFinishRent = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/finishrentbyowner/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/finishrentbyowner/${uuid}`);
       handleModalDelete(index);
       getFinishRents();
     } catch (error) {
@@ -50,7 +51,7 @@ const AdminFinishRentOwners = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/finishrentbyowner?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/finishrentbyowner?page=${currentPage}&search=${search}`
       );
       setFinishRents(resp.data.finishRents);
     } catch (error) {

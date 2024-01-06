@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserChat = () => {
   const [chatUser, setChatUser] = useState([]);
@@ -15,7 +16,7 @@ const UserChat = () => {
   }, []);
 
   const getListMyChat = async () => {
-    const resp = await axios.get(`http://localhost:5000/chats`);
+    const resp = await axios.get(`${API_BASE_URL}/chats`);
     setChatUser(resp.data);
   };
 

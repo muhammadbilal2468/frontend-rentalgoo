@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminEditUser = () => {
   const [file, setFile] = useState(null);
@@ -31,7 +32,7 @@ const AdminEditUser = () => {
 
   const getUserById = async (uuid) => {
     try {
-      const resp = await axios.get(`http://localhost:5000/users/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/users/${uuid}`);
       setUrl(resp.data.url);
       setName(resp.data.name);
       setEmail(resp.data.email);
@@ -52,7 +53,7 @@ const AdminEditUser = () => {
     formData.append("file", file);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/photousers/${uuid}`,
+        `${API_BASE_URL}/photousers/${uuid}`,
         formData
       );
       setUrlChange(false);
@@ -79,10 +80,7 @@ const AdminEditUser = () => {
     formData.append("address", address);
     formData.append("location", location);
     try {
-      const resp = await axios.patch(
-        `http://localhost:5000/users/${uuid}`,
-        formData
-      );
+      const resp = await axios.patch(`${API_BASE_URL}/users/${uuid}`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

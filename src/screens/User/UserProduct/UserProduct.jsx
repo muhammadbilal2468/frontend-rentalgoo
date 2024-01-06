@@ -6,6 +6,7 @@ import Alert from "../../../components/Alert/Alert";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
 import CardProduct from "../../../components/CardProduct/CardProduct";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import API_BASE_URL from "../../../config/config";
 
 const UserProduct = () => {
   const [products, setProducts] = useState([]);
@@ -35,7 +36,7 @@ const UserProduct = () => {
 
   const getProducts = async () => {
     try {
-      let url = "http://localhost:5000/products?";
+      let url = `${API_BASE_URL}/products?`;
 
       if (search || category || limit || citydistrict) {
         if (search) {
@@ -62,7 +63,7 @@ const UserProduct = () => {
 
   const getClosestProducts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/closestproducts`);
+      const resp = await axios.get(`${API_BASE_URL}/closestproducts`);
       setClosestProducts(resp.data);
       console.log(closestProducts);
     } catch (error) {
@@ -79,10 +80,7 @@ const UserProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/saveproducts",
-        formData
-      );
+      const resp = await axios.post(`${API_BASE_URL}/saveproducts`, formData);
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {

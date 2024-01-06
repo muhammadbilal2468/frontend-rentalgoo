@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 import formatRupiah from "../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailFinishRentOwner = () => {
   const [finishRent, setFinishRent] = useState("");
@@ -21,9 +22,7 @@ const UserDetailFinishRentOwner = () => {
 
   const getFinishRentById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/finishrentbyowner/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/finishrentbyowner/${uuid}`);
       setFinishRent(resp.data);
       setProduct(resp.data.product);
       setRenter(resp.data.renter);

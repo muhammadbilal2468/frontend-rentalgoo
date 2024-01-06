@@ -8,6 +8,7 @@ import UserModalConfirm from "../../../components/UserModalConfirm/UserModalConf
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailRentalAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -31,9 +32,7 @@ const UserDetailRentalAgreement = () => {
 
   const getRentalAgreementById = async () => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/agreementproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/agreementproducts/${uuid}`);
       setAgreementProducts(resp.data);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
@@ -49,7 +48,7 @@ const UserDetailRentalAgreement = () => {
 
   const cancelAgreement = async () => {
     try {
-      await axios.delete(`http://localhost:5000/agreementproducts/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/agreementproducts/${uuid}`);
       navigate("/user/rentalagreements");
     } catch (error) {
       console.log(error.response.data.msg);

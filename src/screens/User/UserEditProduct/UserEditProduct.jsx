@@ -6,6 +6,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserEditProduct = () => {
   const [name, setName] = useState("");
@@ -31,7 +32,7 @@ const UserEditProduct = () => {
 
   const getProductById = async (uuid) => {
     try {
-      const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/products/${uuid}`);
       setName(resp.data.name);
       setUrl(resp.data.url);
       setCategory(resp.data.category);
@@ -58,7 +59,7 @@ const UserEditProduct = () => {
     formData.append("time_unit", timeUnit);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/products/${uuid}`,
+        `${API_BASE_URL}/products/${uuid}`,
         formData
       );
       setTitleModal("Berhasil");

@@ -6,6 +6,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserAddProduct = () => {
   const [name, setName] = useState("");
@@ -36,7 +37,7 @@ const UserAddProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      const resp = await axios.post("http://localhost:5000/products", formData);
+      const resp = await axios.post(`${API_BASE_URL}/products`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

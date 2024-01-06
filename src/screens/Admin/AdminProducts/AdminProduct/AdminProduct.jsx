@@ -8,6 +8,7 @@ import AdminPagination from "../../../../components/AdminPagination/AdminPaginat
 import ModalImage from "../../../../components/ModalImage/ModalImage";
 import NotFoundPage from "../../../../components/NotFoundPage/NotFoundPage";
 import formatRupiah from "../../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminProduct = () => {
   const [products, setProducts] = useState([]);
@@ -29,7 +30,7 @@ const AdminProduct = () => {
   const getProducts = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/products?category=${category}&page=${currentPage}&search=${search}&limit=${limit}`
+        `${API_BASE_URL}/products?category=${category}&page=${currentPage}&search=${search}&limit=${limit}`
       );
       setProducts(resp.data.products);
       setTotalPages(resp.data.totalPages);
@@ -41,7 +42,7 @@ const AdminProduct = () => {
 
   const deleteProduct = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/products/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/products/${uuid}`);
       handleModalDelete(index);
       getProducts();
     } catch (error) {
@@ -53,7 +54,7 @@ const AdminProduct = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/products?category=${category}&page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/products?category=${category}&page=${currentPage}&search=${search}`
       );
       setProducts(resp.data.products);
     } catch (error) {

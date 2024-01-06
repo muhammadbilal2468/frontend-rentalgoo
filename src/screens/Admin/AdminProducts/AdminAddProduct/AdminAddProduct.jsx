@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { adminproductImg } from "../../../../assets";
 import AdminCardHeader from "../../../../components/AdminCardHeader/AdminCardHeader";
 import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminAddProduct = () => {
   const [name, setName] = useState("");
@@ -34,7 +35,7 @@ const AdminAddProduct = () => {
     formData.append("price", price);
     formData.append("time_unit", timeUnit);
     try {
-      const resp = await axios.post("http://localhost:5000/products", formData);
+      const resp = await axios.post(`${API_BASE_URL}/products`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

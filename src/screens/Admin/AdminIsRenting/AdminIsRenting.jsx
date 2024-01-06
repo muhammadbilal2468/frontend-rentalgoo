@@ -6,6 +6,7 @@ import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader
 import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
 import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import API_BASE_URL from "../../../config/config";
 
 const AdminIsRenting = () => {
   const [isRentings, setIsRentings] = useState([]);
@@ -25,7 +26,7 @@ const AdminIsRenting = () => {
   const getIsRentings = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/isrentingproducts?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/isrentingproducts?page=${currentPage}&search=${search}`
       );
       setIsRentings(resp.data.isRentings);
       setTotalPages(resp.data.totalPages);
@@ -37,7 +38,7 @@ const AdminIsRenting = () => {
 
   const deleteIsRentings = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/isrentingproducts/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/isrentingproducts/${uuid}`);
       handleModalDelete(index);
       getIsRentings();
     } catch (error) {
@@ -49,7 +50,7 @@ const AdminIsRenting = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/isrentingproducts?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/isrentingproducts?page=${currentPage}&search=${search}`
       );
       setIsRentings(resp.data.isRentings);
     } catch (error) {

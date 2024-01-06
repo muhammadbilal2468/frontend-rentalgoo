@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { adminagreementImg } from "../../../assets";
 import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader";
 import formatRupiah from "../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../config/config";
 
 const AdminDetailAgreementProducts = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -19,9 +20,7 @@ const AdminDetailAgreementProducts = () => {
 
   const getAgreementProductById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/agreementproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/agreementproducts/${uuid}`);
       setAgreementProducts(resp.data);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);

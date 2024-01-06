@@ -7,6 +7,7 @@ import CardSaveProduct from "../../../components/CardSaveProduct/CardSaveProduct
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserCardHeader from "../../../components/UserCardHeader/UserCardHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserSaveProduct = () => {
   const [saveProducts, setSaveProducts] = useState([]);
@@ -23,7 +24,7 @@ const UserSaveProduct = () => {
 
   const getSaveProducts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/saveproducts`);
+      const resp = await axios.get(`${API_BASE_URL}/saveproducts`);
       setSaveProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -32,9 +33,7 @@ const UserSaveProduct = () => {
 
   const deleteSaveProduct = async (id) => {
     try {
-      const resp = await axios.delete(
-        `http://localhost:5000/saveproducts/${id}`
-      );
+      const resp = await axios.delete(`${API_BASE_URL}/saveproducts/${id}`);
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {

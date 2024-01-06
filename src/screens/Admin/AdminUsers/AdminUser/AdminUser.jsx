@@ -7,6 +7,7 @@ import AdminModalConfirm from "../../../../components/AdminModalConfirm/AdminMod
 import AdminPagination from "../../../../components/AdminPagination/AdminPagination";
 import ModalImage from "../../../../components/ModalImage/ModalImage";
 import NotFoundPage from "../../../../components/NotFoundPage/NotFoundPage";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminUser = () => {
   const [users, setUsers] = useState([]);
@@ -27,7 +28,7 @@ const AdminUser = () => {
   const getUsers = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/users?page=${currentPage}&search=${search}&limit=${limit}`
+        `${API_BASE_URL}/users?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setUsers(resp.data.users);
       setTotalUsers(resp.data.totalUsers);
@@ -39,7 +40,7 @@ const AdminUser = () => {
 
   const deleteUser = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/users/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/users/${uuid}`);
       handleModalDelete(index);
       getUsers();
     } catch (error) {
@@ -51,7 +52,7 @@ const AdminUser = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/users?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/users?page=${currentPage}&search=${search}`
       );
       setUsers(resp.data.users);
       setTotalPages(resp.data.totalPages);

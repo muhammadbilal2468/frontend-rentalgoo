@@ -6,6 +6,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserCardHeader from "../../../components/UserCardHeader/UserCardHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserFinishRentOwner = () => {
   const [finishRent, setFinishRent] = useState([]);
@@ -22,7 +23,7 @@ const UserFinishRentOwner = () => {
 
   const getFinishRent = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/finishrentbyowner`);
+      const resp = await axios.get(`${API_BASE_URL}/finishrentbyowner`);
       setFinishRent(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -36,7 +37,7 @@ const UserFinishRentOwner = () => {
   const deleteFinishRent = async (uuid) => {
     try {
       const resp = await axios.delete(
-        `http://localhost:5000/finishrentbyowner/${uuid}`
+        `${API_BASE_URL}/finishrentbyowner/${uuid}`
       );
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");

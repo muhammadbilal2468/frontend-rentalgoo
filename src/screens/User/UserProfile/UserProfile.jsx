@@ -8,6 +8,7 @@ import UserModalConfirm from "../../../components/UserModalConfirm/UserModalConf
 import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import { LogoutUser, reset } from "../../../features/authSlice";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../../../config/config";
 
 const UserProfile = () => {
   const [user, setUser] = useState("");
@@ -29,7 +30,7 @@ const UserProfile = () => {
 
   const getMe = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/me`);
+      const resp = await axios.get(`${API_BASE_URL}/me`);
       setUser(resp.data);
       setUrl(resp.data.url);
     } catch (error) {
@@ -50,7 +51,7 @@ const UserProfile = () => {
     formData.append("file", file);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/photome/${uuid}`,
+        `${API_BASE_URL}/photome/${uuid}`,
         formData
       );
       setTitleModal("Berhasil");

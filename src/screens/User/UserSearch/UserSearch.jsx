@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
+import API_BASE_URL from "../../../config/config";
 
 const UserSearch = () => {
   const [searchs, setSearchs] = useState([]);
@@ -15,7 +16,7 @@ const UserSearch = () => {
 
   const getSearchs = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/searchs`);
+      const resp = await axios.get(`${API_BASE_URL}/searchs`);
       setSearchs(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -26,7 +27,7 @@ const UserSearch = () => {
     const formData = new FormData();
     formData.append("text", inputSearch);
     try {
-      await axios.post("http://localhost:5000/searchs", formData);
+      await axios.post(`${API_BASE_URL}/searchs`, formData);
     } catch (error) {
       console.log(error.response.data.msg);
     }
@@ -48,7 +49,7 @@ const UserSearch = () => {
 
   const deleteSearch = async (uuid) => {
     try {
-      await axios.delete(`http://localhost:5000/searchs/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/searchs/${uuid}`);
       console.log("berhasil menghapus");
       getSearchs();
     } catch (error) {

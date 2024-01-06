@@ -7,6 +7,7 @@ import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
+import API_BASE_URL from "../../../config/config";
 
 const UserAddAgreement = () => {
   const [product, setProduct] = useState("");
@@ -31,7 +32,7 @@ const UserAddAgreement = () => {
   }, [totalPrice]);
 
   const getProductsById = async () => {
-    const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
+    const resp = await axios.get(`${API_BASE_URL}/products/${uuid}`);
     setProduct(resp.data);
     setProductId(resp.data.id);
     setOwnerId(resp.data.user.id);
@@ -50,7 +51,7 @@ const UserAddAgreement = () => {
     formData.append("ownerId", ownerId);
     try {
       const resp = await axios.post(
-        "http://localhost:5000/agreementproducts",
+        `${API_BASE_URL}/agreementproducts`,
         formData
       );
       setTitleModal("Berhasil Menyewa");

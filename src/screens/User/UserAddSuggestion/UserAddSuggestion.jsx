@@ -5,6 +5,7 @@ import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import { modalsuccessImg } from "../../../assets";
 import axios from "axios";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserAddSuggestion = () => {
   const [message, setMessage] = useState("");
@@ -20,10 +21,7 @@ const UserAddSuggestion = () => {
     const formData = new FormData();
     formData.append("message", message);
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/suggestions",
-        formData
-      );
+      const resp = await axios.post(`${API_BASE_URL}/suggestions`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

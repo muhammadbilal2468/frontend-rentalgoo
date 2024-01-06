@@ -6,6 +6,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import CardClosestProduct from "../../../components/CardClosestProduct/CardClosestProduct";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserClosestProduct = () => {
   const [closestProducts, setClosestProducts] = useState([]);
@@ -26,9 +27,9 @@ const UserClosestProduct = () => {
   const getClosestProducts = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/closestproducts?limit=${limit}`
+        `${API_BASE_URL}/closestproducts?limit=${limit}`
       );
-      const total = await axios.get(`http://localhost:5000/closestproducts`);
+      const total = await axios.get(`${API_BASE_URL}/closestproducts`);
       setClosestProducts(resp.data);
       setTotalClosestProducts(total.data.length);
       // setLimit(resp.data.length);
@@ -46,10 +47,7 @@ const UserClosestProduct = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/saveproducts",
-        formData
-      );
+      const resp = await axios.post(`${API_BASE_URL}/saveproducts`, formData);
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {

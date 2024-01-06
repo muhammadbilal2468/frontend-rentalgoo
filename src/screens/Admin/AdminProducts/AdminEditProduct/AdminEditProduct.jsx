@@ -5,6 +5,7 @@ import { adminproductImg } from "../../../../assets";
 import AdminCardHeader from "../../../../components/AdminCardHeader/AdminCardHeader";
 import AdminModalInfo from "../../../../components/AdminModalInfo/AdminModalInfo";
 import formatRupiah from "../../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../../config/config";
 
 const AdminEditProduct = () => {
   const [name, setName] = useState("");
@@ -30,7 +31,7 @@ const AdminEditProduct = () => {
 
   const getProductById = async (uuid) => {
     try {
-      const resp = await axios.get(`http://localhost:5000/products/${uuid}`);
+      const resp = await axios.get(`${API_BASE_URL}/products/${uuid}`);
       setName(resp.data.name);
       setUrl(resp.data.url);
       setCategory(resp.data.category);
@@ -56,7 +57,7 @@ const AdminEditProduct = () => {
     formData.append("price", price);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/products/${uuid}`,
+        `${API_BASE_URL}/products/${uuid}`,
         formData
       );
       setTitleModal("Berhasil");

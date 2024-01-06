@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
 import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 import AdminModalSuggestion from "../../../components/AdminModalSuggestion/AdminModalSuggestion";
+import API_BASE_URL from "../../../config/config";
 
 const AdminSuggestions = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -26,7 +27,7 @@ const AdminSuggestions = () => {
   const getSuggestions = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/suggestions?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/suggestions?page=${currentPage}&search=${search}`
       );
       setSuggestions(resp.data.suggestions);
       setTotalPages(resp.data.totalPages);
@@ -38,7 +39,7 @@ const AdminSuggestions = () => {
 
   const deleteIsRentings = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/suggestions/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/suggestions/${uuid}`);
       handleModalDelete(index);
       getSuggestions();
     } catch (error) {
@@ -50,7 +51,7 @@ const AdminSuggestions = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/suggestions?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/suggestions?page=${currentPage}&search=${search}`
       );
       setSuggestions(resp.data.suggestions);
     } catch (error) {

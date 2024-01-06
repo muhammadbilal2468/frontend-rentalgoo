@@ -6,6 +6,7 @@ import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigat
 import LocationMap from "../../../components/LocationMap/LocationMap";
 import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserEditProfile = () => {
   const [name, setName] = useState("");
@@ -31,7 +32,7 @@ const UserEditProfile = () => {
 
   const getMe = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/me`);
+      const resp = await axios.get(`${API_BASE_URL}/me`);
       setName(resp.data.name);
       setNohp(resp.data.nohp);
       setProvince(resp.data.province);
@@ -62,10 +63,7 @@ const UserEditProfile = () => {
     formData.append("address", address);
     formData.append("location", location);
     try {
-      const resp = await axios.patch(
-        `http://localhost:5000/me/${uuid}`,
-        formData
-      );
+      const resp = await axios.patch(`${API_BASE_URL}/me/${uuid}`, formData);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

@@ -6,6 +6,7 @@ import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserCardHeader from "../../../components/UserCardHeader/UserCardHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserRentalAgreement = () => {
   const [rentalAgreements, setRentalAgreements] = useState([]);
@@ -18,9 +19,7 @@ const UserRentalAgreement = () => {
 
   const getLeaseAgreements = async () => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/renteragreementproducts`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/renteragreementproducts`);
       setRentalAgreements(resp.data);
       console.log(resp.data);
     } catch (error) {

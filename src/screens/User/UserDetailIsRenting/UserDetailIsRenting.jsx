@@ -6,6 +6,7 @@ import LocationMap from "../../../components/LocationMap/LocationMap";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
 import UserRemainingTime from "../../../components/UserRemainingTime/UserRemainingTime";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailIsRenting = () => {
   const [isRenting, setIsRenting] = useState("");
@@ -47,9 +48,7 @@ const UserDetailIsRenting = () => {
   // --- Get IsRentingOut By ID
   const getIsRentingOutById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/isrentingproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/isrentingproducts/${uuid}`);
       setIsRenting(resp.data);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);

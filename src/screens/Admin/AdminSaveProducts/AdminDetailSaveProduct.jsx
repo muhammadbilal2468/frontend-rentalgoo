@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import formatRupiah from "../../../utils/FormatRupiah";
+import API_BASE_URL from "../../../config/config";
 
 const AdminDetailSaveProduct = () => {
   const [product, setProduct] = useState("");
@@ -16,9 +17,7 @@ const AdminDetailSaveProduct = () => {
 
   const getSaveProductById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/saveproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/saveproducts/${uuid}`);
       setProduct(resp.data.product);
       setOwner(resp.data.owner);
       setUser(resp.data.user);

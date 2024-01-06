@@ -22,6 +22,7 @@ import CardClosestProduct from "../../../components/CardClosestProduct/CardClose
 import CardProduct from "../../../components/CardProduct/CardProduct";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import { MeUser } from "../../../features/authSlice";
+import API_BASE_URL from "../../../config/config";
 
 const UserHome = () => {
   const [products, setProducts] = useState([]);
@@ -48,12 +49,9 @@ const UserHome = () => {
 
   const getProducts = async () => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/products?limit=${limit}`,
-        {
-          withCredentials: true, // Set withCredentials ke 'true'
-        }
-      );
+      const resp = await axios.get(`${API_BASE_URL}/products?limit=${limit}`, {
+        withCredentials: true, // Set withCredentials ke 'true'
+      });
       setProducts(resp.data.products);
       setMsg(resp.data.msg);
     } catch (error) {
@@ -70,10 +68,7 @@ const UserHome = () => {
     formData.append("productId", data.id);
     formData.append("ownerId", data.user.id);
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/saveproducts",
-        formData
-      );
+      const resp = await axios.post(`${API_BASE_URL}/saveproducts`, formData);
       setMsg(resp.data.msg);
       setAlertColor("#00ff04");
     } catch (error) {
@@ -89,7 +84,7 @@ const UserHome = () => {
   const getClosestProducts = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/closestproducts?limit=${2}`,
+        `${API_BASE_URL}/closestproducts?limit=${2}`,
         {
           withCredentials: true, // Set withCredentials ke 'true'
         }

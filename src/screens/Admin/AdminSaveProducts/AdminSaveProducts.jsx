@@ -6,6 +6,7 @@ import AdminCardHeader from "../../../components/AdminCardHeader/AdminCardHeader
 import AdminModalConfirm from "../../../components/AdminModalConfirm/AdminModalConfirm";
 import AdminPagination from "../../../components/AdminPagination/AdminPagination";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
+import API_BASE_URL from "../../../config/config";
 
 const AdminSaveProducts = () => {
   const [saveProducts, setSaveProducts] = useState([]);
@@ -24,7 +25,7 @@ const AdminSaveProducts = () => {
   const getSaveProducts = async () => {
     try {
       const resp = await axios.get(
-        `http://localhost:5000/saveproducts?page=${currentPage}&search=${search}&limit=${limit}`
+        `${API_BASE_URL}/saveproducts?page=${currentPage}&search=${search}&limit=${limit}`
       );
       setSaveProducts(resp.data.saveProducts);
       setTotalPages(resp.data.totalPages);
@@ -36,7 +37,7 @@ const AdminSaveProducts = () => {
 
   const deleteSaveProduct = async (uuid, index) => {
     try {
-      await axios.delete(`http://localhost:5000/saveproducts/${uuid}`);
+      await axios.delete(`${API_BASE_URL}/saveproducts/${uuid}`);
       handleModalDelete(index);
       getSaveProducts();
     } catch (error) {
@@ -48,7 +49,7 @@ const AdminSaveProducts = () => {
     e.preventDefault();
     try {
       const resp = await axios.get(
-        `http://localhost:5000/saveproducts?page=${currentPage}&search=${search}`
+        `${API_BASE_URL}/saveproducts?page=${currentPage}&search=${search}`
       );
       setSaveProducts(resp.data.saveProducts);
     } catch (error) {

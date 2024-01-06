@@ -10,6 +10,7 @@ import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import NotFoundPage from "../../../components/NotFoundPage/NotFoundPage";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserCardHeader from "../../../components/UserCardHeader/UserCardHeader";
+import API_BASE_URL from "../../../config/config";
 
 const UserMyProduct = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +28,7 @@ const UserMyProduct = () => {
 
   const getProducts = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/myproducts`);
+      const resp = await axios.get(`${API_BASE_URL}/myproducts`);
       setProducts(resp.data);
     } catch (error) {
       console.log(error.response);
@@ -47,7 +48,7 @@ const UserMyProduct = () => {
   const deleteProduct = async (uuid) => {
     setShowModalConfirm(false);
     try {
-      const resp = await axios.delete(`http://localhost:5000/products/${uuid}`);
+      const resp = await axios.delete(`${API_BASE_URL}/products/${uuid}`);
       setTitleModal("Berhasil");
       setMsg(resp.data.msg);
       setShowModalInfo(true);

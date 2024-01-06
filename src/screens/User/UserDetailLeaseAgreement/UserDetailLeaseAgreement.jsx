@@ -7,6 +7,7 @@ import UserModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
+import API_BASE_URL from "../../../config/config";
 
 const UserDetailLeaseAgreement = () => {
   const [agreementProducts, setAgreementProducts] = useState("");
@@ -29,9 +30,7 @@ const UserDetailLeaseAgreement = () => {
 
   const getLeaseAgreementById = async (uuid) => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/agreementproducts/${uuid}`
-      );
+      const resp = await axios.get(`${API_BASE_URL}/agreementproducts/${uuid}`);
       setAgreementProducts(resp.data);
       setStatus(resp.data.status);
       setProduct(resp.data.product);
@@ -48,7 +47,7 @@ const UserDetailLeaseAgreement = () => {
     formData.append("status", status);
     try {
       const resp = await axios.patch(
-        `http://localhost:5000/agreementproducts/${uuid}`,
+        `${API_BASE_URL}/agreementproducts/${uuid}`,
         formData
       );
       setTitleModal("Berhasil");
@@ -77,7 +76,7 @@ const UserDetailLeaseAgreement = () => {
     };
     try {
       const resp = await axios.post(
-        "http://localhost:5000/isrentingproducts",
+        `${API_BASE_URL}/isrentingproducts`,
         requestData
       );
       setTitleModal("Berhasil");
@@ -94,7 +93,7 @@ const UserDetailLeaseAgreement = () => {
 
   const deleteLeaseAgreement = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/agreementproducts/${id}`);
+      await axios.delete(`${API_BASE_URL}/agreementproducts/${id}`);
     } catch (error) {
       console.log(error.response.data.msg);
     }
