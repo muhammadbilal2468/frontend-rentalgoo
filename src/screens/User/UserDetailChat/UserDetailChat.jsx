@@ -73,6 +73,9 @@ const UserDetailChat = () => {
     }
   };
 
+  console.log("receiver", receiver);
+  console.log("messages", messages);
+
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
