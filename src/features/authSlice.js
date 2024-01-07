@@ -14,7 +14,7 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user, thunkAPI) => {
     try {
-      const resp = await axios.post(`${API_BASE_URL}/login`, {
+      const resp = await axios.post("http://localhost:5000/login", {
         email: user.email,
         password: user.password,
       });
@@ -32,7 +32,7 @@ export const RegisterUser = createAsyncThunk(
   "user/RegisterUser",
   async (req, thunkAPI) => {
     try {
-      const resp = await axios.post(`${API_BASE_URL}/register`, {
+      const resp = await axios.post("http://localhost:5000/register", {
         name: req.name,
         email: req.email,
         password: req.password,
@@ -50,17 +50,7 @@ export const RegisterUser = createAsyncThunk(
 
 export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
   try {
-    // Dapatkan token dari state Redux menggunakan getState()
-    const state = thunkAPI.getState();
-    const token = state.auth.user.token;
-
-    // Lakukan permintaan HTTP dengan menyertakan token otentikasi
-    const resp = await axios.get(`${API_BASE_URL}/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
+    const resp = await axios.get("http://localhost:5000/me");
     return resp.data;
   } catch (error) {
     if (error.response) {
@@ -71,7 +61,7 @@ export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
 });
 
 export const LogoutUser = createAsyncThunk("user/LogoutUser", async () => {
-  await axios.delete(`${API_BASE_URL}/logout`);
+  await axios.delete("http://localhost:5000/logout");
 });
 
 export const authSlice = createSlice({
