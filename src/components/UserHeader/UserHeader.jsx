@@ -27,7 +27,6 @@ const UserHeader = (props) => {
         height="30"
         viewBox="0 0 24 24"
         className="cursor-pointer"
-        class
       >
         <path
           fill="#1D3354"

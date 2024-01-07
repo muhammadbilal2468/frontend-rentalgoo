@@ -27,8 +27,10 @@ const UserDetailChat = () => {
   const getChatPersonal = async () => {
     try {
       const resp = await axios.get(`${API_BASE_URL}/chats/${uuid}`);
-      setMessages(resp.data);
-      setReceiver(resp.data.receiver);
+      if (resp.data && resp.data.id) {
+        setMessages(resp.data);
+        setReceiver(resp.data.receiver);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -37,9 +39,13 @@ const UserDetailChat = () => {
   const getReceiver = async () => {
     try {
       const resp = await axios.get(`${API_BASE_URL}/users/${uuid}`);
-      setReceiver(resp.data);
-      setReceiverUrl(resp.data.url);
-      setReceiverName(resp.data.name);
+      if (resp.data && resp.data.id) {
+        setReceiver(resp.data);
+        setReceiverUrl(resp.data.url);
+        setReceiverName(resp.data.name);
+      } else {
+        console.error("Data penerima tidak valid");
+      }
     } catch (error) {
       console.error(error);
     }
