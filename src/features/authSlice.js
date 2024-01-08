@@ -14,7 +14,7 @@ export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (user, thunkAPI) => {
     try {
-      const resp = await axios.post("http://localhost:5000/login", {
+      const resp = await axios.post(`${API_BASE_URL}/login`, {
         email: user.email,
         password: user.password,
       });
@@ -22,6 +22,8 @@ export const LoginUser = createAsyncThunk(
     } catch (error) {
       if (error.response) {
         const message = error.response.data.msg;
+        console.log(error.response.data.msg);
+        console.log(API_BASE_URL);
         return thunkAPI.rejectWithValue(message);
       }
     }
@@ -32,7 +34,7 @@ export const RegisterUser = createAsyncThunk(
   "user/RegisterUser",
   async (req, thunkAPI) => {
     try {
-      const resp = await axios.post("http://localhost:5000/register", {
+      const resp = await axios.post(`${API_BASE_URL}/register`, {
         name: req.name,
         email: req.email,
         password: req.password,
@@ -50,7 +52,7 @@ export const RegisterUser = createAsyncThunk(
 
 export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
   try {
-    const resp = await axios.get("http://localhost:5000/me");
+    const resp = await axios.get(`${API_BASE_URL}/me`);
     return resp.data;
   } catch (error) {
     if (error.response) {
@@ -61,7 +63,7 @@ export const MeUser = createAsyncThunk("user/MeUser", async (_, thunkAPI) => {
 });
 
 export const LogoutUser = createAsyncThunk("user/LogoutUser", async () => {
-  await axios.delete("http://localhost:5000/logout");
+  await axios.delete(`${API_BASE_URL}/logout`);
 });
 
 export const authSlice = createSlice({
