@@ -27,10 +27,7 @@ const UserDetailChat = () => {
   const getChatPersonal = async () => {
     try {
       const resp = await axios.get(`${API_BASE_URL}/chats/${uuid}`);
-      if (resp.data && resp.data.id) {
-        setMessages(resp.data);
-        setReceiver(resp.data.receiver);
-      }
+      setMessages(resp.data);
     } catch (error) {
       console.error(error);
     }
@@ -79,6 +76,7 @@ const UserDetailChat = () => {
     }
   };
 
+  console.log("uuid", uuid);
   console.log("receiver", receiver);
   console.log("messages", messages);
 
