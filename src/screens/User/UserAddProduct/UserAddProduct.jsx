@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { modalsuccessImg, updaloadProductImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
-import formatRupiah from "../../../utils/FormatRupiah";
 import UserHeader from "../../../components/UserHeader/UserHeader";
+import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import API_BASE_URL from "../../../config/config";
+import formatRupiah from "../../../utils/FormatRupiah";
 
 const UserAddProduct = () => {
   const [name, setName] = useState("");
@@ -237,7 +237,7 @@ const UserAddProduct = () => {
               />
               <select
                 className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                vvalue={timeUnit}
+                value={timeUnit}
                 onChange={(e) => setTimeUnit(e.target.value)}
                 required
               >

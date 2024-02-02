@@ -62,7 +62,7 @@ const Register = () => {
           Nama Lengkap
         </label>
         <input
-          type="name"
+          type="text"
           id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -107,7 +107,7 @@ const Register = () => {
           Konfirmasi Password
         </label>
         <input
-          type="conf-password"
+          type="password"
           id="conf-password"
           value={confPassword}
           onChange={(e) => setConfPassword(e.target.value)}

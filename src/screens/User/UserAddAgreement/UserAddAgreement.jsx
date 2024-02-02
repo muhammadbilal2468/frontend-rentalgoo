@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { modalsuccessImg } from "../../../assets";
 import ButtonNavigation from "../../../components/ButtonNavigation/ButtonNavigation";
-import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
-import formatRupiah from "../../../utils/FormatRupiah";
-import UserHeader from "../../../components/UserHeader/UserHeader";
 import UserAvatar from "../../../components/UserAvatar/UserAvatar";
+import UserHeader from "../../../components/UserHeader/UserHeader";
+import ModalInfo from "../../../components/UserModalInfo/UserModalInfo";
 import API_BASE_URL from "../../../config/config";
+import formatRupiah from "../../../utils/FormatRupiah";
 
 const UserAddAgreement = () => {
   const [product, setProduct] = useState("");
@@ -75,6 +75,10 @@ const UserAddAgreement = () => {
     }
 
     if (name === "amount") {
+      const maxAmount = product.stock;
+      if (newValue > maxAmount) {
+        newValue = "";
+      }
       setAmount(newValue);
       const newPrice = calculateTotalPrice(newValue, time, timeUnit);
       setTotalPrice(newPrice);
@@ -110,8 +114,6 @@ const UserAddAgreement = () => {
     return totalPrice.toFixed(0);
   };
 
-  console.log("time Unit :", timeUnit);
-
   return (
     <>
       <div className="relative w-full md:w-[400px] m-auto border-x-4 border-primary">
@@ -133,10 +135,20 @@ const UserAddAgreement = () => {
                 style={{ backgroundImage: `url(${product.url})` }}
               ></div>
               <div className="border-b-2 pb-2">
-                <p className="text-primary font-bold text-lg">{product.name}</p>
-                <p className="text-tertiary font-bold">
-                  {formatRupiah(product.price)} / {product.time_unit}
-                </p>
+                <div className="flex justify-between items-center">
+                  <div className="">
+                    <p className="text-primary font-bold text-lg">
+                      {product.name}
+                    </p>
+                    <p className="text-tertiary font-bold">
+                      {formatRupiah(product.price)} / {product.time_unit}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center bg-secondary text-white py-1 rounded-md">
+                    <p className="font-semibold">{product.stock}</p>
+                    <p className="text-[10px]">stok</p>
+                  </div>
+                </div>
               </div>
               <label
                 htmlFor="amount"

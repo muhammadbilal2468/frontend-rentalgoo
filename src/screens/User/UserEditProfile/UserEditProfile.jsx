@@ -233,8 +233,8 @@ const UserEditProfile = () => {
               onMapClick={handleMapClick}
             />
 
-            <p>{selectedLocation.latitude}</p>
-            <p>{selectedLocation.longitude}</p>
+            {/* <p>{selectedLocation.latitude}</p>
+            <p>{selectedLocation.longitude}</p> */}
 
             <button
               type="submit"

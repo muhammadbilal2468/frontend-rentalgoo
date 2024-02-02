@@ -54,6 +54,9 @@ const UserDetailChat = () => {
 
   const goSendMessage = async (e) => {
     e.preventDefault();
+    if (!sendMessage) {
+      return;
+    }
     const requestData = {
       receiverId: receiver.id,
       message: sendMessage,
