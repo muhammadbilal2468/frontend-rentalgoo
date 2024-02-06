@@ -144,7 +144,7 @@ const UserAddAgreement = () => {
                       {formatRupiah(product.price)} / {product.time_unit}
                     </p>
                   </div>
-                  <div className="flex flex-col items-center bg-secondary text-white py-1 rounded-md">
+                  <div className="flex flex-col items-center bg-secondary text-white py-1 px-2 rounded-md">
                     <p className="font-semibold">{product.stock}</p>
                     <p className="text-[10px]">stok</p>
                   </div>

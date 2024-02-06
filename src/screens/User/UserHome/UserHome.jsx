@@ -215,7 +215,7 @@ const UserHome = () => {
         </div>
 
         {/* content */}
-        <div className="bg-background rounded-b-lg pb-5 min-h-screen overflow-y-scroll">
+        <div className="bg-background rounded-b-lg pb-5 min-h-screen">
           <div className="relative bg-primary pt-3 rounded-b-xl px-3 h-28">
             <div className=" grid grid-cols-5 gap-5 justify-between items-center bg-white rounded-xl p-5 border-b-4 border-b-primary">
               <div
